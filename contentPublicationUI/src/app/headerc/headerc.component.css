@@ -1,0 +1,25 @@
+header {
+  display: inline-flex;
+  width: 100%;
+  background-color: green;
+  /*overflow:auto;*/
+  justify-content:space-between;
+}
+
+.head-buttons a {
+  font-size: 20px;
+  width: 20%;
+  padding: 0 45px;
+  background-color: pink;
+}
+
+.head-buttons {
+  display: inline-block;
+}
+
+.right-buttons {
+  align-items: center;
+  flex-direction: row;
+  flex-grow: 0;
+}
+
