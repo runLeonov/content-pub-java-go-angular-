@@ -9,10 +9,12 @@ import (
 )
 
 const (
-	titleTableE    = "Titles"
-	categoryTableE = "Categories"
-	tagTableE      = "Tags"
-	serialTableE   = "Serials"
+	titleTableE        = "Titles"
+	categoryTableE     = "Categories"
+	tagTableE          = "Tags"
+	serialTableE       = "Serials"
+	titleContentTableE = "Content"
+	imagesTableE       = "Content.Images"
 )
 
 type Config struct {
@@ -36,6 +38,8 @@ func CreateORMModels(config Config) {
 	db.AutoMigrate(app.Title{})
 	db.AutoMigrate(app.Category{})
 	db.AutoMigrate(app.Tag{})
+	db.AutoMigrate(app.TitleContent{})
+	db.AutoMigrate(app.Image{})
 }
 
 func connectToDb(cfg Config) (*gorm.DB, error) {
