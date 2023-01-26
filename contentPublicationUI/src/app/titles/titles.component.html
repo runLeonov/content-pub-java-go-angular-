@@ -1,1 +1,30 @@
-<p>titles works!</p>
+<div class="title-from-list">
+  <div class="post" *ngFor="let title of titles">
+    <div class="main-img">
+      <img src="https://hentailib.me/uploads/cover/sophisticated-senpai/cover/Co3biHGMsJbN_250x350.jpg" alt=""/>
+    </div>
+    <div class="description">
+      <strong>{{title.id}} titleName = {{title.titleName}}</strong>
+      <p></p>
+    </div>
+
+    <p>originalAuthor = {{title.originalAuthor}}</p>
+    <p>creationDate = {{title.creationDate}}</p>
+    <p>description = {{title.description}}</p>
+    <p>content.id = {{title.content.id}}</p>
+    <p>content.likes = {{title.content.likes}}</p>
+    <p>content.views = {{title.content.views}}</p>
+    <div class="post" *ngFor="let category of title.categories">
+      <p>id = {{category.id}}</p>
+      <p>genre = {{category.genre}}</p>
+    </div>
+    <div class="post" *ngFor="let tag of title.tags">
+      <p>id = {{tag.id}}</p>
+      <p>tagName = {{tag.tagName}}</p>
+    </div>
+    <div class="post" *ngFor="let serial of title.serials">
+      <p>id = {{serial.id}}</p>
+      <p>serialName = {{serial.serialName}}</p>
+    </div>
+  </div>
+</div>
