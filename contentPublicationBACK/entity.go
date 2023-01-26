@@ -32,7 +32,6 @@ type Image struct {
 	TitleContent   TitleContent `json:"-" `
 }
 
-//gorm:"foreignKey:TitleContentID;references:ID"
 type Category struct {
 	ID     uint     `json:"id"`
 	Genre  string   `json:"genre"`

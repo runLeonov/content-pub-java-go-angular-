@@ -2,7 +2,9 @@ package handler
 
 import (
 	"contentPublicationBACK/pkg/service"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	//"github.com/rs/cors"
 )
 
 type Handler struct {
@@ -14,23 +16,8 @@ func NewHandler(services *service.Service) *Handler {
 }
 
 func (h *Handler) InitRouters() *gin.Engine {
-	router := gin.New()
-
-	//router.Use(cors.New(cors.Config{
-	//	AllowOrigins:     []string{"http://localhost:4200/"},
-	//	AllowMethods:     []string{"PUT", "PATCH", "GET"},
-	//	AllowHeaders:     []string{"Origin"},
-	//	ExposeHeaders:    []string{"Content-Length"},
-	//	AllowCredentials: true,
-	//	AllowOriginFunc: func(origin string) bool {
-	//		return origin == "https://github.com"
-	//	},
-	//	MaxAge: 12 * time.Hour,
-	//}))
-
-	//config := cors.DefaultConfig()
-	//config.AllowOrigins = []string{"http://localhost:4200"}
-	//router.Use(cors.New(config))
+	router := gin.Default()
+	router.Use(cors.New(CORSConfig()))
 
 	mainRout := router.Group("/content")
 	{
@@ -41,7 +28,6 @@ func (h *Handler) InitRouters() *gin.Engine {
 		}
 
 		titles := mainRout.Group("/titles")
-		//titles := mainRout.Group("/titles", h.userIdentity)
 		{
 			titles.GET("/", h.getTitles)
 			titles.GET("/:id", h.getTitle)
@@ -57,4 +43,13 @@ func (h *Handler) InitRouters() *gin.Engine {
 	})
 
 	return router
+}
+
+func CORSConfig() cors.Config {
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowOrigins = []string{"http://localhost:4200"}
+	corsConfig.AllowCredentials = true
+	corsConfig.AddAllowHeaders("Access-Control-Allow-Headers", "access-control-allow-origin, access-control-allow-headers", "Content-Type", "X-XSRF-TOKEN", "Accept", "Origin", "X-Requested-With", "Authorization")
+	corsConfig.AddAllowMethods("GET", "POST", "PUT", "DELETE")
+	return corsConfig
 }
