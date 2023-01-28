@@ -39,13 +39,14 @@ func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 
 func (r *TitleRepo) GetRandom() (app.Title, error) {
 	var title app.Title
-	r.db.Debug().Raw("SELECT * FROM titles ORDER BY RAND() LIMIT 1").
+	r.db.Debug().
+		Raw("SELECT * FROM titles ORDER BY RAND() LIMIT 1").
 		Preload(categoryTableE).
 		Preload(serialTableE).
 		Preload(tagTableE).
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
-		Scan(&title)
+		First(&title)
 	return title, nil
 }
 
