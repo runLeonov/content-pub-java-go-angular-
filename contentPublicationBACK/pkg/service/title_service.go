@@ -22,6 +22,10 @@ func (s *TitleService) GetTitle(id int) (app.Title, error) {
 	return s.repoTitles.GetTitleById(id)
 }
 
+func (s *TitleService) GetRandom() (app.Title, error) {
+	return s.repoTitles.GetRandom()
+}
+
 func (s *TitleService) CreateTitle(title app.Title) (uint, error) {
 	return s.repoTitles.SaveNewTitle(title)
 }

@@ -14,6 +14,7 @@ type Authorization interface {
 type Titles interface {
 	GetTitles() ([]app.Title, error)
 	GetTitle(id int) (app.Title, error)
+	GetRandom() (app.Title, error)
 	CreateTitle(title app.Title) (uint, error)
 	UpdateTitle(title app.Title, id int) (uint, error)
 	DeleteTitle(id int) (uint, error)

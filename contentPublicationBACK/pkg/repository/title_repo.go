@@ -37,6 +37,18 @@ func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 	return title, nil
 }
 
+func (r *TitleRepo) GetRandom() (app.Title, error) {
+	var title app.Title
+	r.db.Debug().Raw("SELECT * FROM titles ORDER BY RAND() LIMIT 1").
+		Preload(categoryTableE).
+		Preload(serialTableE).
+		Preload(tagTableE).
+		Preload(titleContentTableE).
+		Preload(imagesTableE).
+		Scan(&title)
+	return title, nil
+}
+
 func (r *TitleRepo) SaveNewTitle(title app.Title) (uint, error) {
 	title.CreationDate = time.Now()
 	r.db.Debug().Create(&title)
