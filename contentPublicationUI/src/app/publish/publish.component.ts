@@ -74,20 +74,15 @@ export class PublishComponent {
         likes: 0,
         views: 0,
         images: [
-          {img64: ""},
-          {img64: ""},
-          {img64: ""},
         ]
       },
       categories: [
-        {genre: ""},
-        {genre: ""},
-        {genre: ""},
-        {genre: ""},
+        {id:1, genre: ""},
+        {id:2,genre: ""},
+        {id:3, genre: ""},
+        {id:4,genre: ""},
       ],
       tags: [
-        {tag: ""},
-        {tag: ""},
       ],
       serials: [
         {serialName: ""},

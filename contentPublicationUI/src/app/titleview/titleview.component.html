@@ -1,5 +1,8 @@
 <div *ngIf="title">
   <div>
+    <div>TitleId: {{title.id}}</div>
+  </div>
+  <div>
     <div>TitleName: {{title.titleName}}</div>
   </div>
   <div>
@@ -11,5 +14,8 @@
   <div>
     <div>Title Image</div>
     <div><img width="200" alt="" [src]="title.titleImg"></div>
+  </div>
+  <div class="post" *ngFor="let cat of title.categories">
+    <p>{{cat.genre}}</p>
   </div>
 </div>
