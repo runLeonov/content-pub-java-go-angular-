@@ -1,0 +1,15 @@
+<div *ngIf="title">
+  <div>
+    <div>TitleName: {{title.titleName}}</div>
+  </div>
+  <div>
+    <div>Author {{title.originalAuthor}}</div>
+  </div>
+  <div>
+    <div>Description {{title.description}}</div>
+  </div>
+  <div>
+    <div>Title Image</div>
+    <div><img width="200" alt="" [src]="title.titleImg"></div>
+  </div>
+</div>

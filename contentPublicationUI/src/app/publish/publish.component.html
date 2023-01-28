@@ -1,0 +1,46 @@
+<div>
+  <div>
+    <div>TitleName</div>
+    <input
+      [(ngModel)]="titleName"
+      type="text"
+      placeholder="Enter title name">
+  </div>
+  <div>
+    <div>Author</div>
+    <input
+      [(ngModel)]="originalAuthor"
+      type="text"
+      placeholder="Enter author">
+  </div>
+  <div>
+    <div>Description</div>
+    <input
+      [(ngModel)]="description"
+      type="text"
+      placeholder="Enter description">
+  </div>
+  <div style="">
+    <div>Title Image</div>
+    <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+    <div><img
+      [src]="url[0]"
+      *ngIf="url"></div>
+    <input *ngIf="!edited" type="file" (change)="selectTitleImg($event);">
+  </div>
+
+  <div style="border: black 3px solid">
+    add new one?
+    <div><img [src]="url[1]" *ngIf="url"></div>
+    <input type="file" (change)="addNewFile($event)">
+  </div>
+
+  <div style="border: rebeccapurple 3px solid">
+    add new one?
+    <div><img [src]="url[1]" *ngIf="url"></div>
+    <input type="file" (change)="addNewFile($event)">
+  </div>
+
+
+  <button (click)="addPost()">Add Post</button>
+</div>

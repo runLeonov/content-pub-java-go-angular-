@@ -1,3 +1,14 @@
 .title-from-list {
   border: 1px solid black;
 }
+
+
+.post {
+  /*display: inline-block;*/
+  border: 1px solid black;
+}
+
+.post div {
+  display: inline-block;
+  border: 1px solid black;
+}

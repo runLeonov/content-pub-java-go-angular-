@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Title} from "../title";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {environment} from "../environment";
 
 @Component({
   selector: 'app-titles',
@@ -13,7 +13,6 @@ export class TitlesComponent {
 
   constructor(private httpclient: HttpClient) {
     this.loadTitlesList();
-    console.log(this.titles);
   }
 
 
@@ -22,6 +21,6 @@ export class TitlesComponent {
   }
 
   private loadTitlesList() {
-    this.httpclient.get<Title[]>('content/titles').subscribe(titles => this.titles = titles)
+    this.httpclient.get<Title[]>(`${environment.serverUrl}/titles/`).subscribe(titles => this.titles = titles)
   }
 }
