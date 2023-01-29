@@ -54,6 +54,16 @@ func (h *Handler) getTitles(c *gin.Context) {
 	c.JSON(http.StatusOK, titles)
 }
 
+func (h *Handler) getAllPossibleContent(c *gin.Context) {
+	allContent, err := h.services.Titles.GetAllPossibleContent()
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, allContent)
+}
+
 func (h *Handler) getRandom(c *gin.Context) {
 	title, err := h.services.Titles.GetRandom()
 	if err != nil {

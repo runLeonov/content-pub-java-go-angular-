@@ -25,6 +25,18 @@ func (r *TitleRepo) GetAllTitles() ([]app.Title, error) {
 	return titles, nil
 }
 
+func (r *TitleRepo) GetAllPossibleContent() (app.AllContent, error) {
+	var cats []app.Category
+	r.db.Find(&cats)
+	var tags []app.Tag
+	r.db.Find(&tags)
+	var serials []app.Serial
+	r.db.Find(&serials)
+
+	cot := app.AllContent{Categories: cats, Tags: tags, Serials: serials}
+	return cot, nil
+}
+
 func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 	var title app.Title
 	r.db.Debug().Where("id = ?", id).

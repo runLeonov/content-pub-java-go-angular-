@@ -18,6 +18,10 @@ func (s *TitleService) GetTitles() ([]app.Title, error) {
 	return s.repoTitles.GetAllTitles()
 }
 
+func (s *TitleService) GetAllPossibleContent() (app.AllContent, error) {
+	return s.repoTitles.GetAllPossibleContent()
+}
+
 func (s *TitleService) GetTitle(id int) (app.Title, error) {
 	return s.repoTitles.GetTitleById(id)
 }

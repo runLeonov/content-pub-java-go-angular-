@@ -30,7 +30,8 @@ func (h *Handler) InitRouters() *gin.Engine {
 		titles := mainRout.Group("/titles")
 		{
 			titles.GET("/", h.getTitles)
-			titles.GET("/randomt", h.getRandom)
+			titles.GET("/random", h.getRandom)
+			titles.GET("/content-all", h.getAllPossibleContent)
 			titles.GET("/:id", h.getTitle)
 			titles.POST("/", h.createTitle)
 			titles.PUT("/:id", h.updateTitle)

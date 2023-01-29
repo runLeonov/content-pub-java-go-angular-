@@ -15,7 +15,7 @@ func NewCategoryRepo(db *gorm.DB) *CategoryRepo {
 
 func (r *CategoryRepo) GetAll() ([]app.Category, error) {
 	var categories []app.Category
-	r.db.Preload(titleTableE).Find(&categories)
+	r.db.Find(&categories)
 	return categories, nil
 }
 

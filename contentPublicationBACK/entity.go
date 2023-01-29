@@ -49,3 +49,9 @@ type Serial struct {
 	SerialName string   `json:"serialName"`
 	Titles     []*Title `json:"titles" gorm:"many2many:titles_serials;"`
 }
+
+type AllContent struct {
+	Categories []Category `json:"categories"`
+	Tags       []Tag      `json:"tags"`
+	Serials    []Serial   `json:"serials"`
+}
