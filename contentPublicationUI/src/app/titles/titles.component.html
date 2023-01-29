@@ -1,13 +1,14 @@
 <div class="title-from-list">
   <div class="post" *ngFor="let title of titles">
-    <div class="main-img">
-    </div>
     <div class="description">
       <strong>{{title.id}} titleName = {{title.titleName}}</strong>
       <a href="/titles/{{title.id}}">ТУПА СИЛКА</a>
       <p></p>
     </div>
-
+    <hr>
+    <div>
+      <img width="250" [src]="title.titleImg">
+    </div>
     <p>originalAuthor = {{title.originalAuthor}}</p>
     <p>creationDate = {{title.creationDate}}</p>
     <p>description = {{title.description}}</p>
@@ -24,7 +25,7 @@
     </div>
     <div *ngFor="let tag of title.tags">
       <p>id = {{tag.id}}</p>
-      <p>tagName = {{tag.tagName}}</p>
+      <p>tagName = {{tag.tag}}</p>
     </div>
     <div *ngFor="let serial of title.serials">
       <p>id = {{serial.id}}</p>

@@ -29,6 +29,18 @@ export class Title {
   }
 }
 
+export class PossibleContent {
+  public categories: Category[];
+  public tags: Tag[];
+  public serials: Serial[];
+
+  constructor(categories: Category[], tags: Tag[], serials: Serial[]) {
+    this.categories = categories;
+    this.tags = tags;
+    this.serials = serials;
+  }
+}
+
 export class TitleContent {
   public id: number;
   public titleId: number;
@@ -83,13 +95,13 @@ export class Category {
 
 export class Tag {
   public id: number;
-  public tagName: string;
+  public tag: string;
   public titles: Title[];
 
 
   constructor(id: number, tagName: string, titles: Title[]) {
     this.id = id;
-    this.tagName = tagName;
+    this.tag = tagName;
     this.titles = titles;
   }
 

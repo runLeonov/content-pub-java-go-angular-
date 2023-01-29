@@ -35,12 +35,28 @@
     <input type="file" (change)="addNewFile($event)">
   </div>
 
-  <div style="border: rebeccapurple 3px solid">
-    add new one?
-    <div><img [src]="url[1]" *ngIf="url"></div>
-    <input type="file" (change)="addNewFile($event)">
+
+  <div *ngIf="allPossible" class="panel">
+    <h2> All categories??</h2>
+    <div *ngFor="let cat of allPossible.categories" style="border: black 3px solid">
+      <input (change)="addToArr($event, cat, categories)" type="checkbox" name="categories"> {{cat.genre}}
+    </div>
   </div>
 
+  <div *ngIf="allPossible" class="panel">
+    <h2> All tags??</h2>
+    <div *ngFor="let tag of allPossible.tags" style="border: black 3px solid">
+      <input (change)="addToArr($event, tag, tags)" type="checkbox" name="tags"> {{tag.tag}}
+    </div>
+  </div>
+
+  <div *ngIf="allPossible" class="panel">
+    <h2> All serials??</h2>
+
+    <div *ngFor="let ser of allPossible.serials" style="border: black 3px solid">
+      <input (change)="addToArr($event, ser, serials)" type="checkbox" name="serials"> {{ser.serialName}}
+    </div>
+  </div>
 
   <button (click)="addPost()">Add Post</button>
 </div>

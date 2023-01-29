@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FormsModule} from "@angular/forms"
-import {Title} from "../title";
+import {Category, Image, PossibleContent, Serial, Tag, Title} from "../title";
 import {environment} from "../environment";
 
 @Component({
@@ -13,12 +13,27 @@ export class PublishComponent {
   url: any[] = [];
   msg = "";
   public edited = false;
+
+
   public titleName: string = '';
   public originalAuthor: string = '';
   public description: string = '';
   public titleImg: any = '';
 
+
+  public allPossible: PossibleContent | undefined;
+  public categories: Category[] = [];
+  public serials: Serial[] = [];
+  public tags: Tag[] = [];
+  public images: Image[] = [];
+
   constructor(private httpclient: HttpClient) {
+    this.loadContents();
+
+  }
+
+  private loadContents() {
+    this.httpclient.get<PossibleContent>(`${environment.serverUrl}/titles/content-all`).subscribe(cot => this.allPossible = cot)
   }
 
   selectTitleImg(event: any) {
@@ -73,20 +88,28 @@ export class PublishComponent {
       content: {
         likes: 0,
         views: 0,
-        images: [
-        ]
+        images: this.images
       },
-      categories: [
-        {id:1, genre: ""},
-        {id:2,genre: ""},
-        {id:3, genre: ""},
-        {id:4,genre: ""},
-      ],
-      tags: [
-      ],
-      serials: [
-        {serialName: ""},
-      ]
+      categories: this.categories,
+      tags: this.tags,
+      serials: this.serials
     }).subscribe()
+  }
+
+  addToArr($event: any, obj: Category | Tag | Serial, arr: any[]) {
+    if ($event.target.checked) {
+      arr.push(obj);
+      return;
+    }
+    removeFromArr(arr, obj);
+
+    function removeFromArr(arr: any[], obj: Category | Tag | Serial) {
+      if (arr.includes(obj)) {
+        const index = arr.indexOf(obj, 0);
+        if (index > -1) {
+          arr.splice(index, 1);
+        }
+      }
+    }
   }
 }
