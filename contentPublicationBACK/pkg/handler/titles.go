@@ -107,6 +107,38 @@ func (h *Handler) getTitle(c *gin.Context) {
 	c.JSON(http.StatusOK, title)
 }
 
+func (h *Handler) likeTitle(c *gin.Context) {
+	var like app.Like
+	if err := c.BindJSON(&like); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err := h.services.Titles.LikeOrUnlike(like, true)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, err)
+}
+
+func (h *Handler) unlikeTitle(c *gin.Context) {
+	var like app.Like
+	if err := c.BindJSON(&like); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err := h.services.Titles.LikeOrUnlike(like, false)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, err)
+}
+
 func (h *Handler) updateTitle(c *gin.Context) {
 	var input app.Title
 

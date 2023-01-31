@@ -15,6 +15,7 @@ type Titles interface {
 	GetTitles() ([]app.Title, error)
 	GetAllPossibleContent() (app.AllContent, error)
 	GetTitle(id int) (app.Title, error)
+	LikeOrUnlike(likeObj app.Like, like bool) error
 	GetRandom() (app.Title, error)
 	CreateTitle(title app.Title) (uint, error)
 	UpdateTitle(title app.Title, id int) (uint, error)

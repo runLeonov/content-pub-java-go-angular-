@@ -20,7 +20,7 @@ type Title struct {
 type TitleContent struct {
 	ID      uint    `json:"id" gorm:"primary_key, AUTO_INCREMENT"`
 	TitleID uint    `json:"titleId"`
-	Likes   uint    `json:"likes"`
+	Likes   []Like  `json:"likes"`
 	Views   uint    `json:"views"`
 	Images  []Image `json:"images"`
 }

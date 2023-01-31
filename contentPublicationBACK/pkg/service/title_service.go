@@ -26,6 +26,13 @@ func (s *TitleService) GetTitle(id int) (app.Title, error) {
 	return s.repoTitles.GetTitleById(id)
 }
 
+func (s *TitleService) LikeOrUnlike(likeObj app.Like, like bool) error {
+	if like {
+		return s.repoTitles.LikeById(likeObj)
+	}
+	return s.repoTitles.UnLikeById(likeObj)
+}
+
 func (s *TitleService) GetRandom() (app.Title, error) {
 	return s.repoTitles.GetRandom()
 }

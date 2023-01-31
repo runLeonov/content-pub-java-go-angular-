@@ -21,6 +21,7 @@ func (r *TitleRepo) GetAllTitles() ([]app.Title, error) {
 		Preload(tagTableE).
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
+		Preload(likeTableE).
 		Find(&titles)
 	return titles, nil
 }
@@ -45,8 +46,17 @@ func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 		Preload(tagTableE).
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
+		Preload(likeTableE).
 		First(&title)
 	return title, nil
+}
+
+func (r *TitleRepo) LikeById(like app.Like) error {
+	return r.db.Debug().Create(&like).Error
+}
+
+func (r *TitleRepo) UnLikeById(like app.Like) error {
+	return r.db.Debug().Delete(&like).Error
 }
 
 func (r *TitleRepo) GetRandom() (app.Title, error) {
@@ -58,6 +68,7 @@ func (r *TitleRepo) GetRandom() (app.Title, error) {
 		Preload(tagTableE).
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
+		Preload(likeTableE).
 		First(&title)
 	return title, nil
 }
@@ -81,6 +92,7 @@ func (r *TitleRepo) GetAllTitlesByNameRegex(name string) ([]app.Title, error) {
 		Preload(tagTableE).
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
+		Preload(likeTableE).
 		Where("title_name LIKE %?%", name).Find(&titles)
 	return titles, nil
 }
@@ -101,6 +113,7 @@ func (r *TitleRepo) GetTitlesByCategories(categoriesIds []uint) ([]app.Title, er
 		Preload(tagTableE).
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
+		Preload(likeTableE).
 		Joins("inner join titles_categories tc on tc.category_id = titles.id ").
 		Where("id IN ?", categoriesIds).Find(&titles)
 	return titles, nil

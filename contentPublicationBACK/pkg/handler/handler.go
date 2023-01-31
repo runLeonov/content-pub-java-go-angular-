@@ -34,6 +34,8 @@ func (h *Handler) InitRouters() *gin.Engine {
 			titles.GET("/content-all", h.getAllPossibleContent)
 			titles.GET("/:id", h.getTitle)
 			titles.POST("/", h.createTitle)
+			titles.POST("/like", h.likeTitle)
+			titles.POST("/unlike", h.unlikeTitle)
 			titles.PUT("/:id", h.updateTitle)
 			titles.DELETE("/:id", h.deleteTitle)
 			titles.GET("/categories/", h.getTitlesByCategories)
