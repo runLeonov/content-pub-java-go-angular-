@@ -1,3 +1,5 @@
+import {User} from "./user";
+
 export class Title {
   public id: number;
   public titleName: string;
@@ -29,6 +31,21 @@ export class Title {
   }
 }
 
+export class Like {
+  public titleContentId: number
+  public userId: number
+
+
+  constructor(titleContentId: number, userId: number) {
+    this.titleContentId = titleContentId;
+    this.userId = userId;
+  }
+
+  static getEmptyLike(): Like {
+    return new Like(0, 0);
+  }
+}
+
 export class PossibleContent {
   public categories: Category[];
   public tags: Tag[];
@@ -44,11 +61,13 @@ export class PossibleContent {
 export class TitleContent {
   public id: number;
   public titleId: number;
-  public likes: number;
+  public likesCount: number = 0;
+  public likes: Like[] = [];
   public views: number;
   public images: Image[];
 
-  constructor(id: number, titleId: number, likes: number, views: number, images: Image[]) {
+
+  constructor(id: number, titleId: number, likes: Like[], views: number, images: Image[]) {
     this.id = id;
     this.titleId = titleId;
     this.likes = likes;
@@ -57,7 +76,7 @@ export class TitleContent {
   }
 
   static getEmptyContent(): TitleContent {
-    return new TitleContent(0, 0, 0, 0, []);
+    return new TitleContent(0, 0, [], 0, []);
   }
 }
 

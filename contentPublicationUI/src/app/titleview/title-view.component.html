@@ -18,4 +18,11 @@
   <div class="post" *ngFor="let cat of title.categories">
     <p>{{cat.genre}}</p>
   </div>
+
+  <button *ngIf="!isLiked" style="color: green" (click)="isLiked = !isLiked; like(true);">
+    Тупа LIKE
+  </button>
+  <button *ngIf="isLiked" style="color: red" (click)="isLiked = !isLiked; like(false);">
+    Тупа UNLIKE
+  </button>
 </div>

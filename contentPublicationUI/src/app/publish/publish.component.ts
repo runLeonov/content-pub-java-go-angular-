@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {FormsModule} from "@angular/forms"
-import {Category, Image, PossibleContent, Serial, Tag, Title} from "../title";
+import {Category, Image, Like, PossibleContent, Serial, Tag} from "../title";
 import {environment} from "../environment";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-publish',
@@ -27,13 +27,12 @@ export class PublishComponent {
   public tags: Tag[] = [];
   public images: Image[] = [];
 
-  constructor(private httpclient: HttpClient) {
+  constructor(private httpclient: HttpClient, private router: Router) {
     this.loadContents();
-
   }
 
   private loadContents() {
-    this.httpclient.get<PossibleContent>(`${environment.serverUrl}/titles/content-all`).subscribe(cot => this.allPossible = cot)
+    this.httpclient.get<PossibleContent>(`${environment.serverUrl}/titles/content-all`).subscribe(cot => this.allPossible = cot);
   }
 
   selectTitleImg(event: any) {
@@ -79,21 +78,23 @@ export class PublishComponent {
   }
 
   addPost() {
-    this.httpclient.post<Title>(`${environment.serverUrl}/titles/`, {
+    this.httpclient.post<any>(`${environment.serverUrl}/titles/`, {
       titleName: this.titleName,
       originalAuthor: this.originalAuthor,
       description: this.description,
       creationDate: new Date(),
       titleImg: this.titleImg,
       content: {
-        likes: 0,
+        likes: [],
         views: 0,
         images: this.images
       },
       categories: this.categories,
       tags: this.tags,
       serials: this.serials
-    }).subscribe()
+    }).subscribe(x => {
+      this.router.navigate(["/titles/" + x.id]);
+    });
   }
 
   addToArr($event: any, obj: Category | Tag | Serial, arr: any[]) {

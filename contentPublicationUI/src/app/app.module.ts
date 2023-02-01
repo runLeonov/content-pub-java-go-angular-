@@ -9,15 +9,16 @@ import {TitlesComponent} from './titles/titles.component';
 import {ProfileComponent} from './profile/profile.component';
 import {PublishComponent} from './publish/publish.component';
 import {FormsModule} from "@angular/forms";
-import {TitleviewComponent} from './titleview/titleview.component';
+import {TitleViewComponent} from './titleview/title-view.component';
 import {TitleViewRandomComponent} from './title-view-random/title-view-random.component';
+import {User} from "./user";
 
 const appRoutes: Routes = [
   {path: 'titles', component: TitlesComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'title/create', component: PublishComponent},
   {path: 'random', component: TitleViewRandomComponent},
-  {path: 'titles/:id', component: TitleviewComponent},
+  {path: 'titles/:id', component: TitleViewComponent},
 ]
 
 @NgModule({
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
     TitlesComponent,
     ProfileComponent,
     PublishComponent,
-    TitleviewComponent,
+    TitleViewComponent,
     TitleViewRandomComponent
   ],
   imports: [
@@ -40,4 +41,20 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+
+  constructor() {
+    let user: User = {
+      email: "leonovcasha@gmail.com",
+      name: "Sasha",
+      role: "USER",
+      id: 1,
+      likes: [
+        {titleContentId: 1, userId: 1},
+        {titleContentId: 2, userId: 1},
+      ]
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+  }
 }
