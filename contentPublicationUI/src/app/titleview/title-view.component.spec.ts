@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TitleviewComponent } from './titleview.component';
+import { TitleViewComponent } from './title-view.component';
 
 describe('TitleviewComponent', () => {
-  let component: TitleviewComponent;
-  let fixture: ComponentFixture<TitleviewComponent>;
+  let component: TitleViewComponent;
+  let fixture: ComponentFixture<TitleViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TitleviewComponent ]
+      declarations: [ TitleViewComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TitleviewComponent);
+    fixture = TestBed.createComponent(TitleViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
