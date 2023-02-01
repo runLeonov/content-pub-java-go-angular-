@@ -20,8 +20,6 @@ func (r *TitleRepo) GetAllTitles() ([]app.Title, error) {
 		Preload(categoryTableE).
 		Preload(tagTableE).
 		Preload(titleContentTableE).
-		Preload(imagesTableE).
-		Preload(likeTableE).
 		Find(&titles)
 	return titles, nil
 }
@@ -52,11 +50,13 @@ func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 }
 
 func (r *TitleRepo) LikeById(like app.Like) error {
+	r.db.Exec("UPDATE title_contents SET likes_count = likes_count + 1 WHERE title_id = ?", &like.TitleContentID)
 	return r.db.Debug().Create(&like).Error
 }
 
 func (r *TitleRepo) UnLikeById(like app.Like) error {
-	return r.db.Debug().Delete(&like).Error
+	r.db.Exec("UPDATE title_contents SET likes_count = likes_count - 1 WHERE title_id = ?", &like.TitleContentID)
+	return r.db.Where("title_content_id = ?", &like.TitleContentID).Delete(&like).Error
 }
 
 func (r *TitleRepo) GetRandom() (app.Title, error) {
@@ -75,7 +75,7 @@ func (r *TitleRepo) GetRandom() (app.Title, error) {
 
 func (r *TitleRepo) SaveNewTitle(title app.Title) (uint, error) {
 	title.CreationDate = time.Now()
-	r.db.Debug().Create(&title)
+	r.db.Debug().Create(&title).Create(&title.Content)
 	return title.ID, nil
 }
 
