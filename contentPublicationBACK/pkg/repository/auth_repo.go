@@ -20,6 +20,6 @@ func (r *AuthRepo) CreateUser(user app.User) (int, error) {
 
 func (r *AuthRepo) GetUser(email, password string) (app.User, error) {
 	var user app.User
-	r.db.Where("email = ? AND password = ?", email, password).First(&user)
-	return user, nil
+	err := r.db.Where("email = ? AND password = ?", email, password).First(&user).Error
+	return user, err
 }
