@@ -10,7 +10,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./publish.component.css']
 })
 export class PublishComponent {
-  url: any[] = [];
+  url: any;
+  urls: any[] = [];
   msg = "";
   public edited = false;
 
@@ -57,7 +58,7 @@ export class PublishComponent {
 
     reader.onload = (_event) => {
       this.msg = "";
-      this.url[0] = reader.result;
+      this.url = reader.result;
       this.titleImg = reader.result;
     }
 
@@ -77,7 +78,8 @@ export class PublishComponent {
 
     reader.onload = (_event) => {
       this.msg = "";
-      this.url[1] = reader.result;
+      this.urls.push(reader.result);
+      this.images.push(new Image(0, String(reader.result)));
     }
   }
 

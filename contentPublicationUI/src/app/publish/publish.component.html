@@ -24,15 +24,19 @@
     <div>Title Image</div>
     <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
     <div><img
-      [src]="url[0]"
+      [src]="url"
       *ngIf="url"></div>
     <input *ngIf="!edited" type="file" (change)="selectTitleImg($event);">
   </div>
 
-  <div style="border: black 3px solid">
+  <div id="images" style="border: black 3px solid">
     add new one?
-    <div><img [src]="url[1]" *ngIf="url"></div>
+    <div><img [src]="urls" *ngIf="urls"></div>
     <input type="file" (change)="addNewFile($event)">
+
+    <div *ngFor="let u of urls"><img
+      [src]="u"
+      *ngIf="u"></div>
   </div>
 
   <select *ngIf="allPossible" [(ngModel)]="type">

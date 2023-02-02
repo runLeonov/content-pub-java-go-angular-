@@ -19,6 +19,10 @@
     <p>{{cat.genre}}</p>
   </div>
 
+  <div class="post" *ngFor="let im of title.content.images">
+    <img width="200" alt="" [src]="im.img64">
+  </div>
+
   <button *ngIf="!isLiked" style="color: green" (click)="isLiked = !isLiked; like(true);">
     Тупа LIKE
   </button>
