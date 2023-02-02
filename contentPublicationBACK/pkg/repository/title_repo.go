@@ -3,7 +3,6 @@ package repository
 import (
 	app "contentPublicationBACK"
 	"gorm.io/gorm"
-	"time"
 )
 
 type TitleRepo struct {
@@ -31,8 +30,10 @@ func (r *TitleRepo) GetAllPossibleContent() (app.AllContent, error) {
 	r.db.Find(&tags)
 	var serials []app.Serial
 	r.db.Find(&serials)
+	var types []app.StaticType
+	r.db.Find(&types)
 
-	cot := app.AllContent{Categories: cats, Tags: tags, Serials: serials}
+	cot := app.AllContent{Categories: cats, Tags: tags, Serials: serials, Types: types}
 	return cot, nil
 }
 
@@ -74,8 +75,7 @@ func (r *TitleRepo) GetRandom() (app.Title, error) {
 }
 
 func (r *TitleRepo) SaveNewTitle(title app.Title) (uint, error) {
-	title.CreationDate = time.Now()
-	r.db.Debug().Create(&title).Create(&title.Content)
+	r.db.Debug().Create(&title)
 	return title.ID, nil
 }
 

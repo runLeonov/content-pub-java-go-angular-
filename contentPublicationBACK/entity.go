@@ -7,6 +7,7 @@ import (
 type Title struct {
 	ID             uint         `json:"id"`
 	TitleName      string       `json:"titleName"`
+	Type           string       `json:"typeName"`
 	OriginalAuthor string       `json:"originalAuthor"`
 	CreationDate   time.Time    `json:"creationDate"`
 	Description    string       `json:"description"`
@@ -52,7 +53,13 @@ type Serial struct {
 }
 
 type AllContent struct {
-	Categories []Category `json:"categories"`
-	Tags       []Tag      `json:"tags"`
-	Serials    []Serial   `json:"serials"`
+	Types      []StaticType `json:"types"`
+	Categories []Category   `json:"categories"`
+	Tags       []Tag        `json:"tags"`
+	Serials    []Serial     `json:"serials"`
+}
+
+type StaticType struct {
+	ID       uint   `json:"id"`
+	TypeName string `json:"typeName"`
 }
