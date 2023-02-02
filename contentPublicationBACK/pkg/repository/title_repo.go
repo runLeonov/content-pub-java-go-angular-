@@ -75,7 +75,7 @@ func (r *TitleRepo) GetRandom() (app.Title, error) {
 }
 
 func (r *TitleRepo) SaveNewTitle(title app.Title) (uint, error) {
-	r.db.Debug().Create(&title)
+	r.db.Create(&title)
 	return title.ID, nil
 }
 
