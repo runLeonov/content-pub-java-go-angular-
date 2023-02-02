@@ -35,6 +35,9 @@
     <input type="file" (change)="addNewFile($event)">
   </div>
 
+  <select *ngIf="allPossible" [(ngModel)]="type">
+    <option *ngFor="let t of allPossible.types">{{t.typeName}}</option>
+  </select>
 
   <div *ngIf="allPossible" class="panel">
     <h2> All categories??</h2>

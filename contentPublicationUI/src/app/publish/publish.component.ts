@@ -19,6 +19,7 @@ export class PublishComponent {
   public originalAuthor: string = '';
   public description: string = '';
   public titleImg: any = '';
+  public type: string = '';
 
 
   public allPossible: PossibleContent | undefined;
@@ -28,11 +29,14 @@ export class PublishComponent {
   public images: Image[] = [];
 
   constructor(private httpclient: HttpClient, private router: Router) {
-    this.loadContents();
+    this.loadContents().subscribe(cot => {
+      this.allPossible = cot
+      this.type = this.allPossible.types[0].typeName
+    });
   }
 
   private loadContents() {
-    this.httpclient.get<PossibleContent>(`${environment.serverUrl}/titles/content-all`).subscribe(cot => this.allPossible = cot);
+    return this.httpclient.get<PossibleContent>(`${environment.serverUrl}/titles/content-all`);
   }
 
   selectTitleImg(event: any) {
@@ -81,6 +85,7 @@ export class PublishComponent {
     this.httpclient.post<any>(`${environment.serverUrl}/titles/`, {
       titleName: this.titleName,
       originalAuthor: this.originalAuthor,
+      typeName: this.type,
       description: this.description,
       creationDate: new Date(),
       titleImg: this.titleImg,

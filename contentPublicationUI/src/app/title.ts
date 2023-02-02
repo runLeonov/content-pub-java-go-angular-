@@ -1,8 +1,7 @@
-import {User} from "./user";
-
 export class Title {
   public id: number;
   public titleName: string;
+  public typeName: string;
   public originalAuthor: string;
   public creationDate: Date = new Date();
   public description: string = '';
@@ -13,13 +12,14 @@ export class Title {
   public serials: Serial[];
 
 
-  constructor(id: number, titleName: string, originalAuthor: string, creationDate: Date, description: string, titleImgBase64: string, content: TitleContent, categories: Category[], tags: Tag[], serials: Serial[]) {
+  constructor(id: number, titleName: string, type: string, originalAuthor: string, creationDate: Date, description: string, titleImg: string, content: TitleContent, categories: Category[], tags: Tag[], serials: Serial[]) {
     this.id = id;
     this.titleName = titleName;
+    this.typeName = type;
     this.originalAuthor = originalAuthor;
     this.creationDate = creationDate;
     this.description = description;
-    this.titleImg = titleImgBase64;
+    this.titleImg = titleImg;
     this.content = content;
     this.categories = categories;
     this.tags = tags;
@@ -27,7 +27,7 @@ export class Title {
   }
 
   static getEmptyTitle(): Title {
-    return new Title(0, "", "", new Date(), "", "", TitleContent.getEmptyContent(), [], [], []);
+    return new Title(0, "", "", "", new Date(), "", "", TitleContent.getEmptyContent(), [], [], []);
   }
 }
 
@@ -50,11 +50,24 @@ export class PossibleContent {
   public categories: Category[];
   public tags: Tag[];
   public serials: Serial[];
+  public types: StaticType[];
 
-  constructor(categories: Category[], tags: Tag[], serials: Serial[]) {
+
+  constructor(categories: Category[], tags: Tag[], serials: Serial[], types: StaticType[]) {
     this.categories = categories;
     this.tags = tags;
     this.serials = serials;
+    this.types = types;
+  }
+}
+
+export class StaticType {
+  public id: number;
+  public typeName: string;
+
+  constructor(id: number, typeName: string) {
+    this.id = id;
+    this.typeName = typeName;
   }
 }
 
