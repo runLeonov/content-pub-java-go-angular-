@@ -24,7 +24,9 @@ func (h *Handler) InitRouters() *gin.Engine {
 		auth := mainRout.Group("/auth")
 		{
 			auth.POST("/register", h.singUp)
-			auth.GET("/login", h.singIn)
+			auth.POST("/login", h.singIn)
+			auth.GET("/user", h.getUser)
+			auth.POST("/check-exist", h.checkExist)
 		}
 
 		titles := mainRout.Group("/titles")

@@ -9,6 +9,8 @@ type Authorization interface {
 	CreateUser(user app.User) (int, error)
 	GenerateToken(email, password string) (string, error)
 	ParseToken(token string) (int, error)
+	CheckUserExist(email string) bool
+	GetUser(id int) (app.User, error)
 }
 
 type Titles interface {

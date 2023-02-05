@@ -51,6 +51,20 @@ func (s *AuthService) GenerateToken(email, password string) (string, error) {
 	return token.SignedString([]byte(signingKey))
 }
 
+func (s *AuthService) GetUser(id int) (app.User, error) {
+	user, err := s.repo.GetUserById(id)
+	if err != nil {
+		return app.User{}, err
+	}
+
+	return user, err
+}
+
+func (s *AuthService) CheckUserExist(email string) bool {
+	exist := s.repo.CheckExist(email)
+	return exist
+}
+
 func (s *AuthService) ParseToken(token string) (int, error) {
 	tok, err := jwt.ParseWithClaims(token, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {

@@ -8,6 +8,8 @@ import (
 type Authorization interface {
 	CreateUser(user app.User) (int, error)
 	GetUser(email, password string) (app.User, error)
+	CheckExist(email string) bool
+	GetUserById(id int) (app.User, error)
 }
 
 type Titles interface {
