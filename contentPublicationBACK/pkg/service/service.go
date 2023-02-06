@@ -13,6 +13,10 @@ type Authorization interface {
 	GetUser(id int) (app.User, error)
 }
 
+type Account interface {
+	GetUserInfo(id int) (app.User, error)
+}
+
 type Titles interface {
 	GetTitles() ([]app.Title, error)
 	GetAllPossibleContent() (app.AllContent, error)
@@ -28,11 +32,13 @@ type Titles interface {
 type Service struct {
 	Titles
 	Authorization
+	Account
 }
 
 func NewService(repo *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repo.Authorization),
 		Titles:        NewTitleService(repo.Titles, repo.Categories),
+		Account:       NewAccountService(repo.Authorization, repo.Account),
 	}
 }

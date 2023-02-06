@@ -77,6 +77,11 @@ func (h *Handler) getUser(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 }
 
+func (h *Handler) logOut(c *gin.Context) {
+	cookie := http.Cookie{Name: "jwt", Value: "", Expires: time.Now().Add(12 * time.Hour), Path: "/", Secure: false, HttpOnly: true}
+	http.SetCookie(c.Writer, &cookie)
+}
+
 func (h *Handler) checkExist(c *gin.Context) {
 	var input signInInput
 

@@ -14,13 +14,13 @@ func NewAuthRepo(db *gorm.DB) *AuthRepo {
 }
 
 func (r *AuthRepo) CreateUser(user app.User) (int, error) {
-	r.db.Debug().Create(&user)
-	return user.ID, nil
+	err := r.db.Create(&user).Error
+	return user.ID, err
 }
 
 func (r *AuthRepo) GetUser(email, password string) (app.User, error) {
 	var user app.User
-	err := r.db.Where("email = ? AND password = ?", email, password).First(&user).Error
+	err := r.db.Debug().Where("email = ? AND password = ?", email, password).First(&user).Error
 	return user, err
 }
 

@@ -12,6 +12,10 @@ type Authorization interface {
 	GetUserById(id int) (app.User, error)
 }
 
+type Account interface {
+	GetUserInfo(id int) (app.User, error)
+}
+
 type Titles interface {
 	GetAllTitles() ([]app.Title, error)
 	GetAllPossibleContent() (app.AllContent, error)
@@ -35,6 +39,7 @@ type Repository struct {
 	Authorization
 	Titles
 	Categories
+	Account
 }
 
 func NewRepository(db *gorm.DB) *Repository {
