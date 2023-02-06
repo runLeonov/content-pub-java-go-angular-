@@ -15,6 +15,7 @@ type Authorization interface {
 
 type Account interface {
 	GetUserInfo(id int) (app.User, error)
+	GetLikedTitlesByUserId(id int) ([]app.Title, error)
 }
 
 type Titles interface {

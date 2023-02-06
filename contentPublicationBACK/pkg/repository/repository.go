@@ -14,6 +14,7 @@ type Authorization interface {
 
 type Account interface {
 	GetUserInfo(id int) (app.User, error)
+	GetUserLikes(id int) ([]app.Title, error)
 }
 
 type Titles interface {
@@ -47,5 +48,6 @@ func NewRepository(db *gorm.DB) *Repository {
 		Authorization: NewAuthRepo(db),
 		Titles:        NewTitleRepo(db),
 		Categories:    NewCategoryRepo(db),
+		Account:       NewAuthRepo(db),
 	}
 }

@@ -7,18 +7,22 @@ import (
 
 type AccountService struct {
 	repoAuth repository.Authorization
-	repo     repository.Account
+	repoAcc  repository.Account
 }
 
 func NewAccountService(repo repository.Authorization, repoAcc repository.Account) *AccountService {
-	return &AccountService{repoAuth: repo, repo: repoAcc}
+	return &AccountService{repoAuth: repo, repoAcc: repoAcc}
 }
 
 func (s *AccountService) GetUserInfo(id int) (app.User, error) {
-	user, err := s.repo.GetUserInfo(id)
+	user, err := s.repoAcc.GetUserInfo(id)
 	if err != nil {
 		return app.User{}, err
 	}
 
 	return user, err
+}
+
+func (s *AccountService) GetLikedTitlesByUserId(id int) ([]app.Title, error) {
+	return s.repoAcc.GetUserLikes(id)
 }

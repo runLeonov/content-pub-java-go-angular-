@@ -17,3 +17,16 @@ func (h *Handler) getUserInfo(c *gin.Context) {
 
 	c.JSON(http.StatusOK, user)
 }
+
+func (h *Handler) getLikedTitles(c *gin.Context) {
+	tok, err := c.Cookie("jwt")
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.Authorization.ParseToken(tok)
+	titles, err := h.services.Account.GetLikedTitlesByUserId(id)
+
+	c.JSON(http.StatusOK, titles)
+}

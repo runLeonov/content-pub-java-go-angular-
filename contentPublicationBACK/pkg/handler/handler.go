@@ -4,7 +4,6 @@ import (
 	"contentPublicationBACK/pkg/service"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	//"github.com/rs/cors"
 )
 
 type Handler struct {
@@ -32,7 +31,8 @@ func (h *Handler) InitRouters() *gin.Engine {
 
 		account := mainRout.Group("/account", h.userIdentity)
 		{
-			account.GET("/")
+			account.GET("/", h.getUserInfo)
+			account.GET("/likes", h.getLikedTitles)
 		}
 
 		titles := mainRout.Group("/titles")
