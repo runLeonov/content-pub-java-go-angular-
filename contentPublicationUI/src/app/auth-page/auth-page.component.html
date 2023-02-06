@@ -1,0 +1,48 @@
+<h1>
+  Create new account:)
+</h1>
+<h2>
+  <div>
+    <div>Enter your email</div>
+    <input
+      [(ngModel)]="email"
+      type="email"
+      placeholder="">
+  </div>
+  <div>
+    <div>Enter your nickname</div>
+    <input
+      [(ngModel)]="name"
+      type="text"
+      placeholder="">
+  </div>
+  <div>
+    <div>Enter password</div>
+    <input #pass
+           [(ngModel)]="password"
+           type="password"
+           placeholder="">
+  </div>
+  <div>
+    <div>Enter password again</div>
+    <input #passRep
+           type="password"
+           placeholder="">
+  </div>
+
+  <div>
+    <div>Add profile photo</div>
+    <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+    <input type="file" (change)="selectImg($event);">
+  </div>
+
+
+  <button (click)="validation()">Create new user!!!</button>
+
+  <div style="color: red" *ngIf="incorrectPass">Password are not same! Try again.</div>
+  <div style="color: red" *ngIf="emptyPass">Password must contains at least 6 symbols</div>
+  <div style="color: red" *ngIf="emptyEmail">Email field cannot be empty</div>
+  <div style="color: red" *ngIf="emptyName">Name field cannot be empty</div>
+  <div style="color: red" *ngIf="userExist">User already exist</div>
+
+</h2>

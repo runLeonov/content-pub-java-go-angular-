@@ -7,7 +7,13 @@
     <a routerLink="/title/create">Publication</a>
   </div>
   <div class="head-buttons right-buttons">
-    <a routerLink="/profile">Profile</a>
-    <a routerLink="/logout">Sign out</a>
+    <a *ngIf="user" routerLink="/profile"><img width="30" [src]="user.img64" alt=""></a>
+    <div *ngIf="!user">
+      <a routerLink="/sing-up">Sing in</a>
+    </div>
+    <div *ngIf="user">
+      <p (click)="logOut()">Sign out</p>
+    </div>
+
   </div>
 </header>

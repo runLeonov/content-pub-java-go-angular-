@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../environment";
 import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../user";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-titleview',
@@ -12,7 +13,7 @@ import {User} from "../user";
 })
 export class TitleViewComponent {
   title: Title = Title.getEmptyTitle();
-  user: User;
+  user: User | undefined;
   isLiked: boolean = false;
   clickCount: number = 0;
   countSec: number = 0;
@@ -20,8 +21,8 @@ export class TitleViewComponent {
 
 
   constructor(private httpclient: HttpClient, private router: Router, private route: ActivatedRoute) {
+    this.user = AppComponent.getUser()
     let id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.user = JSON.parse(String(localStorage.getItem("user")).toString());
     if (id) {
       this.loadTitleByID().subscribe(title => {
         this.title = title;
@@ -34,7 +35,8 @@ export class TitleViewComponent {
       });
     }
 
-    function checkIfLiked(user: User, likes: Like[]): boolean {
+    function checkIfLiked(user: User | undefined, likes: Like[]): boolean {
+      if (!user) return false;
       let liked = false;
       likes.forEach(x => {
           if (x.userId === user.id) {
@@ -66,6 +68,10 @@ export class TitleViewComponent {
     if (this.isWorking) {
       return;
     }
+    if (!this.user) {
+      this.router.navigate(['/sing-up'])
+      return;
+    }
 
     this.isWorking = true;
     let interval = setInterval(() => {
@@ -77,11 +83,13 @@ export class TitleViewComponent {
         if (doLike) {
           this.httpclient.post<Title>(`${environment.serverUrl}/titles/like`, {
             titleContentId: this.title.id,
+            // @ts-ignore
             userId: this.user.id
           }).subscribe();
         } else {
           this.httpclient.post<Title>(`${environment.serverUrl}/titles/unlike`, {
             titleContentId: this.title.id,
+            // @ts-ignore
             userId: this.user.id
           }).subscribe();
         }

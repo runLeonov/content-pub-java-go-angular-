@@ -6,7 +6,7 @@ header {
   justify-content:space-between;
 }
 
-.head-buttons a {
+.head-buttons a, p {
   font-size: 20px;
   width: 20%;
   padding: 0 45px;
