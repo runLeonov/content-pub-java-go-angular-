@@ -48,6 +48,6 @@ func NewRepository(db *gorm.DB) *Repository {
 		Authorization: NewAuthRepo(db),
 		Titles:        NewTitleRepo(db),
 		Categories:    NewCategoryRepo(db),
-		Account:       NewAuthRepo(db),
+		Account:       NewAccountRepo(db),
 	}
 }
