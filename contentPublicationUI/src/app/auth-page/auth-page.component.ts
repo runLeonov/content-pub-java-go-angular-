@@ -101,21 +101,22 @@ export class AuthPageComponent {
       password: this.password,
       name: this.name,
       img64: this.img
-    }, {withCredentials: true}).subscribe(() => this.singIn());
+    }).subscribe(() => this.singIn());
   }
 
   singIn() {
-    this.httpclient.post<any>(`${environment.serverUrl}/auth/login`, {
+    this.httpclient.post(`${environment.serverUrl}/auth/login`, {
       email: this.email,
       password: this.password,
-    }, {withCredentials: true}).subscribe(() => {
+    }).subscribe(() => {
       this.getUser();
     });
   }
 
   getUser() {
-    this.httpclient.get<any>(`${environment.serverUrl}/auth/user`, {withCredentials: true}).subscribe(user => {
+    this.httpclient.get(`${environment.serverUrl}/auth/user`).subscribe(user => {
       localStorage.setItem("user", JSON.stringify(user));
+      document.location.reload();
     });
   }
 }

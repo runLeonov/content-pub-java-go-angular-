@@ -21,6 +21,7 @@ import {TitleViewRandomComponent} from './title-view-random/title-view-random.co
 
 import {AuthPageComponent} from './auth-page/auth-page.component';
 import {Observable} from "rxjs";
+import { LoginComponent } from './auth-page/login/login.component';
 
 const appRoutes: Routes = [
   {path: 'titles', component: TitlesComponent},
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   {path: 'random', component: TitleViewRandomComponent},
   {path: 'titles/:id', component: TitleViewComponent},
   {path: 'sing-up', component: AuthPageComponent},
+  {path: 'do-login', component: LoginComponent},
 ]
 
 @Injectable()
@@ -53,7 +55,8 @@ export class CustomInterceptor implements HttpInterceptor {
     PublishComponent,
     TitleViewComponent,
     TitleViewRandomComponent,
-    AuthPageComponent
+    AuthPageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
