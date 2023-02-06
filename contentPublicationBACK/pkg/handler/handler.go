@@ -32,7 +32,7 @@ func (h *Handler) InitRouters() *gin.Engine {
 
 		account := mainRout.Group("/account", h.userIdentity)
 		{
-			account.GET("/account")
+			account.GET("/")
 		}
 
 		titles := mainRout.Group("/titles")
