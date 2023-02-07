@@ -19,12 +19,16 @@ func (r *AccountRepo) GetUserInfo(id int) (app.User, error) {
 	return user, err
 }
 
-func (r *AccountRepo) GetUserLikes(id int) ([]app.Title, error) {
+func (r *AccountRepo) GetUserLikes(userId int) ([]app.Title, error) {
 	var titles []app.Title
-	r.db.Raw("select * from titles "+
-		"inner join title_contents on title_id = titles.id "+
-		"inner join likes on likes.title_content_id = title_contents.id "+
-		"inner join users on users.id = likes.user_id "+
-		"where users.id = ?", id).Preload(titleContentTableE).Preload(likeTableE).Scan(&titles)
+	r.db.Debug().
+		Preload(serialTableE).
+		Preload(categoryTableE).
+		Preload(tagTableE).
+		Preload(imagesTableE).
+		Preload(titleContentTableE).
+		Preload(likeTableE).
+		Preload("Content.Likes.User").
+		Find(&titles, app.Title{Content: app.TitleContent{Likes: []app.Like{{UserID: uint(userId)}}}})
 	return titles, nil
 }
