@@ -45,6 +45,10 @@ func (s *TitleService) UpdateTitle(title app.Title, id int) (uint, error) {
 	return s.repoTitles.UpdateTitle(title, id)
 }
 
+func (s *TitleService) UpdateViewsForTitle(id int) error {
+	return s.repoTitles.AddView(id)
+}
+
 func (s *TitleService) DeleteTitle(id int) (uint, error) {
 	return s.repoTitles.DeleteTitleById(id)
 }

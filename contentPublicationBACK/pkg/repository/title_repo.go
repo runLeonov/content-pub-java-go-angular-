@@ -55,6 +55,10 @@ func (r *TitleRepo) LikeById(like app.Like) error {
 	return r.db.Debug().Create(&like).Error
 }
 
+func (r *TitleRepo) AddView(id int) error {
+	return r.db.Exec("UPDATE title_contents SET views = views + 1 WHERE title_id = ?", id).Error
+}
+
 func (r *TitleRepo) UnLikeById(like app.Like) error {
 	r.db.Exec("UPDATE title_contents SET likes_count = likes_count - 1 WHERE title_id = ?", &like.TitleContentID)
 	return r.db.Where("title_content_id = ?", &like.TitleContentID).Delete(&like).Error

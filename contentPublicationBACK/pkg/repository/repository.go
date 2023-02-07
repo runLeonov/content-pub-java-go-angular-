@@ -29,6 +29,7 @@ type Titles interface {
 	DeleteTitleById(id int) (uint, error)
 	GetTitlesByCategories(ids []uint) ([]app.Title, error)
 	GetAllTitlesByNameRegex(name string) ([]app.Title, error)
+	AddView(id int) error
 }
 
 type Categories interface {

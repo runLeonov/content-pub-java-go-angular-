@@ -123,6 +123,20 @@ func (h *Handler) likeTitle(c *gin.Context) {
 	c.JSON(http.StatusOK, err)
 }
 
+func (h *Handler) updateViewsCount(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid params")
+		return
+	}
+	err = h.services.Titles.UpdateViewsForTitle(id)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, id)
+}
+
 func (h *Handler) unlikeTitle(c *gin.Context) {
 	var like app.Like
 	if err := c.BindJSON(&like); err != nil {
