@@ -1,1 +1,51 @@
-<p>likes-page works!</p>
+<div *ngIf="titles">
+  <div *ngFor="let title of titles" class="manga-block">
+    <a href="/titles/{{title.id}}" class="title-img" [style.background-image]="'url(' + title.titleImg + ')'"></a>
+    <div class="rows">
+      <div class="row">
+        <a href="/titles/{{title.id}}">{{title.titleName}}</a>
+      </div>
+      <div class="row">
+        <strong>Serials:</strong>
+        <span *ngIf="title.serials.length === 0">
+          No serials((
+        </span>
+        <span *ngFor="let ser of title.serials">
+          {{ser.serialName}}
+        </span>
+      </div>
+      <div class="row">
+        <strong>Categories:</strong>
+        <span *ngIf="title.categories.length === 0">
+          No categories((
+        </span>
+        <span *ngFor="let cat of title.categories">
+          {{cat.genre}}
+        </span>
+      </div>
+      <div class="row">
+        <strong>Tags:</strong>
+        <span *ngIf="title.tags.length === 0">
+          No tags((
+        </span>
+        <span *ngFor="let tag of title.tags">
+          {{tag.tag}}
+        </span>
+      </div>
+      <div class="row">
+        <span>
+          {{title.content.likesCount}} likes, {{title.content.views}} views, {{title.content.images.length}} images
+        </span>
+      </div>
+      <div  class="row">
+        {{parseDate(title.creationDate)}}
+      </div>
+
+      <div style="border-top: 1px solid black" class="row">
+        <span><strong>Description:</strong> {{title.description}}</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>

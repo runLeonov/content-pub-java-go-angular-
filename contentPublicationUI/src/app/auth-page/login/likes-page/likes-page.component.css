@@ -1,0 +1,36 @@
+.manga-block {
+  border: 2px solid green;
+  display: block;
+  margin: 10px auto 10px auto;
+  height: max-content;
+  overflow: hidden;
+}
+
+.manga-block:hover {
+  background-color: #63c77f;
+}
+
+
+.manga-block .title-img {
+  float: left;
+  width: 210px;
+  height: 200px;
+  text-align: left;
+  padding: 5px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.manga-block .rows .row {
+  float: left;
+  text-align: left;
+  padding: 6px 0 0;
+  margin-right: 6px;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+

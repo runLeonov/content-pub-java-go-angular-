@@ -18,6 +18,7 @@ export class TitleViewComponent {
   clickCount: number = 0;
   countSec: number = 0;
   isWorking: boolean = false;
+  isViewed: boolean = false;
 
 
   constructor(private httpclient: HttpClient, private router: Router, private route: ActivatedRoute) {
@@ -27,11 +28,13 @@ export class TitleViewComponent {
       this.loadTitleByID().subscribe(title => {
         this.title = title;
         this.isLiked = checkIfLiked(this.user, this.title.content.likes);
+        this.addView();
       });
     } else {
       this.loadTitleRandom().subscribe(title => {
         this.title = title;
         this.isLiked = checkIfLiked(this.user, this.title.content.likes);
+        this.addView();
       });
     }
 
@@ -57,6 +60,13 @@ export class TitleViewComponent {
   private loadTitleByID() {
     let id = this.route.snapshot.paramMap.get('id');
     return this.httpclient.get<Title>(`${environment.serverUrl}/titles/${id}`);
+  }
+
+  private addView() {
+    let url = `${environment.serverUrl}/titles/add-view/` + this.title.id
+    setTimeout(() => {
+      this.httpclient.get(url).subscribe(() => {});
+    }, 10000);
   }
 
   private loadTitleRandom() {
