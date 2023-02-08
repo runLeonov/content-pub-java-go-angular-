@@ -5,3 +5,8 @@ body {
 #main {
   background-color: #dfe8e1;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}

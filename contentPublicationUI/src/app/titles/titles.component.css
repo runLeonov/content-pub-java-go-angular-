@@ -1,14 +1,78 @@
 .title-from-list {
   border: 1px solid black;
+  width: 70%;
 }
 
+.right-panel {
+  width: 30%;
+  padding: 1%;
+}
+
+.main-content {
+  display: flex;
+}
+
+.filter-but {
+  width: 100%
+}
+
+.filter-but50 {
+  width: 50%;
+  height: 50px;
+}
+
+app-filter-panel {
+  margin: 5px;
+  border: 1px solid black;
+  width: 20%;
+}
 
 .post {
-  /*display: inline-block;*/
+  display: block;
+  margin: 10px auto 10px auto;
+  height: max-content;
+  overflow: hidden;
   border: 3px solid black;
 }
 
 .post div {
   display: inline-block;
   border: 1px solid black;
+}
+
+
+.manga-block {
+  border: 2px solid green;
+  display: block;
+  margin: 10px auto 10px auto;
+  height: max-content;
+  overflow: hidden;
+}
+
+.manga-block:hover {
+  background-color: #63c77f;
+}
+
+
+.manga-block .title-img {
+  float: left;
+  width: 210px;
+  height: 200px;
+  text-align: left;
+  padding: 5px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.manga-block .rows .row {
+  float: left;
+  text-align: left;
+  padding: 6px 0 0;
+  margin-right: 6px;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
 }

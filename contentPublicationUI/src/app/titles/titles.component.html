@@ -1,37 +1,92 @@
-<div class="title-from-list">
-  <div class="post" *ngFor="let title of titles">
-    <div class="description">
-      <strong>{{title.id}} titleName = {{title.titleName}}</strong>
-      <a href="/titles/{{title.id}}">ТУПА СИЛКА</a>
-      <p></p>
+<div class="main-content">
+  <div class="block title-from-list">
+    <div class="manga-block" *ngFor="let title of titles">
+      <a href="/titles/{{title.id}}" class="title-img" [style.background-image]="'url(' + title.titleImg + ')'"></a>
+      <div class="rows">
+        <div class="row">
+          <a style="font-size: 22px" href="/titles/{{title.id}}"><strong> {{title.titleName}}</strong></a>
+        </div>
+        <div class="row">
+          <strong>Serials:</strong>
+          <span *ngIf="title.serials.length === 0">
+          No serials((
+        </span>
+          <span *ngFor="let ser of title.serials">
+          {{ser.serialName}}
+        </span>
+        </div>
+        <div class="row">
+          <strong>Categories:</strong>
+          <span *ngIf="title.categories.length === 0">
+          No categories((
+        </span>
+          <span *ngFor="let cat of title.categories">
+          {{cat.genre}}
+        </span>
+        </div>
+        <div class="row">
+          <strong>Tags:</strong>
+          <span *ngIf="title.tags.length === 0">
+          No tags((
+        </span>
+          <span *ngFor="let tag of title.tags">
+          {{tag.tag}}
+        </span>
+        </div>
+        <div class="row">
+        <span>
+          {{title.content.likesCount}} likes, {{title.content.views}} views
+        </span>
+        </div>
+        <div class="row">
+          <!--        {{parseDate(title.creationDate)}}-->
+        </div>
+
+        <div style="border-top: 1px solid black" class="row">
+          <hr>
+          <span><strong>Description:</strong> {{title.description}}</span>
+        </div>
+
+      </div>
     </div>
-    <hr>
-    <div>
-      <img width="250" [src]="title.titleImg">
-    </div>
-    <p>originalAuthor = {{title.originalAuthor}}</p>
-    <p>creationDate = {{title.creationDate}}</p>
-    <p>description = {{title.description}}</p>
-    <p>content.id = {{title.content.id}}</p>
-    <p>content.likes = {{title.content.likesCount}}</p>
-    <p>content.views = {{title.content.views}}</p>
-    <div *ngFor="let image of title.content.images">
-      <p>imgid = {{image.id}}</p>
-      <p>img64 = {{image.img64}}</p>
-    </div>
-    <div *ngFor="let category of title.categories">
-      <p>id = {{category.id}}</p>
-      <p>genre = {{category.genre}}</p>
-    </div>
-    <div *ngFor="let tag of title.tags">
-      <p>id = {{tag.id}}</p>
-      <p>tagName = {{tag.tag}}</p>
-    </div>
-    <div *ngFor="let serial of title.serials">
-      <p>id = {{serial.id}}</p>
-      <p>serialName = {{serial.serialName}}</p>
-    </div>
-    <hr>
   </div>
 
+  <div class="right-panel">
+    <div>
+      <button  class="filter-but" *ngIf="hideCats" (click)="hideCats = !hideCats">Show categories</button>
+      <button  class="filter-but" *ngIf="!hideCats" (click)="hideCats = !hideCats">Hide categories</button>
+    </div>
+    <div [ngStyle]="{'display': hideCats ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
+      <div>Categories</div>
+      <div *ngFor="let cat of allPossible.categories" style="border: black 3px solid">
+        <input (change)="addToArr($event, cat, categories)" type="checkbox" name="categories"> {{cat.genre}}
+      </div>
+    </div>
+
+    <div>
+      <button  class="filter-but" *ngIf="hideTags" (click)="hideTags = !hideTags">Show tags</button>
+      <button  class="filter-but" *ngIf="!hideTags" (click)="hideTags = !hideTags">Hide tags</button>
+    </div>
+    <div [ngStyle]="{'display': hideTags ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
+      <div>Tags</div>
+      <div *ngFor="let tag of allPossible.tags" style="border: black 3px solid">
+        <input (change)="addToArr($event, tag, tags)" type="checkbox" name="tags"> {{tag.tag}}
+      </div>
+    </div>
+
+    <div>
+      <button  class="filter-but" *ngIf="hideSerials" (click)="hideSerials = !hideSerials">Show serials</button>
+      <button  class="filter-but" *ngIf="!hideSerials" (click)="hideSerials = !hideSerials">Hide serials</button>
+    </div>
+    <div  [ngStyle]="{'display': hideSerials ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
+      <div>Serials</div>
+      <div *ngFor="let ser of allPossible.serials" style="border: black 3px solid">
+        <input (change)="addToArr($event, ser, serials)" type="checkbox" name="serials"> {{ser.serialName}}
+      </div>
+    </div>
+    <div style="display: flex">
+      <button class="filter-but50" (click)="reset()">Reset filter</button>
+      <button class="filter-but50" (click)="filterList()">Search</button>
+    </div>
+  </div>
 </div>
