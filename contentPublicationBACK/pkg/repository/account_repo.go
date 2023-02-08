@@ -28,7 +28,11 @@ func (r *AccountRepo) GetUserLikes(userId int) ([]app.Title, error) {
 		Preload(imagesTableE).
 		Preload(titleContentTableE).
 		Preload(likeTableE).
-		Preload("Content.Likes.User").
-		Find(&titles, app.Title{Content: app.TitleContent{Likes: []app.Like{{UserID: uint(userId)}}}})
+		Preload(userTableE).
+		Joins("inner join title_contents t on t.title_id = titles.id").
+		Joins("inner join likes l on l.title_content_id = t.id").
+		Joins("inner join users u on u.id = l.user_id ").
+		Where("u.id = ?", userId).
+		Find(&titles)
 	return titles, nil
 }

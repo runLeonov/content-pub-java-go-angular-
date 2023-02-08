@@ -49,6 +49,37 @@ func (s *TitleService) UpdateViewsForTitle(id int) error {
 	return s.repoTitles.AddView(id)
 }
 
+func (s *TitleService) GetFilteredTitles(cats []app.Category, tags []app.Tag, serials []app.Serial) ([]app.Title, error) {
+	var titles []app.Title
+	if len(cats) != 0 {
+		var arrInt []uint
+		for _, category := range cats {
+			arrInt = append(arrInt, category.ID)
+		}
+		arr, _ := s.repoTitles.GetTitlesByCategories(arrInt)
+		titles = append(titles, arr...)
+	}
+
+	if len(tags) != 0 {
+		var arrInt []uint
+		for _, tag := range tags {
+			arrInt = append(arrInt, tag.ID)
+		}
+		arr, _ := s.repoTitles.GetTitlesByTags(arrInt)
+		titles = append(titles, arr...)
+	}
+
+	if len(serials) != 0 {
+		var arrInt []uint
+		for _, ser := range serials {
+			arrInt = append(arrInt, ser.ID)
+		}
+		arr, _ := s.repoTitles.GetTitlesBySerials(arrInt)
+		titles = append(titles, arr...)
+	}
+	return titles, nil
+}
+
 func (s *TitleService) DeleteTitle(id int) (uint, error) {
 	return s.repoTitles.DeleteTitleById(id)
 }

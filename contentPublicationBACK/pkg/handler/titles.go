@@ -137,6 +137,22 @@ func (h *Handler) updateViewsCount(c *gin.Context) {
 	c.JSON(http.StatusOK, id)
 }
 
+func (h *Handler) filterTitles(c *gin.Context) {
+	var filter app.AllContent
+	if err := c.BindJSON(&filter); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	titles, err := h.services.Titles.GetFilteredTitles(filter.Categories, filter.Tags, filter.Serials)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, titles)
+}
+
 func (h *Handler) unlikeTitle(c *gin.Context) {
 	var like app.Like
 	if err := c.BindJSON(&like); err != nil {

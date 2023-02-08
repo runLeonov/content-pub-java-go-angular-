@@ -28,6 +28,8 @@ type Titles interface {
 	UpdateTitle(title app.Title, id int) (uint, error)
 	DeleteTitleById(id int) (uint, error)
 	GetTitlesByCategories(ids []uint) ([]app.Title, error)
+	GetTitlesBySerials(ids []uint) ([]app.Title, error)
+	GetTitlesByTags(ids []uint) ([]app.Title, error)
 	GetAllTitlesByNameRegex(name string) ([]app.Title, error)
 	AddView(id int) error
 }

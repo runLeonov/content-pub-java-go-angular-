@@ -16,6 +16,7 @@ const (
 	titleContentTableE = "Content"
 	imagesTableE       = "Content.Images"
 	likeTableE         = "Content.Likes"
+	userTableE         = "Content.Likes.User"
 )
 
 type Config struct {

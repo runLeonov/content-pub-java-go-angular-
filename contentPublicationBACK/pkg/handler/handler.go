@@ -39,6 +39,7 @@ func (h *Handler) InitRouters() *gin.Engine {
 		{
 			titles.GET("/", h.getTitles)
 			titles.GET("/add-view/:id", h.updateViewsCount)
+			titles.POST("/filter", h.filterTitles)
 			titles.GET("/random", h.getRandom)
 			titles.GET("/content-all", h.getAllPossibleContent)
 			titles.GET("/:id", h.getTitle)

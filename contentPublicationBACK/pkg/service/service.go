@@ -29,6 +29,7 @@ type Titles interface {
 	DeleteTitle(id int) (uint, error)
 	GetTitlesByCategories(categories []app.Category) ([]app.Title, error)
 	UpdateViewsForTitle(id int) error
+	GetFilteredTitles(cats []app.Category, tags []app.Tag, serials []app.Serial) ([]app.Title, error)
 }
 
 type Service struct {
