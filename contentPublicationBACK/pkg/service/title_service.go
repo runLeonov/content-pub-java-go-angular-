@@ -50,6 +50,7 @@ func (s *TitleService) UpdateViewsForTitle(id int) error {
 }
 
 func (s *TitleService) GetFilteredTitles(cats []app.Category, tags []app.Tag, serials []app.Serial) ([]app.Title, error) {
+	set := make(map[uint]app.Title)
 	var titles []app.Title
 	if len(cats) != 0 {
 		var arrInt []uint
@@ -77,7 +78,16 @@ func (s *TitleService) GetFilteredTitles(cats []app.Category, tags []app.Tag, se
 		arr, _ := s.repoTitles.GetTitlesBySerials(arrInt)
 		titles = append(titles, arr...)
 	}
-	return titles, nil
+
+	for _, title := range titles {
+		set[title.ID] = title
+	}
+	res := make([]app.Title, 0, len(set))
+	for _, t := range set {
+		res = append(res, t)
+	}
+
+	return res, nil
 }
 
 func (s *TitleService) DeleteTitle(id int) (uint, error) {

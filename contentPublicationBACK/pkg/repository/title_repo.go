@@ -112,33 +112,37 @@ func (r *TitleRepo) DeleteTitleById(id int) (uint, error) {
 
 func (r *TitleRepo) GetTitlesByCategories(ids []uint) ([]app.Title, error) {
 	var titles []app.Title
-	r.db.Preload(categoryTableE).
+	r.db.Debug().
+		Preload(categoryTableE).
 		Preload(serialTableE).
 		Preload(tagTableE).
 		Preload(titleContentTableE).
-		Joins("inner join titles_categories tc on tc.category_id = titles.id ").
-		Where("id IN ?", ids).Find(&titles)
+		Where("titles.id IN (SELECT title_id FROM titles_categories JOIN categories t on titles_categories.category_id = t.id WHERE t.id IN ?)", ids).
+		Find(&titles)
 	return titles, nil
 }
 
 func (r *TitleRepo) GetTitlesByTags(ids []uint) ([]app.Title, error) {
 	var titles []app.Title
-	r.db.Preload(categoryTableE).
+	r.db.Debug().
+		Preload(categoryTableE).
 		Preload(serialTableE).
 		Preload(tagTableE).
 		Preload(titleContentTableE).
-		Joins("inner join titles_tags tc on tc.tag_id = titles.id ").
-		Where("id IN ?", ids).Find(&titles)
+		Where("titles.id IN (SELECT title_id FROM titles_tags JOIN tags t on titles_tags.tag_id = t.id WHERE t.id IN ?)", ids).
+		Find(&titles)
+
 	return titles, nil
 }
 
 func (r *TitleRepo) GetTitlesBySerials(ids []uint) ([]app.Title, error) {
 	var titles []app.Title
-	r.db.Preload(categoryTableE).
+	r.db.Debug().
+		Preload(categoryTableE).
 		Preload(serialTableE).
 		Preload(tagTableE).
 		Preload(titleContentTableE).
-		Joins("inner join titles_serials tc on tc.serial_id = titles.id ").
-		Where("id IN ?", ids).Find(&titles)
+		Where("titles.id IN (SELECT title_id FROM titles_serials JOIN serials t on titles_serials.serial_id = t.id WHERE t.id IN ?)", ids).
+		Find(&titles)
 	return titles, nil
 }
