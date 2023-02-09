@@ -39,10 +39,12 @@ export class TitlesComponent {
   }
 
   filterList() {
-    this.httpclient.post<Title[]>(`${environment.serverUrl}/titles/filter`, {
-      categories: this.categories,
-      tags: this.tags,
-      serials: this.serials,
+    this.httpclient.post<Title[]>(`${environment.serverUrl}/titles/filter/`, {
+      content: {
+        categories: this.categories,
+        tags: this.tags,
+        serials: this.serials,
+      }
     }).subscribe(titles => this.titles = titles);
   }
 

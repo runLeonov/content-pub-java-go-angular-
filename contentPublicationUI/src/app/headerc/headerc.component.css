@@ -1,16 +1,17 @@
 header {
+  height: 80px;
   display: inline-flex;
   width: 100%;
   background-color: green;
-  /*overflow:auto;*/
   justify-content:space-between;
 }
 
-.head-buttons a, p {
-  font-size: 20px;
-  width: 20%;
-  padding: 0 45px;
-  background-color: pink;
+.head-buttons a, span {
+  border: 1px solid black;
+  font-size: 15px;
+  width: 100px;
+  padding: 0 30px;
+  background-color: #f59993;
 }
 
 .head-buttons {

@@ -5,15 +5,9 @@
     <a routerLink="">Manhwa</a>
     <a routerLink="/random">Random manga or manhwa</a>
     <a routerLink="/title/create">Publication</a>
-  </div>
-  <div class="head-buttons right-buttons">
-    <a *ngIf="user" routerLink="/profile"><img width="30" [src]="user.img64" alt=""></a>
-    <div *ngIf="!user">
-      <a routerLink="/sing-up">Sing in</a>
-    </div>
-    <div *ngIf="user">
-      <p (click)="logOut()">Sign out</p>
-    </div>
 
+    <a *ngIf="user" routerLink="/profile"><img width="30" [src]="user.img64" alt=""></a>
+      <a *ngIf="!user" routerLink="/sing-up">Sing in</a>
+      <span  *ngIf="user" (click)="logOut()">Sign out</span>
   </div>
 </header>

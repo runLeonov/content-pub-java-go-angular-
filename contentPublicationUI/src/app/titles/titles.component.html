@@ -1,5 +1,8 @@
 <div class="main-content">
   <div class="block title-from-list">
+    <div class="" *ngIf="titles.length === 0">
+      <h2>No any titles by your filter((</h2>
+    </div>
     <div class="manga-block" *ngFor="let title of titles">
       <a href="/titles/{{title.id}}" class="title-img" [style.background-image]="'url(' + title.titleImg + ')'"></a>
       <div class="rows">
@@ -53,8 +56,8 @@
 
   <div class="right-panel">
     <div>
-      <button  class="filter-but" *ngIf="hideCats" (click)="hideCats = !hideCats">Show categories</button>
-      <button  class="filter-but" *ngIf="!hideCats" (click)="hideCats = !hideCats">Hide categories</button>
+      <button class="filter-but" *ngIf="hideCats" (click)="hideCats = !hideCats">Show categories</button>
+      <button class="filter-but" *ngIf="!hideCats" (click)="hideCats = !hideCats">Hide categories</button>
     </div>
     <div [ngStyle]="{'display': hideCats ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
       <div>Categories</div>
@@ -64,8 +67,8 @@
     </div>
 
     <div>
-      <button  class="filter-but" *ngIf="hideTags" (click)="hideTags = !hideTags">Show tags</button>
-      <button  class="filter-but" *ngIf="!hideTags" (click)="hideTags = !hideTags">Hide tags</button>
+      <button class="filter-but" *ngIf="hideTags" (click)="hideTags = !hideTags">Show tags</button>
+      <button class="filter-but" *ngIf="!hideTags" (click)="hideTags = !hideTags">Hide tags</button>
     </div>
     <div [ngStyle]="{'display': hideTags ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
       <div>Tags</div>
@@ -75,17 +78,17 @@
     </div>
 
     <div>
-      <button  class="filter-but" *ngIf="hideSerials" (click)="hideSerials = !hideSerials">Show serials</button>
-      <button  class="filter-but" *ngIf="!hideSerials" (click)="hideSerials = !hideSerials">Hide serials</button>
+      <button class="filter-but" *ngIf="hideSerials" (click)="hideSerials = !hideSerials">Show serials</button>
+      <button class="filter-but" *ngIf="!hideSerials" (click)="hideSerials = !hideSerials">Hide serials</button>
     </div>
-    <div  [ngStyle]="{'display': hideSerials ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
+    <div [ngStyle]="{'display': hideSerials ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
       <div>Serials</div>
       <div *ngFor="let ser of allPossible.serials" style="border: black 3px solid">
         <input (change)="addToArr($event, ser, serials)" type="checkbox" name="serials"> {{ser.serialName}}
       </div>
     </div>
     <div style="display: flex">
-      <button class="filter-but50" (click)="reset()">Reset filter</button>
+      <button class="filter-but50" style="margin-right: 3px;" (click)="reset()">Reset filter</button>
       <button class="filter-but50" (click)="filterList()">Search</button>
     </div>
   </div>

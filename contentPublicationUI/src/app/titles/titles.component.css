@@ -1,6 +1,6 @@
 .title-from-list {
-  border: 1px solid black;
   width: 70%;
+  padding: 1%;
 }
 
 .right-panel {
@@ -9,11 +9,27 @@
 }
 
 .main-content {
+
   display: flex;
 }
 
 .filter-but {
-  width: 100%
+  width: 100%;
+
+}
+
+button {
+  background-color: green;
+  margin-top: 1px;
+  margin-bottom: 3px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
 }
 
 .filter-but50 {
@@ -44,7 +60,7 @@ app-filter-panel {
 .manga-block {
   border: 2px solid green;
   display: block;
-  margin: 10px auto 10px auto;
+  margin-bottom: 10px;
   height: max-content;
   overflow: hidden;
 }
