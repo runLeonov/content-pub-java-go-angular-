@@ -137,14 +137,22 @@ func (h *Handler) updateViewsCount(c *gin.Context) {
 	c.JSON(http.StatusOK, id)
 }
 
+type filterStruct struct {
+	Content     app.AllContent `json:"content"`
+	Titles      []app.Title    `json:"titles"`
+	SortByDate  bool           `json:"sortByDate"`
+	SortByLikes bool           `json:"sortByLikes"`
+	SortByViews bool           `json:"sortByViews"`
+}
+
 func (h *Handler) filterTitles(c *gin.Context) {
-	var filter app.AllContent
+	var filter filterStruct
 	if err := c.BindJSON(&filter); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
-	titles, err := h.services.Titles.GetFilteredTitles(filter.Categories, filter.Tags, filter.Serials)
+	titles, err := h.services.Titles.GetFilteredTitles(filter.Content.Categories, filter.Content.Tags, filter.Content.Serials)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

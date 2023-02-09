@@ -15,7 +15,9 @@ func NewTitleRepo(db *gorm.DB) *TitleRepo {
 
 func (r *TitleRepo) GetAllTitles() ([]app.Title, error) {
 	var titles []app.Title
-	r.db.Preload(serialTableE).
+	r.db.Debug().
+		Raw("SELECT * FROM titles INNER JOIN title_contents tc on titles.id = tc.title_id ORDER BY tc.likes_count DESC").
+		Preload(serialTableE).
 		Preload(categoryTableE).
 		Preload(tagTableE).
 		Preload(titleContentTableE).
@@ -53,6 +55,18 @@ func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 func (r *TitleRepo) LikeById(like app.Like) error {
 	r.db.Exec("UPDATE title_contents SET likes_count = likes_count + 1 WHERE title_id = ?", &like.TitleContentID)
 	return r.db.Debug().Create(&like).Error
+}
+
+func (r *TitleRepo) GetByRowFilter(row string, ids []int) ([]app.Title, error) {
+	var titles []app.Title
+	r.db.Debug().
+		Raw("SELECT * FROM titles INNER JOIN title_contents tc on titles.id = tc.title_id ORDER BY tc.likes_count DESC").
+		Preload(serialTableE).
+		Preload(categoryTableE).
+		Preload(tagTableE).
+		Preload(titleContentTableE).
+		Find(&titles)
+	return titles, nil
 }
 
 func (r *TitleRepo) AddView(id int) error {

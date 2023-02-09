@@ -49,6 +49,25 @@ func (s *TitleService) UpdateViewsForTitle(id int) error {
 	return s.repoTitles.AddView(id)
 }
 
+func (s *TitleService) GetFilteredTitlesByParams(byLike, byDate, byViews bool, cats []app.Category, tags []app.Tag, serials []app.Serial) ([]app.Title, error) {
+	titles, err := s.GetFilteredTitles(cats, tags, serials)
+	//var orders []string
+	//str := "SELECT * FROM titles INNER JOIN title_contents tc on titles.id = tc.title_id ORDER BY tc.likes_count DESC, tc.views DESC, titles.creation_date DESC"
+	//if !byLike && !byDate && !byViews {
+	//	return titles, err
+	//}
+	//if byDate {
+	//	str +=
+	//}
+	//if byLike {
+	//
+	//}
+	//if byViews {
+	//
+	//}
+	return titles, err
+}
+
 func (s *TitleService) GetFilteredTitles(cats []app.Category, tags []app.Tag, serials []app.Serial) ([]app.Title, error) {
 	set := make(map[uint]app.Title)
 	var titles []app.Title
