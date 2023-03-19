@@ -23,6 +23,7 @@ import {AuthPageComponent} from './auth-page/auth-page.component';
 import {Observable} from "rxjs";
 import { LoginComponent } from './auth-page/login/login.component';
 import { LikesPageComponent } from './auth-page/login/likes-page/likes-page.component';
+import { FootercComponent } from './footerc/footerc.component';
 
 const appRoutes: Routes = [
   {path: 'titles', component: TitlesComponent},
@@ -59,7 +60,8 @@ export class CustomInterceptor implements HttpInterceptor {
     TitleViewRandomComponent,
     AuthPageComponent,
     LoginComponent,
-    LikesPageComponent
+    LikesPageComponent,
+    FootercComponent
   ],
   imports: [
     BrowserModule,

@@ -69,6 +69,10 @@ func (s *TitleService) GetFilteredTitlesByParams(byLike, byDate, byViews bool, c
 }
 
 func (s *TitleService) GetFilteredTitles(cats []app.Category, tags []app.Tag, serials []app.Serial) ([]app.Title, error) {
+	if len(cats) == 0 && len(tags) == 0 && len(serials) == 0 {
+		return s.GetTitles()
+	}
+
 	set := make(map[uint]app.Title)
 	var titles []app.Title
 	if len(cats) != 0 {

@@ -1,0 +1,66 @@
+.description {
+  /*background-color: #63c77f;*/
+  background-color: #63c77f;
+}
+
+button {
+  background-color: green;
+  border: none;
+
+  color: white;
+  text-align: center;
+  display: inline-block;
+}
+
+.left-bar {
+  margin: 20px;
+  width: min-content;
+}
+
+.title-name {
+  font-size: 24px;
+}
+
+.right-bar {
+  margin: 20px;
+  width: 100%;
+}
+
+.panel-btns-tags-cats-inner {
+  min-height: 35px;
+  display: flex;
+}
+
+.cats-tags {
+  margin: 0 2px;
+}
+
+.start-read {
+  height: max-content;
+  width: 100%;
+  padding: 15px 32px;
+  font-size: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.description .title {
+  font-size: 14px;
+  color: green;
+}
+
+.like {
+  border-radius: 0;
+  width: 200px;
+  padding: 15px 32px;
+  display: inline-block;
+}
+
+.start-read:hover {
+  cursor: pointer;
+}
+
+.panel-btns-tags-cats {
+  background-color: pink;
+  padding: 10px;
+}

@@ -1,32 +1,61 @@
-<div *ngIf="title">
-  <div>
-    <div>TitleId: {{title.id}}</div>
-  </div>
-  <div>
-    <div>TitleName: {{title.titleName}}</div>
-  </div>
-  <div>
-    <div>Author {{title.originalAuthor}}</div>
-  </div>
-  <div>
-    <div>Description {{title.description}}</div>
-  </div>
-  <div>
-    <div>Title Image</div>
-    <div><img width="200" alt="" [src]="title.titleImg"></div>
-  </div>
-  <div class="post" *ngFor="let cat of title.categories">
-    <p>{{cat.genre}}</p>
+<div *ngIf="title" style="display: flex">
+  <div class="left-bar">
+    <div>
+      <div><img width="200" alt="" [src]="title.titleImg"></div>
+    </div>
+    <button class="like" *ngIf="!isLiked" style="color: white" (click)="isLiked = !isLiked; like(true);">
+      <strong> Тупа LIKE</strong>
+    </button>
+    <button class="like" *ngIf="isLiked" style="color: red" (click)="isLiked = !isLiked; like(false);">
+      <strong> Тупа UNLIKE</strong>
+    </button>
+
+    <div class="description">
+
+      <div>
+        <div class="title">type</div>
+        <div class="value">{{title.typeName}}</div>
+      </div>
+      <div>
+        <div class="title">release year</div>
+        <div class="value">{{getReleaseYear(title)}}</div>
+      </div>
+      <div>
+        <div class="title">serials</div>
+        <div class="value" *ngFor="let cat of title.serials">
+          {{cat.serialName}}
+        </div>
+      </div>
+      <div>
+        <div class="title">author</div>
+        <div class="value">{{title.originalAuthor}}</div>
+      </div>
+    </div>
   </div>
 
-  <div class="post" *ngFor="let im of title.content.images">
-    <img width="200" alt="" [src]="im.img64">
+
+  <div class="right-bar">
+    <div class="title-name"><strong> TitleName: {{title.titleName}}</strong></div>
+    <div class="panel-btns-tags-cats">
+      <div class="panel-btns-tags-cats-inner">
+        categories:
+        <div class="cats-tags" *ngFor="let cat of title.categories">
+          <button>{{cat.genre}}</button>
+        </div>
+      </div>
+      <div class="panel-btns-tags-cats-inner">
+        tags:
+        <div class="cats-tags" *ngFor="let tag of title.tags">
+          <button>{{tag.tag}}</button>
+        </div>
+      </div>
+      <div> Description: {{title.description}}</div>
+    </div>
+    <button class="start-read">Start read</button>
   </div>
 
-  <button *ngIf="!isLiked" style="color: green" (click)="isLiked = !isLiked; like(true);">
-    Тупа LIKE
-  </button>
-  <button *ngIf="isLiked" style="color: red" (click)="isLiked = !isLiked; like(false);">
-    Тупа UNLIKE
-  </button>
+  <!--  <div class="post" *ngFor="let im of title.content.images">-->
+  <!--    <img width="200" alt="" [src]="im.img64">-->
+  <!--  </div>-->
+
 </div>

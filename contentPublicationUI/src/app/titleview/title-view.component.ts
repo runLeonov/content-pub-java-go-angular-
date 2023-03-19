@@ -52,6 +52,10 @@ export class TitleViewComponent {
     }
   }
 
+  getReleaseYear(title: Title): number {
+    return new Date(title.creationDate).getFullYear();
+  }
+
 
   ngOnInit(): void {
 

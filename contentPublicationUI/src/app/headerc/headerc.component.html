@@ -7,7 +7,7 @@
     <a routerLink="/title/create">Publication</a>
 
     <a *ngIf="user" routerLink="/profile"><img width="30" [src]="user.img64" alt=""></a>
-      <a *ngIf="!user" routerLink="/sing-up">Sing in</a>
-      <span  *ngIf="user" (click)="logOut()">Sign out</span>
+    <a *ngIf="!user" routerLink="/sing-up">Sing in</a>
+    <span *ngIf="user" (click)="logOut()">Sign out</span>
   </div>
 </header>
