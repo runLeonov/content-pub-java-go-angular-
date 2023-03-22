@@ -16,7 +16,7 @@ import {TitlesComponent} from './titles/titles.component';
 import {ProfileComponent} from './profile/profile.component';
 import {PublishComponent} from './publish/publish.component';
 import {FormsModule} from "@angular/forms";
-import {TitleViewComponent} from './titleview/title-view.component';
+import {TitleViewComponent} from './title-view/title-view.component';
 import {TitleViewRandomComponent} from './title-view-random/title-view-random.component';
 
 import {AuthPageComponent} from './auth-page/auth-page.component';
@@ -24,6 +24,8 @@ import {Observable} from "rxjs";
 import { LoginComponent } from './auth-page/login/login.component';
 import { LikesPageComponent } from './auth-page/login/likes-page/likes-page.component';
 import { FootercComponent } from './footerc/footerc.component';
+import { ImagesViewComponent } from './images-view/images-view.component';
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 
 const appRoutes: Routes = [
   {path: 'titles', component: TitlesComponent},
@@ -34,6 +36,7 @@ const appRoutes: Routes = [
   {path: 'sing-up', component: AuthPageComponent},
   {path: 'do-login', component: LoginComponent},
   {path: 'liked-titles', component: LikesPageComponent},
+  {path: 'titles/:id/images', component: ImagesViewComponent},
 ]
 
 @Injectable()
@@ -61,7 +64,9 @@ export class CustomInterceptor implements HttpInterceptor {
     AuthPageComponent,
     LoginComponent,
     LikesPageComponent,
-    FootercComponent
+    FootercComponent,
+    ImagesViewComponent,
+    ProfileEditComponent
   ],
   imports: [
     BrowserModule,

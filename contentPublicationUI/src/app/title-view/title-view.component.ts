@@ -7,7 +7,7 @@ import {User} from "../user";
 import {AppComponent} from "../app.component";
 
 @Component({
-  selector: 'app-titleview',
+  selector: 'app-title-view',
   templateUrl: './title-view.component.html',
   styleUrls: ['./title-view.component.css']
 })

@@ -3,7 +3,7 @@
   background-color: #63c77f;
 }
 
-button {
+button , a{
   background-color: green;
   border: none;
 
@@ -22,6 +22,7 @@ button {
 }
 
 .right-bar {
+  display: inline-block;
   margin: 20px;
   width: 100%;
 }
@@ -36,8 +37,8 @@ button {
 }
 
 .start-read {
-  height: max-content;
-  width: 100%;
+  height: min-content;
+  width: max-content;
   padding: 15px 32px;
   font-size: 20px;
   border-bottom-left-radius: 10px;

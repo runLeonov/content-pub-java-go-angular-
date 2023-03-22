@@ -1,2 +1,42 @@
-<p *ngIf="user"><img [src]="user.img64" alt=""></p>
-<a routerLink="/liked-titles">See what you like</a>
+<div style="display: flex">
+
+  <div *ngIf="user" class="left-bar">
+    <div>
+      <div><img width="200" alt="" [src]="user.img64"></div>
+    </div>
+
+    <div class="description">
+      <div>
+        <div class="title">NickName:</div>
+        <div class="value">{{user.nickName}}</div>
+      </div>
+      <div>
+        <div class="title">Email:</div>
+        <div class="value">{{user.email}}</div>
+      </div>
+      <div>
+        <div class="title">Last name:</div>
+        <div class="value">{{user.lastName}}</div>
+      </div>
+      <div>
+        <div class="title">First name:</div>
+        <div class="value">{{user.firstName}}</div>
+      </div>
+      <div>
+        <div class="title">Date of creation:</div>
+        <div class="value">{{user.creationDate}}</div>
+      </div>
+      <div>
+        <div class="title">User role:</div>
+        <div class="value">{{user.role}}</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="right-bar">
+    <a class="do-action" routerLink="/liked-titles">See all what you like</a>
+
+    <a class="do-action" routerLink="/edit-profile">Edit your profile</a>
+    <a class="do-action" routerLink="/user-comments">Check commented posts</a>
+  </div>
+</div>

@@ -12,6 +12,8 @@ export class AuthPageComponent {
   email: string | undefined
   password: string | undefined
   name: string | undefined
+  firstName: string | undefined
+  lastName: string | undefined
   img: any = ''
 
   incorrectPass: boolean = false
@@ -99,8 +101,10 @@ export class AuthPageComponent {
     this.httpclient.post<bigint>(`${environment.serverUrl}/auth/register`, {
       email: this.email,
       password: this.password,
-      name: this.name,
-      img64: this.img
+      nickName: this.name,
+      img64: this.img,
+      firstName: this.firstName,
+      lastName: this.lastName
     }).subscribe(() => this.singIn());
   }
 
