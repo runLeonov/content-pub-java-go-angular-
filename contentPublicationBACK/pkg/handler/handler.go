@@ -43,6 +43,7 @@ func (h *Handler) InitRouters() *gin.Engine {
 			{
 				filter.POST("/", h.filterTitles)
 			}
+			titles.GET("/:id/images", h.getImagesById)
 			titles.GET("/random", h.getRandom)
 			titles.GET("/content-all", h.getAllPossibleContent)
 			titles.GET("/:id", h.getTitle)

@@ -15,7 +15,13 @@ func NewAccountRepo(db *gorm.DB) *AccountRepo {
 
 func (r *AccountRepo) GetUserInfo(id int) (app.User, error) {
 	var user app.User
-	err := r.db.Where("id = ?", id).Preload("Likes").First(&user).Error
+	err := r.db.Debug().Where("id = ?", id).
+		Preload("Likes", func(db *gorm.DB) *gorm.DB {
+			return db.Limit(1)
+		}).
+		Preload("Likes.TitleContent").
+		Preload("Likes.TitleContent.Title").
+		First(&user).Error
 	return user, err
 }
 

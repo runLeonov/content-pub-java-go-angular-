@@ -161,6 +161,22 @@ func (h *Handler) filterTitles(c *gin.Context) {
 	c.JSON(http.StatusOK, titles)
 }
 
+func (h *Handler) getImagesById(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid params")
+		return
+	}
+
+	images, err := h.services.Titles.GetImagesByTitleId(id)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, images)
+}
+
 func (h *Handler) unlikeTitle(c *gin.Context) {
 	var like app.Like
 	if err := c.BindJSON(&like); err != nil {

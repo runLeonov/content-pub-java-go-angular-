@@ -52,6 +52,19 @@ func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 	return title, nil
 }
 
+func (r *TitleRepo) GetImagesByTitleId(id int) ([]app.Image, error) {
+	var title app.Title
+	r.db.Debug().Where("id = ?", id).
+		Preload(categoryTableE).
+		Preload(serialTableE).
+		Preload(tagTableE).
+		Preload(titleContentTableE).
+		Preload(imagesTableE).
+		Preload(likeTableE).
+		First(&title)
+	return title.Content.Images, nil
+}
+
 func (r *TitleRepo) LikeById(like app.Like) error {
 	r.db.Exec("UPDATE title_contents SET likes_count = likes_count + 1 WHERE title_id = ?", &like.TitleContentID)
 	return r.db.Debug().Create(&like).Error

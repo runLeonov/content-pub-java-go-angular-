@@ -49,6 +49,10 @@ func (s *TitleService) UpdateViewsForTitle(id int) error {
 	return s.repoTitles.AddView(id)
 }
 
+func (s *TitleService) GetImagesByTitleId(id int) ([]app.Image, error) {
+	return s.repoTitles.GetImagesByTitleId(id)
+}
+
 func (s *TitleService) GetFilteredTitlesByParams(byLike, byDate, byViews bool, cats []app.Category, tags []app.Tag, serials []app.Serial) ([]app.Title, error) {
 	titles, err := s.GetFilteredTitles(cats, tags, serials)
 	//var orders []string

@@ -33,6 +33,7 @@ type Titles interface {
 	GetAllTitlesByNameRegex(name string) ([]app.Title, error)
 	AddView(id int) error
 	GetByRowFilter(row string, ids []int) ([]app.Title, error)
+	GetImagesByTitleId(id int) ([]app.Image, error)
 }
 
 type Categories interface {

@@ -30,6 +30,7 @@ type Titles interface {
 	GetTitlesByCategories(categories []app.Category) ([]app.Title, error)
 	UpdateViewsForTitle(id int) error
 	GetFilteredTitles(cats []app.Category, tags []app.Tag, serials []app.Serial) ([]app.Title, error)
+	GetImagesByTitleId(id int) ([]app.Image, error)
 }
 
 type Service struct {
