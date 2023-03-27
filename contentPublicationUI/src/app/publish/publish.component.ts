@@ -176,9 +176,13 @@ export class PublishComponent implements OnInit {
   }
 
   addPost() {
+    if (!this.user) {
+      return;
+    }
     this.httpclient.post<any>(`${environment.serverUrl}/titles/`, {
       titleName: this.titleName,
       originalAuthor: this.originalAuthor,
+      authorId: this.user.id,
       typeName: this.type,
       description: this.description,
       creationDate: new Date(),

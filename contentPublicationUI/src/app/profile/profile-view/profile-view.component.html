@@ -1,0 +1,32 @@
+<div *ngIf="user" style="display: flex">
+
+  <div  class="left-bar">
+    <div>
+      <div><img width="200" alt="" [src]="user.img64"></div>
+    </div>
+
+    <div class="description">
+      <div>
+        <div class="title">NickName:</div>
+        <div class="value">{{user.nickName}}</div>
+      </div>
+      <div>
+        <div class="title">First name:</div>
+        <div class="value">{{user.firstName}}</div>
+      </div>
+      <div>
+        <div class="title">User role:</div>
+        <div class="value">{{user.role}}</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="right-bar">
+    <div class="panel-btns-tags-cats">
+      <div class="title-name"><strong><u> Last name:</u> {{user.lastName}}</strong></div>
+      <div class="title-name"><strong><u>First Name:</u> {{user.firstName}}</strong></div>
+      <div class="title-name"><strong><u> Email: </u> {{user.email}}</strong></div>
+      <div class="title-name"><strong><u> Release date:</u> {{getCreatingDate(user.creationDate)}}</strong></div>
+      </div>
+  </div>
+</div>

@@ -37,16 +37,13 @@
         </span>
         </div>
         <div class="row">
-        <span>
-          {{title.content.likesCount}} likes, {{title.content.views}} views
-        </span>
+          <strong>Date of release:</strong> {{getCreatingDate(title.creationDate)}}
         </div>
         <div class="row">
-          <!--        {{parseDate(title.creationDate)}}-->
-        </div>
-
-        <div style="border-top: 1px solid black" class="row">
+          <span>{{title.content.likesCount}} likes, {{title.content.views}} views</span>
           <hr>
+        </div>
+        <div style="border-top: 1px solid black" class="row">
           <span><strong>Description:</strong> {{title.description}}</span>
         </div>
 
@@ -60,7 +57,6 @@
       <button class="filter-but" *ngIf="!hideCats" (click)="hideCats = !hideCats">Hide categories</button>
     </div>
     <div [ngStyle]="{'display': hideCats ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
-      <div>Categories</div>
       <div *ngFor="let cat of allPossible.categories" style="border: black 3px solid">
         <input (change)="addToArr($event, cat, categories)" type="checkbox" name="categories"> {{cat.genre}}
       </div>
@@ -71,7 +67,6 @@
       <button class="filter-but" *ngIf="!hideTags" (click)="hideTags = !hideTags">Hide tags</button>
     </div>
     <div [ngStyle]="{'display': hideTags ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
-      <div>Tags</div>
       <div *ngFor="let tag of allPossible.tags" style="border: black 3px solid">
         <input (change)="addToArr($event, tag, tags)" type="checkbox" name="tags"> {{tag.tag}}
       </div>
@@ -82,7 +77,6 @@
       <button class="filter-but" *ngIf="!hideSerials" (click)="hideSerials = !hideSerials">Hide serials</button>
     </div>
     <div [ngStyle]="{'display': hideSerials ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
-      <div>Serials</div>
       <div *ngFor="let ser of allPossible.serials" style="border: black 3px solid">
         <input (change)="addToArr($event, ser, serials)" type="checkbox" name="serials"> {{ser.serialName}}
       </div>

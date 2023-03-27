@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {Title} from "../../../title";
+import {Title} from "../../title";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {AppComponent} from "../../../app.component";
-import {User} from "../../../user";
-import {environment} from "../../../environment";
+import {AppComponent} from "../../app.component";
+import {User} from "../../user";
+import {environment} from "../../environment";
 
 @Component({
   selector: 'app-likes-page',
@@ -24,8 +24,7 @@ export class LikesPageComponent {
 
   }
 
-  parseDate(date: Date): string {
-    console.log(Date.parse('04 Dec 1995 00:12:00 GMT').toLocaleString());
-    return ""
+  parseDate(date: Date): Date {
+    return new Date(date);
   }
 }

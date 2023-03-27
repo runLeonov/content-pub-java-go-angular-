@@ -22,10 +22,12 @@ import {TitleViewRandomComponent} from './title-view-random/title-view-random.co
 import {AuthPageComponent} from './auth-page/auth-page.component';
 import {Observable} from "rxjs";
 import { LoginComponent } from './auth-page/login/login.component';
-import { LikesPageComponent } from './auth-page/login/likes-page/likes-page.component';
+import { LikesPageComponent } from './profile/likes-page/likes-page.component';
 import { FootercComponent } from './footerc/footerc.component';
 import { ImagesViewComponent } from './images-view/images-view.component';
-import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { ProfEditComponent } from './auth-page/prof-edit/prof-edit.component';
+import { CommentsPageComponent } from './profile/comments-page/comments-page.component';
+import { ProfileViewComponent } from './profile/profile-view/profile-view.component';
 
 const appRoutes: Routes = [
   {path: 'titles', component: TitlesComponent},
@@ -37,6 +39,9 @@ const appRoutes: Routes = [
   {path: 'do-login', component: LoginComponent},
   {path: 'liked-titles', component: LikesPageComponent},
   {path: 'titles/:id/images', component: ImagesViewComponent},
+  {path: 'edit-profile', component: ProfEditComponent},
+  {path: 'user-comments', component: CommentsPageComponent},
+  {path: 'profile-view/:id', component: ProfileViewComponent},
 ]
 
 @Injectable()
@@ -66,7 +71,9 @@ export class CustomInterceptor implements HttpInterceptor {
     LikesPageComponent,
     FootercComponent,
     ImagesViewComponent,
-    ProfileEditComponent
+    ProfEditComponent,
+    CommentsPageComponent,
+    ProfileViewComponent
   ],
   imports: [
     BrowserModule,

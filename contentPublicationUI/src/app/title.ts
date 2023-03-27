@@ -1,8 +1,11 @@
+import {User} from "./user";
+
 export class Title {
   public id: number;
   public titleName: string;
   public typeName: string;
   public originalAuthor: string;
+  public authorId: number;
   public creationDate: Date = new Date();
   public description: string = '';
   public titleImg: string = '';
@@ -12,11 +15,12 @@ export class Title {
   public serials: Serial[];
 
 
-  constructor(id: number, titleName: string, type: string, originalAuthor: string, creationDate: Date, description: string, titleImg: string, content: TitleContent, categories: Category[], tags: Tag[], serials: Serial[]) {
+  constructor(id: number, titleName: string, typeName: string, originalAuthor: string, authorId: number, creationDate: Date, description: string, titleImg: string, content: TitleContent, categories: Category[], tags: Tag[], serials: Serial[]) {
     this.id = id;
     this.titleName = titleName;
-    this.typeName = type;
+    this.typeName = typeName;
     this.originalAuthor = originalAuthor;
+    this.authorId = authorId;
     this.creationDate = creationDate;
     this.description = description;
     this.titleImg = titleImg;
@@ -27,7 +31,7 @@ export class Title {
   }
 
   static getEmptyTitle(): Title {
-    return new Title(0, "", "", "", new Date(), "", "", TitleContent.getEmptyContent(), [], [], []);
+    return new Title(0, "", "", "", 0, new Date(), "", "", TitleContent.getEmptyContent(), [], [], []);
   }
 }
 
@@ -61,6 +65,21 @@ export class PossibleContent {
   }
 }
 
+export class Comment {
+  public commentVal: string;
+  public user: User;
+  public titleContent: TitleContent;
+  public creationDate: Date;
+
+
+  constructor(commentVal: string, user: User, titleContent: TitleContent, creationDate: Date) {
+    this.commentVal = commentVal;
+    this.user = user;
+    this.titleContent = titleContent;
+    this.creationDate = creationDate;
+  }
+}
+
 export class StaticType {
   public id: number;
   public typeName: string;
@@ -78,18 +97,20 @@ export class TitleContent {
   public likes: Like[] = [];
   public views: number;
   public images: Image[];
+  public comments: Comment[];
 
 
-  constructor(id: number, titleId: number, likes: Like[], views: number, images: Image[]) {
+  constructor(id: number, titleId: number, likes: Like[], views: number, images: Image[], comments: Comment[]) {
     this.id = id;
     this.titleId = titleId;
     this.likes = likes;
     this.views = views;
     this.images = images;
+    this.comments = comments;
   }
 
   static getEmptyContent(): TitleContent {
-    return new TitleContent(0, 0, [], 0, []);
+    return new TitleContent(0, 0, [], 0, [], []);
   }
 }
 

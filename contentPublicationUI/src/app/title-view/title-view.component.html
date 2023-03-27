@@ -28,7 +28,8 @@
       </div>
       <div>
         <div class="title">author</div>
-        <div class="value">{{title.originalAuthor}}</div>
+        <div *ngIf="title.authorId === 0" class="value">{{title.originalAuthor}}</div>
+        <div *ngIf="title.authorId !== 0" class="value"><a href="/profile-view/{{title.authorId}}">{{title.originalAuthor}}</a></div>
       </div>
     </div>
   </div>
@@ -38,13 +39,13 @@
     <div class="title-name"><strong> TitleName: {{title.titleName}}</strong></div>
     <div class="panel-btns-tags-cats">
       <div class="panel-btns-tags-cats-inner">
-        categories:
+        <span> categories:</span>
         <div class="cats-tags" *ngFor="let cat of title.categories">
           <button>{{cat.genre}}</button>
         </div>
       </div>
       <div class="panel-btns-tags-cats-inner">
-        tags:
+        <span>tags:</span>
         <div class="cats-tags" *ngFor="let tag of title.tags">
           <button>{{tag.tag}}</button>
         </div>
@@ -52,5 +53,22 @@
       <div> Description: {{title.description}}</div>
     </div>
     <a class="start-read" href="/titles/{{title.id}}/images">Start read</a>
+    <div class="comments">
+      <div class="comment-inpt">
+        <input type="text" [(ngModel)]="comment" placeholder="Add your comment">
+        <button (click)="addComment()">Add comment</button>
+      </div>
+      <div class="comment-from-user" *ngFor="let comm of title.content.comments">
+        <div style="display: flex">
+          <img class="user-img" width="40" [src]="comm.user.img64">
+          <div class="title">[{{comm.user.nickName ? comm.user.nickName : "[no name]" }}]</div>
+          <div class="value">{{comm.commentVal}}</div>
+        </div>
+        <div style="display: flex">
+          <div class="title">{{getDate(comm).toLocaleTimeString()}} {{getDate(comm).toLocaleDateString()}}</div>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>

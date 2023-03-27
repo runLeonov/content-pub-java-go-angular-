@@ -3,24 +3,28 @@ header {
   height: 80px;
   width: 100%;
   background-color: green;
-  justify-content:space-between;
+  display: flex;
+  justify-content: center;
 }
 
-.head-buttons a, span {
+.head-buttons a,  .head-buttons  span {
   border: 1px solid black;
   font-size: 18px;
-  width: min-content;
-  padding: 0 30px;
+  padding: 10px 35px;
   background-color: #f59993;
 }
 
 .head-buttons {
-  display: inline-block;
-}
-
-.right-buttons {
+  height: 100%;
+  width: 60%;
   align-items: center;
-  flex-direction: row;
-  flex-grow: 0;
+  justify-content:space-between;
 }
 
+.user-img {
+  width: 100px;
+  padding: 5px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

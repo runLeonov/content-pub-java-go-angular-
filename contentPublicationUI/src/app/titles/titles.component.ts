@@ -30,6 +30,15 @@ export class TitlesComponent {
 
   }
 
+  parseDate(date: Date): Date {
+    return new Date(date);
+  }
+
+  getCreatingDate(date: Date): string {
+    date = this.parseDate(date);
+    return date.toLocaleTimeString() +" "+ date.toLocaleDateString()
+  }
+
   private loadTitlesList() {
     this.httpclient.get<Title[]>(`${environment.serverUrl}/titles/`).subscribe(titles => this.titles = titles)
   }

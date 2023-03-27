@@ -1,21 +1,29 @@
-<h2>
-  <div>
-    <div>Enter your email</div>
-    <input
-      [(ngModel)]="email"
-      type="email"
-      placeholder="">
-  </div>
-  <div>
-    <div>Enter password</div>
-    <input
-      [(ngModel)]="password"
-      type="password"
-      placeholder="">
+<div class="auth-form">
+  <br>
+  <div class="panel1">
+    <div class="title">
+      <div>Enter your email</div>
+      <input
+        [(ngModel)]="email"
+        type="email"
+        placeholder="">
+    </div>
+    <div class="title">
+      <div>Enter password</div>
+      <input
+        [(ngModel)]="password"
+        type="password"
+        placeholder="">
+    </div>
   </div>
 
   <div style="color: red" *ngIf="emptyEmail">Email field cannot be empty</div>
   <div style="color: red" *ngIf="emptyPass">Password field is empty</div>
-
-  <button (click)="submit()">Login</button>
-</h2>
+  <br>
+  <div class="auth-btns">
+    <div>
+      <button (click)="submit()">Login</button>
+    </div>
+  </div>
+  <br>
+</div>

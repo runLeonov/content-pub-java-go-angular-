@@ -1,0 +1,40 @@
+<div *ngIf="user" class="auth-form">
+  <br>
+  <div class="panel1">
+    <div class="auth-form-inner">
+      <div class="title">
+        <div>Enter your new nickname</div>
+        <input
+          [(ngModel)]="name"
+          type="text"
+          placeholder="{{user.nickName}}">
+      </div>
+      <div class="title">
+        <div>Enter your new lastname</div>
+        <input
+          [(ngModel)]="lastName"
+          type="text"
+          placeholder="{{user.lastName}}">
+      </div>
+      <div class="title">
+        <div>Enter your new firstName</div>
+        <input
+          [(ngModel)]="firstName"
+          type="text"
+          placeholder="{{user.firstName}}">
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="auth-btns">
+    <div>
+      <button (click)="validation()">Save changes</button>
+    </div>
+  </div>
+  <div style="color: red" *ngIf="emptyName">Name field cannot be empty</div>
+  <div style="color: red" *ngIf="userExist">User already exist</div>
+  <br>
+
+</div>
+

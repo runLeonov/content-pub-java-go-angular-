@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Like, Title} from "../title";
+import {Comment, Like, Title} from "../title";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environment";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -19,6 +19,7 @@ export class TitleViewComponent {
   countSec: number = 0;
   isWorking: boolean = false;
   isViewed: boolean = false;
+  comment: string = '';
 
 
   constructor(private httpclient: HttpClient, private router: Router, private route: ActivatedRoute) {
@@ -57,8 +58,11 @@ export class TitleViewComponent {
   }
 
 
-  ngOnInit(): void {
+  getDate(comm: Comment): Date {
+    return new Date(comm.creationDate);
+  }
 
+  ngOnInit(): void {
   }
 
   private loadTitleByID() {
@@ -69,12 +73,27 @@ export class TitleViewComponent {
   private addView() {
     let url = `${environment.serverUrl}/titles/add-view/` + this.title.id
     setTimeout(() => {
-      this.httpclient.get(url).subscribe(() => {});
+      this.httpclient.get(url).subscribe(() => {
+      });
     }, 10000);
   }
 
   private loadTitleRandom() {
     return this.httpclient.get<Title>(`${environment.serverUrl}/titles/random`);
+  }
+
+  public addComment() {
+    if (!this.user) {
+      this.router.navigate(['/sing-up'])
+      return;
+    }
+    if (!this.comment.trim()) return;
+    this.httpclient.post(`${environment.serverUrl}/titles/comment`, {
+      commentVal: this.comment,
+      titleContentId: this.title.id,
+      userId: this.user.id,
+      creationDate: new Date(),
+    }).subscribe(() => location.reload());
   }
 
   like(doLike: boolean) {

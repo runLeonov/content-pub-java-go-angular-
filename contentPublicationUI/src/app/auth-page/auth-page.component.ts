@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {environment} from "../environment";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
@@ -6,9 +6,9 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-auth-page',
   templateUrl: './auth-page.component.html',
-  styleUrls: ['./auth-page.component.css']
+  styleUrls: ['./auth-page.component.css', '../title-view/title-view.component.css', '../publish/publish.component.css']
 })
-export class AuthPageComponent {
+export class AuthPageComponent implements OnInit {
   email: string | undefined
   password: string | undefined
   name: string | undefined
@@ -22,6 +22,12 @@ export class AuthPageComponent {
   emptyName: boolean = false
   emptyPass: boolean = false
 
+  imgInputHelper: HTMLElement | any;
+  imgInputHelperLabel: HTMLElement | any;
+  imgContainer: HTMLElement | any;
+  imgFiles = [];
+  addImgHandler: any;
+
   msg = "";
   public edited = false;
   url: any;
@@ -34,7 +40,61 @@ export class AuthPageComponent {
   //@ts-ignore
   @ViewChild('passRep') passRep: ElementRef;
 
-  ngAfterViewInit() {
+
+  ngOnInit(): void {
+    this.imgInputHelper = document.getElementById("add-single-img");
+    this.imgInputHelperLabel = document.getElementById("add-img-label");
+    this.imgContainer = document.querySelector(".custom-image-container");
+    this.imgFiles = [];
+
+    this.addImgHandler = () => {
+      const file = this.imgInputHelper.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const newImg = document.createElement("img");
+        newImg.style.width = "100%";
+        newImg.style.height = "320px";
+        newImg.style.border = "solid 1px black";
+        newImg.style.borderRadius = "5px";
+        newImg.style.objectFit = "cover";
+        if (typeof reader.result === "string") {
+          newImg.src = reader.result;
+        }
+        this.imgContainer.insertBefore(newImg, this.imgInputHelperLabel);
+        this.imgInputHelperLabel.remove();
+      };
+      // @ts-ignore
+      this.imgFiles.push(file);
+      this.imgInputHelper.value = "";
+      return;
+    };
+    this.imgInputHelper.addEventListener("change", this.addImgHandler);
+  }
+
+  selectTitleImg(event: any) {
+    if (!event.target.files[0] || event.target.files[0].length == 0) {
+      this.msg = 'You must select an image';
+      return;
+    }
+
+    let mimeType = event.target.files[0].type;
+
+    if (mimeType.match(/image\/*/) == null) {
+      this.msg = "Only images are supported";
+      return;
+    }
+
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+
+    reader.onload = (_event) => {
+      this.msg = "";
+      this.url = reader.result;
+    }
+
+    this.edited = true
   }
 
   validation() {
