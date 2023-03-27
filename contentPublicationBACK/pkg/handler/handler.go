@@ -31,8 +31,13 @@ func (h *Handler) InitRouters() *gin.Engine {
 
 		account := mainRout.Group("/account", h.userIdentity)
 		{
+			account.POST("/edit", h.changeUserInfo)
 			account.GET("/", h.getUserInfo)
+			account.GET("/profile-view/:id", h.getUserInfoById)
 			account.GET("/likes", h.getLikedTitles)
+			account.GET("/commented", h.getCommentedTitles)
+			account.GET("/likes-limit", h.getLikedTitlesLimit)
+			account.GET("/commented-limit", h.getCommentedTitlesLimit)
 		}
 
 		titles := mainRout.Group("/titles")
@@ -49,6 +54,7 @@ func (h *Handler) InitRouters() *gin.Engine {
 			titles.GET("/:id", h.getTitle)
 			titles.POST("/", h.createTitle)
 			titles.POST("/like", h.likeTitle)
+			titles.POST("/comment", h.commentTitle)
 			titles.POST("/unlike", h.unlikeTitle)
 			titles.PUT("/:id", h.updateTitle)
 			titles.DELETE("/:id", h.deleteTitle)

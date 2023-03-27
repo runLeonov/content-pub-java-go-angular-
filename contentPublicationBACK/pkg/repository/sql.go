@@ -17,6 +17,8 @@ const (
 	imagesTableE       = "Content.Images"
 	likeTableE         = "Content.Likes"
 	userTableE         = "Content.Likes.User"
+	commentTableE      = "Content.Comments"
+	commentUserTableE  = "Content.Comments.User"
 )
 
 type Config struct {
@@ -44,6 +46,7 @@ func CreateORMModels(config Config) {
 	db.AutoMigrate(app.Image{})
 	db.AutoMigrate(app.Like{})
 	db.AutoMigrate(app.StaticType{})
+	db.AutoMigrate(app.Comment{})
 }
 
 func connectToDb(cfg Config) (*gorm.DB, error) {

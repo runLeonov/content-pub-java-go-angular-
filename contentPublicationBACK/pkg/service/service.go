@@ -16,6 +16,10 @@ type Authorization interface {
 type Account interface {
 	GetUserInfo(id int) (app.User, error)
 	GetLikedTitlesByUserId(id int) ([]app.Title, error)
+	ChangeUserInfo(newUser app.User, id int) (app.User, error)
+	GetLikedTitlesByUserIdLimit(id int) ([]app.Title, error)
+	GetCommentedTitlesByUserId(id int) ([]app.Title, error)
+	GetCommentedTitlesByUserIdLimit(id int) ([]app.Title, error)
 }
 
 type Titles interface {
@@ -23,6 +27,7 @@ type Titles interface {
 	GetAllPossibleContent() (app.AllContent, error)
 	GetTitle(id int) (app.Title, error)
 	LikeOrUnlike(likeObj app.Like, like bool) error
+	CommentTitle(comm app.Comment) error
 	GetRandom() (app.Title, error)
 	CreateTitle(title app.Title) (uint, error)
 	UpdateTitle(title app.Title, id int) (uint, error)

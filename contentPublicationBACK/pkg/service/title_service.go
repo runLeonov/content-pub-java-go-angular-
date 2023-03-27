@@ -33,6 +33,10 @@ func (s *TitleService) LikeOrUnlike(likeObj app.Like, like bool) error {
 	return s.repoTitles.UnLikeById(likeObj)
 }
 
+func (s *TitleService) CommentTitle(comment app.Comment) error {
+	return s.repoTitles.CommentById(comment)
+}
+
 func (s *TitleService) GetRandom() (app.Title, error) {
 	return s.repoTitles.GetRandom()
 }

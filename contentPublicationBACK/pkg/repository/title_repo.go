@@ -48,6 +48,10 @@ func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
 		Preload(likeTableE).
+		Preload(commentTableE, func(db *gorm.DB) *gorm.DB {
+			return db.Order("creation_date desc")
+		}).
+		Preload(commentUserTableE).
 		First(&title)
 	return title, nil
 }
@@ -68,6 +72,10 @@ func (r *TitleRepo) GetImagesByTitleId(id int) ([]app.Image, error) {
 func (r *TitleRepo) LikeById(like app.Like) error {
 	r.db.Exec("UPDATE title_contents SET likes_count = likes_count + 1 WHERE title_id = ?", &like.TitleContentID)
 	return r.db.Debug().Create(&like).Error
+}
+
+func (r *TitleRepo) CommentById(comment app.Comment) error {
+	return r.db.Debug().Create(&comment).Error
 }
 
 func (r *TitleRepo) GetByRowFilter(row string, ids []int) ([]app.Title, error) {
@@ -101,6 +109,10 @@ func (r *TitleRepo) GetRandom() (app.Title, error) {
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
 		Preload(likeTableE).
+		Preload(commentTableE, func(db *gorm.DB) *gorm.DB {
+			return db.Order("creation_date desc")
+		}).
+		Preload(commentUserTableE).
 		First(&title)
 	return title, nil
 }
@@ -129,11 +141,7 @@ func (r *TitleRepo) GetAllTitlesByNameRegex(name string) ([]app.Title, error) {
 }
 
 func (r *TitleRepo) DeleteTitleById(id int) (uint, error) {
-	//err := r.db.Debug().Delete(&app.Title{}, id).Association(categoryTableE).Delete()
 	_ = r.db.Debug().Delete(&app.Title{}, id).Association("Titles.Serials.Categories.Tags").Delete()
-	//if err != nil {
-	//	return 0, err
-	//}
 	return uint(id), nil
 }
 

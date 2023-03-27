@@ -9,6 +9,7 @@ type Title struct {
 	TitleName      string       `json:"titleName"`
 	Type           string       `json:"typeName"`
 	OriginalAuthor string       `json:"originalAuthor"`
+	AuthorId       uint         `json:"authorId"`
 	CreationDate   time.Time    `json:"creationDate"`
 	Description    string       `json:"description"`
 	TitleImgBase64 string       `json:"titleImg"`
@@ -19,13 +20,14 @@ type Title struct {
 }
 
 type TitleContent struct {
-	ID         uint    `json:"id" gorm:"primary_key, AUTO_INCREMENT"`
-	Title      *Title  `json:"-"`
-	TitleID    uint    `json:"titleId"`
-	LikesCount uint    `json:"likesCount" gorm:"default:0"`
-	Likes      []Like  `json:"likes"`
-	Views      uint    `json:"views"`
-	Images     []Image `json:"images"`
+	ID         uint      `json:"id" gorm:"primary_key, AUTO_INCREMENT"`
+	Title      *Title    `json:"title"`
+	TitleID    uint      `json:"titleId"`
+	LikesCount uint      `json:"likesCount" gorm:"default:0"`
+	Likes      []Like    `json:"likes"`
+	Views      uint      `json:"views"`
+	Images     []Image   `json:"images"`
+	Comments   []Comment `json:"comments"`
 }
 
 type Image struct {

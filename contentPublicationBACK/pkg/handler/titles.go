@@ -107,6 +107,22 @@ func (h *Handler) getTitle(c *gin.Context) {
 	c.JSON(http.StatusOK, title)
 }
 
+func (h *Handler) commentTitle(c *gin.Context) {
+	var comment app.Comment
+	if err := c.BindJSON(&comment); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err := h.services.Titles.CommentTitle(comment)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, err)
+}
+
 func (h *Handler) likeTitle(c *gin.Context) {
 	var like app.Like
 	if err := c.BindJSON(&like); err != nil {
