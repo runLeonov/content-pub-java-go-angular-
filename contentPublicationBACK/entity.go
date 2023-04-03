@@ -13,6 +13,7 @@ type Title struct {
 	CreationDate   time.Time    `json:"creationDate"`
 	Description    string       `json:"description"`
 	TitleImgBase64 string       `json:"titleImg"`
+	Released       bool         `json:"released"`
 	Content        TitleContent `json:"content" gorm:"foreignKey:TitleID"`
 	Categories     []Category   `json:"categories" gorm:"many2many:titles_categories;"`
 	Tags           []Tag        `json:"tags" gorm:"many2many:titles_tags;"`
