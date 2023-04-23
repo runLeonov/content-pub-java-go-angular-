@@ -1,0 +1,210 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>user info</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sticky-footer-navbar/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="theme-color" content="#7952b3">
+
+
+    <style>
+
+        main .container {
+            padding-top: 100px;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <!--    <link href="form-validation.css" rel="stylesheet">-->
+</head>
+<!--<body class="bg-light ">-->
+<body class="d-flex flex-column h-100">
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Fixed navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/titles/}">Titles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/titles/}" tabindex="-1" aria-disabled="true">Unreleased
+                            titles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/users/}">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/comments/}">Comments</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="">User photo:</span>
+                </h4>
+                <img th:src="${user.getImg()}" alt="Admin" class="w-100">
+                <ul class="list-group mb-3">
+                    <li th:if="${!user.getComments().isEmpty()}" th:each="comm: ${user.getComments()}"
+                        class="list-group-item d-flex justify-content-between lh-sm">
+                        <a th:href="${'/titles/' + comm.getTitleContent().getTitle().getID()}"
+                           style="text-decoration: none">
+                            <div>
+                                <h6 th:if="${comm.getCreationDate() != null}" th:text="${comm.getCreationDate()}"
+                                    class="my-0"></h6>
+                                <h6 th:unless="${comm.getCreationDate() != null}" class="my-0">[date parse error]</h6>
+                                <small th:text="${comm.getCommentVal()}" class="text-muted"></small>
+                            </div>
+                        </a>
+                        <i class="material-icons">
+                            <form method="post" th:action="${'/users/' + user.getID() +'/comment/' + comm.getID()}">
+                                <button style="text-decoration: none; border: none; background-color: white"
+                                        class="text-danger"
+                                        type="submit">delete
+                                </button>
+                            </form>
+                        </i>
+                    </li>
+                    <li th:unless="${!user.getComments().isEmpty()}"
+                        class="list-group-item d-flex justify-content-between bg-light">
+                        <div class="text-danger">
+                            <h6 class="my-0">User has no</h6>
+                            <small>any comments</small>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">User info:</h4>
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label for="firstName" class="form-label">First name</label>
+                        <input type="text" class="form-control" id="firstName"
+                               th:placeholder="${user.getFirstName()}" disabled value="" required="">
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="lastName" class="form-label">Last name</label>
+                        <input type="text" class="form-control" id="lastName" th:placeholder="${user.getLastName()}"
+                               disabled value="" required="">
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="username" class="form-label">Username</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text">@</span>
+                            <input type="text" class="form-control" id="username"
+                                   th:placeholder="${user.getName()} " disabled
+                                   required="">
+                            <div class="invalid-feedback">
+                                Your username is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="email" class="form-label">Email
+                        </label>
+                        <input type="email" class="form-control" id="email" th:placeholder="${user.getEmail()}"
+                               disabled>
+                        <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <form method="post" th:action="${'/users/' + user.getID() +'/ban'}">
+                            <button th:if="${!user.isBanned()}" class="w-100 btn btn-danger btn-lg form-control"
+                                    type="submit">Ban user
+                            </button>
+                            <button th:unless="${!user.isBanned()}" class="w-100 btn btn-secondary btn-lg form-control"
+                                    type="submit">Unban user
+                            </button>
+                        </form>
+                    </div>
+
+                    <h3 class="mb-3">Users uploaded titles:</h3>
+                    <div class="col-12" th:each="title: ${titles}">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary" th:text="${title.getOriginalAuthor()}">World</strong>
+                                <h3 class="mb-0" th:text="${title.getTitleName()}"></h3>
+                                <div class="mb-1 text-muted" th:if="${title.getCreationDate() != null}"
+                                     th:text="${title.getCreationDate()}"></div>
+                                <div class="mb-1 text-muted" th:unless="${title.getCreationDate() != null}">[date parse
+                                    error]
+                                </div>
+                                <p class="card-text mb-auto" th:text="${title.getDescription()}"></p>
+                                <a th:href="${'/titles/' + title.getID()}" class="stretched-link">Check title info</a>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <img th:src="${title.getTitleImgBase64()}" alt="" class="bd-placeholder-img" width="200"
+                                     height="250">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+</footer>
+</body>
+</html>

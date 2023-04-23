@@ -1,0 +1,177 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Sticky Footer Navbar Template · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sticky-footer-navbar/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <meta name="theme-color" content="#7952b3">
+
+    <style>
+        main .container {
+            padding-top: 100px;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Fixed navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/titles/}">Titles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/titles/}" tabindex="-1" aria-disabled="true">Unreleased
+                            titles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/users/}">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/comments/}">Comments</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="bg-light d-flex">
+            <div class="me-auto ms-2 mb-2 mb-md-0 d-flex">
+                <!--                <p class="lead me-4">Filter by</p>-->
+                <form th:action="@{/titles/f}" method="get" class="d-flex me-2">
+
+
+                    <input name="filter" class="form-control" type="search" placeholder="Search by title name" aria-label="Search">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="d-flex">
+                <div class="dropdown me-1">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort by
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item active" href="#">Id</a></li>
+                        <li><a class="dropdown-item" href="#">Top rated</a></li>
+                        <li><a class="dropdown-item" href="#">Creation date</a></li>
+                    </ul>
+                </div>
+                <div class="me-2" >
+                    <a class="btn btn-secondary" th:href="@{/titles/}">Reset</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="table-responsive">
+            <table class="table custom-table">
+                <thead>
+                <tr>
+                    <th scope="col">Title id</th>
+                    <th scope="col">Title name</th>
+                    <th scope="col">Is released</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Tags</th>
+                    <th scope="col">Categories</th>
+                    <th scope="col">Serials</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Title image</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="title: ${titles}">
+                    <td>
+                        <span th:text="${title.getID()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${title.getTitleName()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${title.isReleased()}"></span>
+                    </td>
+                    <td>
+                        <span th:if="${title.getType() == ''}" th:text="${title.getType()}"></span>
+                        <span th:unless="${title.getType() == ''}" th:text="${'No type'}"></span>
+                    </td>
+                    <td>
+                        <small th:each="tag: ${title.getTags()}" th:text="${tag.getTagName()}" class="d-block"></small>
+                    </td>
+                    <td>
+                        <small th:each="cat: ${title.getCategories()}" th:text="${cat.getGenre()}"
+                               class="d-block"></small>
+                    </td>
+                    <td>
+                        <small th:each="ser: ${title.getSerials()}" th:text="${ser.getSerialName()}"
+                               class="d-block"></small>
+                    </td>
+                    <td>
+                        <span th:text="${title.getDescription()}"></span>
+                    </td>
+                    <td>
+                        <ul class="persons">
+                            <li>
+                                <a th:href="${'/titles/' + title.getID()}">
+                                    <img style="width: 36px; height: 36px" th:src="${title.getTitleImgBase64()}"
+                                         alt="Person" class="img-fluid">
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-grid">
+            <a class="btn btn-secondary" th:href="@{/creating/}">Create new one</a>
+        </div>
+    </div>
+</main>
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+</footer>
+</body>
+</html>
