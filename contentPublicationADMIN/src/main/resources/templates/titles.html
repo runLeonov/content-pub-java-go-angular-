@@ -19,7 +19,7 @@
 
     <style>
         main .container {
-            padding-top: 100px;
+            padding-top: 60px;
         }
 
         .bd-placeholder-img {
@@ -41,35 +41,29 @@
 <body class="d-flex flex-column h-100">
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Fixed navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="container-fluid container">
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" th:href="@{/titles/}">Titles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/titles/}" tabindex="-1" aria-disabled="true">Unreleased
+                        <a class="nav-link active" th:href="@{/titles/}">Unreleased
                             titles</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/users/}">Users</a>
                     </li>
+                </ul>
+
+                <ul class="navbar-nav mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/comments/}">Comments</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -78,11 +72,9 @@
     <div class="container">
         <div class="bg-light d-flex">
             <div class="me-auto ms-2 mb-2 mb-md-0 d-flex">
-                <!--                <p class="lead me-4">Filter by</p>-->
                 <form th:action="@{/titles/f}" method="get" class="d-flex me-2">
-
-
-                    <input name="filter" class="form-control" type="search" placeholder="Search by title name" aria-label="Search">
+                    <input name="filter" class="form-control" type="search" placeholder="Search by title name"
+                           aria-label="Search">
                     <button class="btn btn-outline-secondary" type="submit">Search</button>
                 </form>
             </div>
@@ -98,7 +90,7 @@
                         <li><a class="dropdown-item" href="#">Creation date</a></li>
                     </ul>
                 </div>
-                <div class="me-2" >
+                <div class="me-2">
                     <a class="btn btn-secondary" th:href="@{/titles/}">Reset</a>
                 </div>
             </div>
@@ -128,8 +120,11 @@
                     <td>
                         <span th:text="${title.getTitleName()}"></span>
                     </td>
-                    <td>
-                        <span th:text="${title.isReleased()}"></span>
+                    <td class="bg-success" style="color: white" th:if="${title.isReleased()}">
+                        released
+                    </td>
+                    <td class="bg-danger" style="color: white" th:unless="${title.isReleased()}">
+                        not released
                     </td>
                     <td>
                         <span th:if="${title.getType() == ''}" th:text="${title.getType()}"></span>
@@ -162,9 +157,6 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="d-grid">
-            <a class="btn btn-secondary" th:href="@{/creating/}">Create new one</a>
         </div>
     </div>
 </main>

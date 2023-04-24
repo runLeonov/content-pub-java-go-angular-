@@ -38,45 +38,33 @@
             }
         }
     </style>
-
-
-    <!-- Custom styles for this template -->
-    <!--    <link href="form-validation.css" rel="stylesheet">-->
 </head>
-<!--<body class="bg-light ">-->
 <body class="d-flex flex-column h-100">
-
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Fixed navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="container-fluid container">
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
+                        <a class="nav-link " th:href="@{/titles/}">Titles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/}">Titles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/}" tabindex="-1" aria-disabled="true">Unreleased
+                        <a class="nav-link " th:href="@{/titles/}">Unreleased
                             titles</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" th:href="@{/users/}">Users</a>
                     </li>
+                </ul>
+
+                <ul class="navbar-nav mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/comments/}">Comments</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -96,7 +84,7 @@
                         <a th:href="${'/titles/' + comm.getTitleContent().getTitle().getID()}"
                            style="text-decoration: none">
                             <div>
-                                <h6 th:if="${comm.getCreationDate() != null}" th:text="${comm.getCreationDate()}"
+                                <h6 th:if="${comm.getCreationDate() != null}" th:text="${#temporals.format(comm.getCreationDate(), 'dd-MM-yyyy HH:mm')}"
                                     class="my-0"></h6>
                                 <h6 th:unless="${comm.getCreationDate() != null}" class="my-0">[date parse error]</h6>
                                 <small th:text="${comm.getCommentVal()}" class="text-muted"></small>
@@ -182,7 +170,7 @@
                                 <strong class="d-inline-block mb-2 text-primary" th:text="${title.getOriginalAuthor()}">World</strong>
                                 <h3 class="mb-0" th:text="${title.getTitleName()}"></h3>
                                 <div class="mb-1 text-muted" th:if="${title.getCreationDate() != null}"
-                                     th:text="${title.getCreationDate()}"></div>
+                                     th:text="${#temporals.format(title.getCreationDate(), 'dd-MM-yyyy HH:mm')}"></div>
                                 <div class="mb-1 text-muted" th:unless="${title.getCreationDate() != null}">[date parse
                                     error]
                                 </div>
