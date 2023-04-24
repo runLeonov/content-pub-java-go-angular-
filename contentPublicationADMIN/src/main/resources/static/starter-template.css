@@ -1,0 +1,19 @@
+body {
+    padding-top: 5rem;
+}
+
+.crow {
+    display: flex;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.ccolumn {
+    flex: 45%;
+    padding: 5px;
+}
+
+.dropdown-menu {
+    max-height: 280px;
+    overflow-y: auto;
+}
