@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class User {
-    private int ID;
+    private Long ID;
     private String email;
     private String password;
     private String name;
@@ -18,5 +18,6 @@ public class User {
     private LocalDateTime creationDate;
     private String lastName;
     private String firstName;
+    private boolean banned;
 
 }

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class Comment {
+    private Long ID;
     private String commentVal;
     private LocalDateTime creationDate;
     private User user;
