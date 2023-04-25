@@ -40,8 +40,7 @@
         }
     </style>
 
-
-<!--    <link href="form-validation.css" rel="stylesheet">-->
+    <!--    <link href="form-validation.css" rel="stylesheet">-->
 </head>
 <body class="d-flex flex-column h-100">
 <header>
@@ -265,41 +264,44 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <div>
-                            <h3 class="mb-3">Comments by users for title:</h3>
-                            <ul class="list-group mb-3">
-                                <li th:if="${!title.getContent().getComments().isEmpty()}"
-                                    th:each="comm: ${title.getContent().getComments()}"
-                                    class="list-group-item d-flex justify-content-between lh-sm">
-                                    <a th:href="${'/users/' + comm.getUserID()}" style="text-decoration: none">
-                                        <div>
-                                            <h6 th:if="${comm.getCreationDate() != null}"
-                                                th:text="${#temporals.format(comm.getCreationDate(), 'dd-MM-yyyy HH:mm')}"
-                                                class="my-0"></h6>
-                                            <h6 th:unless="${comm.getCreationDate() != null}" class="my-0">[date parse
-                                                error]</h6>
-                                            <small th:text="'[' + ${comm.getUser().getName()} + ']: ' + ${comm.getCommentVal()}"
-                                                   class="text-muted"> </small>
-                                        </div>
-                                    </a>
-                                    <i class="material-icons">
-                                        <form method="post" th:action="${'/titles/' + title.getID() +'/comment/' + comm.getID()}">
-                                            <button style="text-decoration: none; border: none; background-color: white" class="text-danger">delete</button>
-                                        </form>
-                                    </i>
-                                </li>
-                                <li th:unless="${!title.getContent().getComments().isEmpty()}"
-                                    class="list-group-item d-flex justify-content-between bg-light">
-                                    <div class="text-danger">
-                                        <h6 class="my-0">Title has no</h6>
-                                        <small>any comments</small>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-
                     </div>
+                    <div>
+                        <h3 class="mb-3">Comments by users for title:</h3>
+                        <ul class="list-group mb-3">
+                            <li th:if="${!title.getContent().getComments().isEmpty()}"
+                                th:each="comm: ${title.getContent().getComments()}"
+                                class="list-group-item d-flex justify-content-between lh-sm">
+                                <a th:href="${'/users/' + comm.getUserID()}" style="text-decoration: none">
+                                    <div>
+                                        <h6 th:if="${comm.getCreationDate() != null}"
+                                            th:text="${#temporals.format(comm.getCreationDate(), 'dd-MM-yyyy HH:mm')}"
+                                            class="my-0"></h6>
+                                        <h6 th:unless="${comm.getCreationDate() != null}" class="my-0">[date parse
+                                            error]</h6>
+                                        <small th:text="'[' + ${comm.getUser().getName()} + ']: ' + ${comm.getCommentVal()}"
+                                               class="text-muted"> </small>
+                                    </div>
+                                </a>
+                                <i class="material-icons">
+                                    <form method="post"
+                                          th:action="${'/titles/' + title.getID() +'/comment/' + comm.getID()}">
+                                        <button style="text-decoration: none; border: none; background-color: white"
+                                                class="text-danger">delete
+                                        </button>
+                                    </form>
+                                </i>
+                            </li>
+                            <li th:unless="${!title.getContent().getComments().isEmpty()}"
+                                class="list-group-item d-flex justify-content-between bg-light">
+                                <div class="text-danger">
+                                    <h6 class="my-0">Title has no</h6>
+                                    <small>any comments</small>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
                 </div>
             </div>
         </div>
