@@ -85,9 +85,18 @@
                         Sort by
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item active" href="#">Id</a></li>
-                        <li><a class="dropdown-item" href="#">Top rated</a></li>
-                        <li><a class="dropdown-item" href="#">Creation date</a></li>
+                        <form method="get" th:if="${byID}" th:action="@{/titles/sort/id/}">
+                            <button class="dropdown-item active" type="submit">Id</button>
+                        </form>
+                        <form method="get" th:unless="${byID}" th:action="@{/titles/sort/id/}">
+                            <button class="dropdown-item" type="submit">Id</button>
+                        </form>
+                        <form method="get" th:if="${byDate}" th:action="@{/titles/sort/date/}">
+                            <button class="dropdown-item active" type="submit">Creation date</button>
+                        </form>
+                        <form method="get" th:unless="${byDate}" th:action="@{/titles/sort/date/}">
+                            <button class="dropdown-item" type="submit">Creation date</button>
+                        </form>
                     </ul>
                 </div>
                 <div class="me-2">
@@ -109,6 +118,7 @@
                     <th scope="col">Categories</th>
                     <th scope="col">Serials</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Title image</th>
                 </tr>
                 </thead>
@@ -143,6 +153,11 @@
                     </td>
                     <td>
                         <span th:text="${title.getDescription()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${#temporals.format(title.getCreationDate(), 'dd-MM-yyyy')}"></span>
+                        <small class="text-muted"
+                               th:text="${#temporals.format(title.getCreationDate(), 'HH:mm')}"></small>
                     </td>
                     <td>
                         <ul class="persons">

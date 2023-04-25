@@ -86,9 +86,18 @@
                         Sort by
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item active" href="#">Id</a></li>
-                        <li><a class="dropdown-item" href="#">Most publication</a></li>
-                        <li><a class="dropdown-item" href="#">Creation date</a></li>
+                        <form method="get" th:if="${byID}" th:action="@{/users/sort/id/}">
+                            <button class="dropdown-item active" type="submit">Id</button>
+                        </form>
+                        <form method="get" th:unless="${byID}" th:action="@{/users/sort/id/}">
+                            <button class="dropdown-item" type="submit">Id</button>
+                        </form>
+                        <form method="get" th:if="${byDate}" th:action="@{/users/sort/date/}">
+                            <button class="dropdown-item active" type="submit">Creation date</button>
+                        </form>
+                        <form method="get" th:unless="${byDate}" th:action="@{/users/sort/date/}">
+                            <button class="dropdown-item" type="submit">Creation date</button>
+                        </form>
                     </ul>
                 </div>
                 <div class="me-2">

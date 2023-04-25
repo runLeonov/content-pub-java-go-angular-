@@ -230,8 +230,8 @@
                         </form>
                     </div>
 
-                    <h3 class="mb-3">Title images in content:</h3>
                     <div th:if="${!title.getContent().getImages().isEmpty()}">
+                        <h3 class="mb-3">Title images in content:</h3>
                         <button id="scrollerImg" class="w-100 btn btn-secondary btn-lg">
                             Show content images
                         </button>
@@ -274,7 +274,6 @@
                                     <a th:href="${'/users/' + comm.getUserID()}" style="text-decoration: none">
                                         <div>
                                             <h6 th:if="${comm.getCreationDate() != null}"
-
                                                 th:text="${#temporals.format(comm.getCreationDate(), 'dd-MM-yyyy HH:mm')}"
                                                 class="my-0"></h6>
                                             <h6 th:unless="${comm.getCreationDate() != null}" class="my-0">[date parse
