@@ -4,10 +4,10 @@
       <div><img width="200" alt="" [src]="title.titleImg"></div>
     </div>
     <button class="like" *ngIf="!isLiked" style="color: white" (click)="isLiked = !isLiked; like(true);">
-      <strong> Тупа LIKE</strong>
+      <strong>LIKE</strong>
     </button>
     <button class="like" *ngIf="isLiked" style="color: red" (click)="isLiked = !isLiked; like(false);">
-      <strong> Тупа UNLIKE</strong>
+      <strong>UNLIKE</strong>
     </button>
 
     <div class="description">
@@ -36,7 +36,7 @@
 
 
   <div class="right-bar">
-    <div class="title-name"><strong> TitleName: {{title.titleName}}</strong></div>
+    <div class="title-name"><strong> Title name: {{title.titleName}}</strong></div>
     <div class="panel-btns-tags-cats">
       <div class="panel-btns-tags-cats-inner">
         <span> categories:</span>

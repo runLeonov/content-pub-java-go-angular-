@@ -46,9 +46,8 @@
       </div>
       <input type="file" id="image-input" name="photos" accept="image/jpeg" multiple/>
     </div>
-
-
   </div>
+
   <div class="all-possible-content-panel">
     <div *ngIf="allPossible" class="panel">
       <h2> Select categories for title</h2>
@@ -73,8 +72,13 @@
     </div>
 
   </div>
-
-  <button (click)="addPost()">Add Post</button>
+  <div class="errMsg" *ngIf="titleNameEmpty"><strong> Title name cannot be empty</strong></div>
+  <div class="errMsg" *ngIf="descriptionEmpty"><strong> Description cannot be empty</strong></div>
+  <div class="errMsg" *ngIf="titleImageEmpty"><strong> Title image cannot be empty</strong></div>
+  <div class="errMsg" *ngIf="tagsEmpty"><strong> Tags list cannot be empt</strong>y</div>
+  <div class="errMsg" *ngIf="categoriesEmpty"><strong> Categories list cannot be empty</strong></div>
+  <div class="errMsg" *ngIf="contentImagesEmpty"><strong> Content images cannot be empty</strong></div>
+  <button class="addTitle" (click)="addPost()">Add Post</button>
 
 
 </div>

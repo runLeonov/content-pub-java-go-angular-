@@ -29,6 +29,13 @@ export class PublishComponent implements OnInit {
   imgFilesMain = [];
   addImgHandlerMain: any;
 
+  public titleNameEmpty: boolean = false;
+  public descriptionEmpty: boolean = false;
+  public titleImageEmpty: boolean = false;
+  public tagsEmpty: boolean = false;
+  public categoriesEmpty: boolean = false;
+  public contentImagesEmpty: boolean = false;
+
   public titleName: string = '';
   public originalAuthor: string;
   public description: string = '';
@@ -48,6 +55,47 @@ export class PublishComponent implements OnInit {
       this.allPossible = cot
       this.type = this.allPossible.types[0].typeName
     });
+  }
+
+  validation(): boolean {
+    if (!this.titleName) {
+      this.titleNameEmpty = true;
+      return false;
+    }
+
+    if (!this.description) {
+      this.descriptionEmpty = true;
+      return false;
+    }
+
+    if (!this.titleImg) {
+      this.titleImageEmpty = true;
+      return false;
+    }
+
+    if (!this.tags) {
+      this.tagsEmpty = true;
+      return false;
+    }
+
+    if (!this.categories) {
+      this.categoriesEmpty = true;
+      return false;
+    }
+
+    if (!this.images) {
+      this.contentImagesEmpty = true;
+      return false;
+    }
+
+    this.titleNameEmpty = false;
+    this.descriptionEmpty = false;
+    this.titleImageEmpty = false;
+    this.tagsEmpty = false;
+    this.categoriesEmpty = false;
+    this.contentImagesEmpty = false;
+
+    return true;
   }
 
   ngOnInit(): void {
@@ -179,6 +227,8 @@ export class PublishComponent implements OnInit {
     if (!this.user) {
       return;
     }
+    if (!this.validation()) return;
+
     this.httpclient.post<any>(`${environment.serverUrl}/titles/`, {
       titleName: this.titleName,
       originalAuthor: this.originalAuthor,

@@ -76,6 +76,7 @@ app-filter-panel {
   text-align: left;
   padding: 5px;
   background-size: contain;
+  /*background-size: cover;*/
   background-repeat: no-repeat;
   background-position: center;
 }

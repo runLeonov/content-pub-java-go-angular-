@@ -162,7 +162,7 @@ export class AuthPageComponent implements OnInit {
       email: this.email,
       password: this.password,
       nickName: this.name,
-      img64: this.img,
+      img64: this.url,
       firstName: this.firstName,
       lastName: this.lastName
     }).subscribe(() => this.singIn());
