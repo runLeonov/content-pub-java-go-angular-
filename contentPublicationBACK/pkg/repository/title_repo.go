@@ -16,7 +16,7 @@ func NewTitleRepo(db *gorm.DB) *TitleRepo {
 func (r *TitleRepo) GetAllTitles() ([]app.Title, error) {
 	var titles []app.Title
 	r.db.Debug().
-		Raw("SELECT * FROM titles INNER JOIN title_contents tc on titles.id = tc.title_id ORDER BY tc.likes_count DESC").
+		Raw("SELECT * FROM titles INNER JOIN title_contents tc on titles.id = tc.title_id WHERE released = true ORDER BY tc.likes_count DESC").
 		Preload(serialTableE).
 		Preload(categoryTableE).
 		Preload(tagTableE).
