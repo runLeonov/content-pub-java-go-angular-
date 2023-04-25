@@ -71,6 +71,7 @@
 </header>
 <main class="flex-shrink-0">
     <div class="container">
+        <div class="bg-light" style="padding-top: 30px">
         <div class="bg-light d-flex">
             <div class="me-auto ms-2 mb-2 mb-md-0 d-flex">
                 <form th:action="@{/users/f}" method="get" class="d-flex me-2">
@@ -105,7 +106,7 @@
                 </div>
             </div>
         </div>
-
+        </div>
         <div class="table-responsive">
             <table class="table custab custom-table">
                 <thead>
@@ -147,7 +148,7 @@
 
                     <td>
                         <ul class="persons">
-                            <li>
+                            <li style="margin: 0">
                                 <a th:href="${'/users/' + user.getID()}">
                                     <img style="width: 36px; height: 36px" th:src="${user.getImg()}" alt="Person"
                                          class="img-fluid">

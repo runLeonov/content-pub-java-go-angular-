@@ -70,6 +70,7 @@
 </header>
 <main class="flex-shrink-0">
     <div class="container">
+        <div class="bg-light" style="padding-top: 30px">
         <div class="bg-light d-flex">
             <div class="me-auto ms-2 mb-2 mb-md-0 d-flex">
                 <form th:action="@{/titles/f}" method="get" class="d-flex me-2">
@@ -104,22 +105,22 @@
                 </div>
             </div>
         </div>
-
+        </div>
 
         <div class="table-responsive">
             <table class="table custom-table">
                 <thead>
                 <tr>
-                    <th scope="col">Title id</th>
+                    <th scope="col">Id</th>
                     <th scope="col">Title name</th>
-                    <th scope="col">Is released</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Type</th>
                     <th scope="col">Tags</th>
                     <th scope="col">Categories</th>
                     <th scope="col">Serials</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Title image</th>
+                    <th scope="col" width="150">Date</th>
+                    <th scope="col" class="text-center">Image</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -161,7 +162,7 @@
                     </td>
                     <td>
                         <ul class="persons">
-                            <li>
+                            <li style="margin: 0">
                                 <a th:href="${'/titles/' + title.getID()}">
                                     <img style="width: 36px; height: 36px" th:src="${title.getTitleImgBase64()}"
                                          alt="Person" class="img-fluid">
