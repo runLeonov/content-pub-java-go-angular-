@@ -14,6 +14,7 @@ type User struct {
 	CreationDate time.Time `json:"creationDate"`
 	LastName     string    `json:"lastName"`
 	FirstName    string    `json:"firstName"`
+	Banned       bool      `json:"banned" gorm:"default:false"`
 }
 
 type Like struct {
@@ -24,6 +25,7 @@ type Like struct {
 }
 
 type Comment struct {
+	ID             int          `json:"id" gorm:"primary_key, AUTO_INCREMENT"`
 	CommentVal     string       `json:"commentVal"`
 	CreationDate   time.Time    `json:"creationDate"`
 	User           User         `json:"user"`
