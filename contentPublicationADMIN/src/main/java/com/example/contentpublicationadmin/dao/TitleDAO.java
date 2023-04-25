@@ -21,9 +21,39 @@ public class TitleDAO {
         return jdbcTemplate.query(sql, new Mappers.TitleMapper(jdbcTemplate));
     }
 
+    public List<Title> findAllByID() {
+        String sql = "SELECT * FROM titles ORDER BY id DESC ";
+        return jdbcTemplate.query(sql, new Mappers.TitleMapper(jdbcTemplate));
+    }
+
+    public List<Title> findAllByDate() {
+        String sql = "SELECT * FROM titles ORDER BY creation_date DESC";
+        return jdbcTemplate.query(sql, new Mappers.TitleMapper(jdbcTemplate));
+    }
+
+
+    public List<Title> findFilteredAll(String filter) {
+        String sql = "SELECT * FROM titles WHERE title_name LIKE ?";
+        return jdbcTemplate.query(sql, new Object[]{'%' + filter + '%'}, new Mappers.TitleMapper(jdbcTemplate));
+    }
+
     public Title findById(Long id) {
         String sql = "SELECT * FROM titles WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new Mappers.TitleMapper(jdbcTemplate));
+    }
+
+    public void releaseOrBanTitleById(Title title) {
+        String sql = "UPDATE titles SET released = ? WHERE id = ?";
+        jdbcTemplate.update(sql, !title.isReleased(), title.getID());
+    }
+    public void deleteCommentForTitle(Long commentId) {
+        String sql = "DELETE FROM comments WHERE id = ?";
+        jdbcTemplate.update(sql, commentId);
+    }
+
+    public List<Title> findTitlesByUserId(Long id) {
+        String sql = "SELECT * FROM titles WHERE author_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{id}, new Mappers.TitleMapper(jdbcTemplate));
     }
 
     public void save(Title title) {
