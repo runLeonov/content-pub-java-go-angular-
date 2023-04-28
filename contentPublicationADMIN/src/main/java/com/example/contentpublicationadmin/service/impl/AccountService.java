@@ -6,6 +6,7 @@ import com.example.contentpublicationadmin.entity.Title;
 import com.example.contentpublicationadmin.entity.User;
 import com.example.contentpublicationadmin.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -84,6 +85,10 @@ public class AccountService implements IAccountService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return accountDAO.getUserByName(username);
+        try {
+            return accountDAO.getUserByName(username);
+        } catch (EmptyResultDataAccessException e) {
+            throw new UsernameNotFoundException("Not found");
+        }
     }
 }

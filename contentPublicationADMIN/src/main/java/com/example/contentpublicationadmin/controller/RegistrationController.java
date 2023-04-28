@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Objects;
 
 @Controller()
 @RequestMapping("/registration")
@@ -38,6 +39,11 @@ public class RegistrationController {
     @PostMapping()
     public ModelAndView registration(@ModelAttribute("usr") @Valid User user, BindingResult bindingResult, ModelMap modelMap) {
         if (bindingResult.hasErrors()) {
+            return new ModelAndView("registration", modelMap);
+        }
+
+        if (Objects.nonNull(accountService.loadUserByUsername(user.getUsername()))) {
+            modelMap.addAttribute("err", "User already exist!");
             return new ModelAndView("registration", modelMap);
         }
 
