@@ -4,7 +4,7 @@ import {AppComponent} from "../app.component";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {environment} from "../environment";
-import {Title} from "../title";
+import {Comment, Title} from "../title";
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +28,6 @@ export class ProfileComponent  implements OnInit {
       this.likedTitles = titles;
     });
   }
-
   getLimitComments() {
     this.httpclient.get<Title[]>(`${environment.serverUrl}/account/commented-limit`).subscribe(titles => {
       this.commentedTitles = titles;

@@ -1,16 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from "../../environment";
 import {User} from "../../user";
 import {AppComponent} from "../../app.component";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {Image} from "../../title";
 
 @Component({
   selector: 'app-prof-edit',
   templateUrl: './prof-edit.component.html',
   styleUrls: ['../auth-page.component.css', '../../publish/publish.component.css', '../../title-view/title-view.component.css']
 })
-export class ProfEditComponent {
+export class ProfEditComponent  {
   name: string | undefined
   firstName: string | undefined
   lastName: string | undefined

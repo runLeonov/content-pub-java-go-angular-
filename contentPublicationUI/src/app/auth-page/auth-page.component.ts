@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-auth-page',
   templateUrl: './auth-page.component.html',
-  styleUrls: ['./auth-page.component.css', '../title-view/title-view.component.css', '../publish/publish.component.css']
+  // styleUrls: ['./auth-page.component.css', '../title-view/title-view.component.css', '../publish/publish.component.css']
 })
 export class AuthPageComponent implements OnInit {
   email: string | undefined

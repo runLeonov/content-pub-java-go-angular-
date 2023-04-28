@@ -1,74 +1,104 @@
-<div *ngIf="title" style="display: flex">
-  <div class="left-bar">
-    <div>
-      <div><img width="200" alt="" [src]="title.titleImg"></div>
-    </div>
-    <button class="like" *ngIf="!isLiked" style="color: white" (click)="isLiked = !isLiked; like(true);">
-      <strong>LIKE</strong>
-    </button>
-    <button class="like" *ngIf="isLiked" style="color: red" (click)="isLiked = !isLiked; like(false);">
-      <strong>UNLIKE</strong>
-    </button>
-
-    <div class="description">
-
-      <div>
-        <div class="title">type</div>
-        <div class="value">{{title.typeName}}</div>
+<div *ngIf="title" class="row g-4 p-4">
+  <div class="col-md-3 col-lg-3 order-first">
+    <div class="row g-1">
+      <img [src]="title.titleImg" alt="Admin" class="w-100">
+      <div class="col-sm-12">
+        <button class="w-100 btn-lg btn-danger" *ngIf="!isLiked" style="color: white"
+                (click)="isLiked = !isLiked; like(true);">
+          <strong>LIKE</strong>
+        </button>
+        <button class="w-100 btn-lg btn-success" *ngIf="isLiked"
+                (click)="isLiked = !isLiked; like(false);">
+          <strong>LIKED</strong>
+        </button>
       </div>
-      <div>
-        <div class="title">release year</div>
-        <div class="value">{{getReleaseYear(title)}}</div>
+      <div class="col-sm-12">
+        <input type="text" class="form-control text-center" id="type"
+               placeholder="{{'type: '+ title.typeName}}" disabled>
       </div>
-      <div>
-        <div class="title">serials</div>
-        <div class="value" *ngFor="let cat of title.serials">
-          {{cat.serialName}}
-        </div>
+      <div class="col-sm-12">
+        <input type="text" class="form-control text-center" id="views"
+               placeholder="{{'views: '+ title.content.views}}" disabled>
       </div>
-      <div>
-        <div class="title">author</div>
-        <div *ngIf="title.authorId === 0" class="value">{{title.originalAuthor}}</div>
-        <div *ngIf="title.authorId !== 0" class="value"><a href="/profile-view/{{title.authorId}}">{{title.originalAuthor}}</a></div>
+      <div class="col-sm-6">
+        <input type="text" class="form-control text-center" id="comments"
+               placeholder="{{'comments: '+ title.content.comments.length}}" disabled>
+      </div>
+      <div class="col-sm-6">
+        <input type="text" class="form-control text-center" id="likes"
+               placeholder="{{'likes: '+ title.content.likesCount}}" disabled>
       </div>
     </div>
   </div>
 
+  <div class="col-md-9 col-lg-9">
+    <h3 class="">Title info: <span>{{title.titleName}}</span></h3>
 
-  <div class="right-bar">
-    <div class="title-name"><strong> Title name: {{title.titleName}}</strong></div>
-    <div class="panel-btns-tags-cats">
-      <div class="panel-btns-tags-cats-inner">
-        <span> categories:</span>
-        <div class="cats-tags" *ngFor="let cat of title.categories">
-          <button>{{cat.genre}}</button>
+    <div class="bg-pink p-3">
+      <div class="col-12 d-grid">
+        <div class="my-1">
+          <div class="d-flex" style="gap: 2px;">
+            <span style="margin: 0" class="form-label">categories:</span>
+            <a style="color: white" class="px-1" *ngFor="let cat of title.categories">{{cat.genre}}</a>
+          </div>
+        </div>
+        <div class="my-1">
+          <div class="d-flex" style="gap: 2px;">
+            <span style="margin: 0" class="form-label">tags:</span>
+            <a style="color: white" class="px-1" *ngFor="let tag of title.tags">{{tag.tag}}</a>
+          </div>
+        </div>
+        <div class="my-1">
+          <div class="d-flex" style="gap: 2px;">
+            <span style="margin: 0" class="form-label">serials:</span>
+            <a style="color: white" class="px-1" *ngFor="let ser of title.serials">{{ser.serialName}}</a>
+          </div>
+        </div>
+        <div class="col-12">
+          <textarea style="height: 100px" disabled class="w-100">{{'Description: ' + title.description}}</textarea>
         </div>
       </div>
-      <div class="panel-btns-tags-cats-inner">
-        <span>tags:</span>
-        <div class="cats-tags" *ngFor="let tag of title.tags">
-          <button>{{tag.tag}}</button>
-        </div>
-      </div>
-      <div> Description: {{title.description}}</div>
+
     </div>
-    <a class="start-read" href="/titles/{{title.id}}/images">Start read</a>
-    <div class="comments">
-      <div class="comment-inpt">
-        <input type="text" [(ngModel)]="comment" placeholder="Add your comment">
-        <button (click)="addComment()">Add comment</button>
-      </div>
-      <div class="comment-from-user" *ngFor="let comm of title.content.comments">
-        <div style="display: flex">
-          <img class="user-img" width="40" [src]="comm.user.img64">
-          <div class="title">[{{comm.user.nickName ? comm.user.nickName : "[no name]" }}]</div>
-          <div class="value">{{comm.commentVal}}</div>
+    <a href="/titles/{{title.id}}/images" class="col-3 btn-lg not-border-top order-md-last">
+      Start read
+    </a>
+
+
+    <div class="row comments">
+      <div class="form-group d-flex">
+        <div class="col-9">
+          <input type="text" [(ngModel)]="comment" class="form-control" placeholder="Add your comment">
         </div>
-        <div style="display: flex">
-          <div class="title">{{getDate(comm).toLocaleTimeString()}} {{getDate(comm).toLocaleDateString()}}</div>
+        <div class="col-3">
+          <button (click)="addComment()" class="form-control">Add comment</button>
+        </div>
+      </div>
+
+
+      <div class="col-12" *ngFor="let comm of title.content.comments">
+        <div
+          class="row flex-column g-0 px-3 border rounded not-border-top overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col-auto d-none d-lg-block">
+            <img [src]="comm.user.img64" alt="" class="bd-placeholder-img" width="50">
+          </div>
+
+          <div class="col p-2 likes-inner d-flex flex-column position-static">
+            <div class="row">
+              <div class="col-9 d-flex">
+                <span class="title">[{{comm.user.nickName}}]</span>
+                <span class="ml-3 value">{{comm.commentVal}}</span>
+              </div>
+              <div class="col-3 d-flex">
+                <div class="mb-1 text-muted title"
+                     *ngIf="comm.creationDate">{{getDate(comm).toLocaleTimeString()}} {{getDate(comm).toLocaleDateString()}}</div>
+                <div class="mb-1 text-muted title" *ngIf="!comm.creationDate">[date parse error]</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-
 </div>

@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from "../../environment";
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
+import {Router, Routes} from "@angular/router";
+import {User} from "../../user";
+
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,9 @@ export class LoginComponent implements OnInit {
   emptyEmail: boolean = false
   emptyPass: boolean = false
 
+
+
+
   constructor(private httpclient: HttpClient, private router: Router) {
 
   }
@@ -24,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    this.httpclient.post<any>(`${environment.serverUrl}/auth/login`, {
+    this.httpclient.post<string>(`${environment.serverUrl}/auth/login`, {
       email: this.email,
       password: this.password,
     }).subscribe(() => {
@@ -42,10 +47,10 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.httpclient.get<any>(`${environment.serverUrl}/auth/user`).subscribe(user => {
+    this.httpclient.get<User>(`${environment.serverUrl}/auth/user`).subscribe(user => {
       localStorage.setItem("user", JSON.stringify(user));
-      this.router.navigate(['/titles']);
       document.location.reload();
+      this.router.navigate(['profile']).then(() => {});
     });
   }
 }

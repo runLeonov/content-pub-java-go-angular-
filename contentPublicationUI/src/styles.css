@@ -11,3 +11,43 @@ a {
   text-decoration: none;
   color: black;
 }
+
+button , a {
+  background-color: green;
+  border: none;
+
+  color: white !important;
+  text-align: center;
+  display: inline-block;
+}
+
+.nav-item a {
+  color: white !important;
+}
+
+.bg-wgr {
+  background-color: #63c77f !important;
+}
+
+.bg-gr {
+  background-color: green !important;
+}
+
+.bg-pink {
+  background-color: pink !important;
+}
+
+.btn-danger {
+  background-color: #dc3545 !important;
+}
+
+.not-border-bottom {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.not-border-top {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+

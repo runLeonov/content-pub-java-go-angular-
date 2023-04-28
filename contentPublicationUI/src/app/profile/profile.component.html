@@ -1,92 +1,107 @@
-<div style="display: flex">
+<div *ngIf="user" class="row p-3 pt-4 pb-5 g-3">
+  <div class="col-md-3 col-lg-3 order-md-first">
+    <img [src]="user.img64" alt="Admin" class="w-100 bg-wgr">
+    <div class="row g-1 p-2 bg-wgr">
+      <div class="col-sm-6">
+        <strong class="title">First name</strong>
+        <input type="text" class="form-control p-1" id="firstName"
+               placeholder="{{user.firstName}}" disabled value="" required="">
+      </div>
 
-  <div *ngIf="user" class="left-bar">
-    <div>
-      <div><img width="200" alt="" [src]="user.img64"></div>
+      <div class="col-sm-6">
+        <strong class="title">Last name</strong>
+        <input type="text" class="form-control p-1" id="lastName" placeholder="{{user.lastName}}"
+               disabled value="" required="">
+      </div>
+
+      <div class="col-sm-6">
+        <strong  class="title">Username</strong>
+        <div class="input-group has-validation">
+          <span class="input-group-text p-1">@</span>
+          <input type="text" class="form-control p-1" id="username"
+                 placeholder="{{user.nickName}}" disabled>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <strong class="title">Role</strong>
+        <input type="text" class="form-control p-1" id="role" placeholder="{{user.role}}"
+               disabled value="">
+      </div>
+
+
+      <div class="col-sm-12">
+        <strong class="title">Email
+        </strong>
+        <input type="email" class="form-control p-1" id="email" placeholder="{{user.email}}"
+               disabled>
+      </div>
+
+      <div class="col-sm-12">
+        <strong class="title">Creation date
+        </strong>
+        <input type="text" class="form-control p-1" id="date" placeholder="{{parseDate(user.creationDate)}}" disabled>
+      </div>
+
     </div>
-
-    <div class="description">
-      <div>
-        <div class="title">NickName:</div>
-        <div class="value">{{user.nickName}}</div>
-      </div>
-      <div>
-        <div class="title">Email:</div>
-        <div class="value">{{user.email}}</div>
-      </div>
-      <div>
-        <div class="title">Last name:</div>
-        <div class="value">{{user.lastName}}</div>
-      </div>
-      <div>
-        <div class="title">First name:</div>
-        <div class="value">{{user.firstName}}</div>
-      </div>
-      <div>
-        <div class="title">Date of creation:</div>
-        <div class="value">{{getReleaseYear(user)}}</div>
-      </div>
-      <div>
-        <div class="title">User role:</div>
-        <div class="value">{{user.role}}</div>
-      </div>
-    </div>
-
   </div>
-  <div class="right-bar">
 
-    <a class="do-action" routerLink="/liked-titles">See all what you like</a>
-    <div class="block title-from-list">
-      <div *ngFor="let title of likedTitles" class="manga-block likes-inner" style="display: flex">
-        <a href="/titles/{{title.id}}" class="title-inner-img"
-           [style.background-image]="'url(' + title.titleImg + ')'"></a>
-        <div class="rows">
 
-          <div class="row">
-            <strong>Title name:</strong>
-            {{title.titleName}}
+  <div class="col-md-9 col-lg-9">
+    <a class="btn-lg w-100 not-border-bottom" routerLink="/user-comments">Check commented posts</a>
+    <div class="col-12" *ngFor="let title of commentedTitles">
+      <div
+        class="row g-0  border rounded not-border-top overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-2 likes-inner d-flex flex-column position-static">
+          <h4 class="mb-0">{{title.titleName}}</h4>
+          <div class="d-flex">
+            <span>Author: </span>
+            <strong class="text-muted">{{title.originalAuthor}}</strong>
           </div>
-          <div class="row">
-            <strong>Author:</strong>
-            {{title.originalAuthor}}
+          <div class="d-flex">
+            <span>Creation date: </span>
+            <div class="mb-1 text-muted" *ngIf="title.creationDate">{{parseDate(title.creationDate)}}</div>
+            <div class="mb-1 text-muted" *ngIf="!title.creationDate">[date parse error]</div>
           </div>
-          <div class="row">
-            <strong>Views:</strong>
-            {{title.content.views}}
-          </div>
-          <div class="row">
-            <strong>Likes:</strong>
-            {{title.content.likesCount}}
-          </div>
+          <textarea style="border: 0" class="w-100" disabled>{{title.description}}</textarea>
+          <p class="card-text mb-auto">
+
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img [src]="title.titleImg" alt="" class="bd-placeholder-img" width="100">
         </div>
       </div>
     </div>
-    <a class="do-action " routerLink="/user-comments">Check commented posts</a>
-    <div class="block title-from-list">
-      <div *ngFor="let title of commentedTitles" class="manga-block likes-inner" style="display: flex">
-        <a href="/titles/{{title.id}}" class="title-inner-img"
-           [style.background-image]="'url(' + title.titleImg + ')'"></a>
-        <div class="rows">
 
-          <div class="row">
-            <strong>Title name:</strong>
-            {{title.titleName}}
+
+    <a class="btn-lg w-100 not-border-bottom" routerLink="/liked-titles">See all what you like</a>
+    <div class="col-12" *ngFor="let title of likedTitles">
+      <div
+        class="row g-0  border rounded  not-border-top overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-2 likes-inner d-flex flex-column position-static">
+          <h4 class="mb-0">{{title.titleName}}</h4>
+          <div class="d-flex">
+            <span>Author: </span>
+            <strong class="text-muted">{{title.originalAuthor}}</strong>
           </div>
-          <div class="row">
-            <strong>Author:</strong>
-            {{title.originalAuthor}}
+          <div class="d-flex">
+            <span>Creation date: </span>
+            <div class="mb-1 text-muted" *ngIf="title.creationDate">{{parseDate(title.creationDate)}}</div>
+            <div class="mb-1 text-muted" *ngIf="!title.creationDate">[date parse error]</div>
           </div>
-          <div class="row">
-            <strong>Views:</strong>
-            {{title.content.views}}
-          </div>
-          <div class="row">
-            <strong>Likes:</strong>
-            {{title.content.likesCount}}
-          </div>
+          <textarea style="border: 0" class="w-100" disabled>{{title.description}}</textarea>
+          <p class="card-text mb-auto">
+
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img [src]="title.titleImg" alt="" class="bd-placeholder-img" width="100">
         </div>
       </div>
     </div>
-    <a class="do-action last" routerLink="/edit-profile">Edit your profile</a>
+
+    <a class="btn-lg w-100" routerLink="/edit-profile">Edit your profile</a>
+
   </div>
 </div>

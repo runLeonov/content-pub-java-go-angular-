@@ -82,6 +82,10 @@ export class TitleViewComponent {
     return this.httpclient.get<Title>(`${environment.serverUrl}/titles/random`);
   }
 
+  parseDate(date: Date): Date {
+    return new Date(date);
+  }
+
   public addComment() {
     if (!this.user) {
       this.router.navigate(['/sing-up'])

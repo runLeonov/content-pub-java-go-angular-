@@ -1,33 +1,176 @@
-<div class="main-pub">
-  <div class="info">
-    <div>Welcome to creation page. Build new publication.</div>
-    <div>
-      <br>
-      <div>TitleName</div>
-      <input
-        [(ngModel)]="titleName"
-        type="text"
-        placeholder="Enter title name">
-    </div>
-    <br>
-    <div>
-      <div>Description</div>
-      <input
-        [(ngModel)]="description"
-        type="text"
-        placeholder="Enter description">
-    </div>
-    <br>
-    <div>
-      Select the type of title
-      <select *ngIf="allPossible" [(ngModel)]="type">
-        <option *ngFor="let t of allPossible.types">{{t.typeName}}</option>
-      </select>
+<!--<div class="main-pub">-->
+<!--  <div class="info">-->
+<!--    <div>Welcome to creation page. Build new publication.</div>-->
+<!--    <div>-->
+<!--      <br>-->
+<!--      <div>TitleName</div>-->
+<!--      <input-->
+<!--        [(ngModel)]="titleName"-->
+<!--        type="text"-->
+<!--        placeholder="Enter title name">-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <div>-->
+<!--      <div>Description</div>-->
+<!--      <input-->
+<!--        [(ngModel)]="description"-->
+<!--        type="text"-->
+<!--        placeholder="Enter description">-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <div>-->
+<!--      Select the type of title-->
+<!--      <select *ngIf="allPossible" [(ngModel)]="type">-->
+<!--        <option *ngFor="let t of allPossible.types">{{t.typeName}}</option>-->
+<!--      </select>-->
+<!--    </div>-->
+
+<!--    <div class="custom-form">-->
+<!--      <br><br>-->
+<!--      <div>Select title image</div>-->
+<!--      <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>-->
+<!--      <div>-->
+<!--        <div class="custom-image-container-main">-->
+<!--          <label id="add-img-label-main" for="add-single-img-main">+</label>-->
+<!--          <input type="file" id="add-single-img-main" (change)="selectTitleImg($event);" accept="image/jpeg"/>-->
+<!--        </div>-->
+<!--        <input type="file" id="image-input-main" name="photos" accept="image/jpeg"/>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="custom-form">-->
+<!--      <div>Select content images. Add as much as necessary.</div>-->
+<!--      <div class="custom-image-container">-->
+<!--        <label id="add-img-label" for="add-single-img">+</label>-->
+<!--        <input type="file" id="add-single-img" (change)="addNewFile($event)" accept="image/jpeg"/>-->
+<!--      </div>-->
+<!--      <input type="file" id="image-input" name="photos" accept="image/jpeg" multiple/>-->
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--  <div class="all-possible-content-panel">-->
+<!--    <div *ngIf="allPossible" class="panel">-->
+<!--      <h2> Select categories for title</h2>-->
+<!--      <div *ngFor="let cat of allPossible.categories" style="margin-top: 1px; border: black 1px solid">-->
+<!--        <input (change)="addToArr($event, cat, categories)" type="checkbox" name="categories"> {{cat.genre}}-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div *ngIf="allPossible" class="panel">-->
+<!--      <h2> Select tags for title </h2>-->
+<!--      <div *ngFor="let tag of allPossible.tags" style="margin-top: 1px; border: black 1px solid">-->
+<!--        <input (change)="addToArr($event, tag, tags)" type="checkbox" name="tags"> {{tag.tag}}-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div *ngIf="allPossible" class="panel">-->
+<!--      <h2> Select serials for title</h2>-->
+
+<!--      <div *ngFor="let ser of allPossible.serials" style="margin-top: 1px; border: black 1px solid">-->
+<!--        <input (change)="addToArr($event, ser, serials)" type="checkbox" name="serials"> {{ser.serialName}}-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="errMsg" *ngIf="titleNameEmpty"><strong> Title name cannot be empty</strong></div>-->
+<!--  <div class="errMsg" *ngIf="descriptionEmpty"><strong> Description cannot be empty</strong></div>-->
+<!--  <div class="errMsg" *ngIf="titleImageEmpty"><strong> Title image cannot be empty</strong></div>-->
+<!--  <div class="errMsg" *ngIf="tagsEmpty"><strong> Tags list cannot be empt</strong>y</div>-->
+<!--  <div class="errMsg" *ngIf="categoriesEmpty"><strong> Categories list cannot be empty</strong></div>-->
+<!--  <div class="errMsg" *ngIf="contentImagesEmpty"><strong> Content images cannot be empty</strong></div>-->
+<!--  <button class="addTitle" (click)="addPost()">Add Post</button>-->
+
+
+<!--</div>-->
+
+<div class="px-2 py-2">
+  <div class="row g-1">
+    <div *ngIf="allPossible" class="mb-0">
+
+      <div *ngIf="allPossible.categories" class=" col-4 btn-group">
+        <button type="button"
+                class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+          Categories list
+        </button>
+        <ul class="w-100 dropdown-menu">
+          <li *ngFor="let cat of allPossible.categories"
+              class="list-group-item d-flex justify-content-between" style="border: none">
+            <div (change)="addToArr($event, cat, tags)">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminateCats"
+                     name="categories">
+              <label class="form-check-label text-secondary" for="flexCheckIndeterminateCats">
+                {{cat.genre}}
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="!allPossible.categories" class="w-100 btn-group">
+        <button type="button" class="w-100 btn btn-danger"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+          No categories.
+        </button>
+      </div>
+      <div *ngIf="allPossible.tags" class="col-4 btn-group">
+        <button type="button"
+                class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+          Tags list
+        </button>
+        <ul class="w-100 dropdown-menu">
+          <li *ngFor="let cat of allPossible.tags"
+              class="list-group-item d-flex justify-content-between" style="border: none">
+            <div (change)="addToArr($event, cat, tags)">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminateTags"
+                     name="categories">
+              <label class="form-check-label text-secondary" for="flexCheckIndeterminateTags">
+                {{cat.tag}}
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="!allPossible.tags" class="w-100 btn-group">
+        <button type="button" class="w-100 btn btn-danger"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+          No tags.
+        </button>
+      </div>
+      <div *ngIf="allPossible.serials" class="col-4 btn-group">
+        <button type="button"
+                class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+          Serials list
+        </button>
+        <ul class="w-100 dropdown-menu">
+          <li *ngFor="let cat of allPossible.serials"
+              class="list-group-item d-flex justify-content-between" style="border: none">
+            <div (change)="addToArr($event, cat, serials)">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminateSerials"
+                     name="categories">
+              <label class="form-check-label text-secondary" for="flexCheckIndeterminateSerials">
+                {{cat.serialName}}
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="!allPossible.serials" class="w-100 btn-group">
+        <button type="button" class="w-100 btn btn-danger"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+          No serials.
+        </button>
+      </div>
     </div>
 
-    <div class="custom-form">
-      <br><br>
-      <div>Select title image</div>
+
+    <div class="custom-form col-12">
+      <label for="lastName" class="form-label mb-1">Select title image</label>
       <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
       <div>
         <div class="custom-image-container-main">
@@ -38,47 +181,46 @@
       </div>
     </div>
 
-    <div class="custom-form">
-      <div>Select content images. Add as much as necessary.</div>
+    <div class="custom-form col-12">
+      <label for="lastName" class="form-label mb-1">Select content images. Add as much as necessary.</label>
       <div class="custom-image-container">
         <label id="add-img-label" for="add-single-img">+</label>
         <input type="file" id="add-single-img" (change)="addNewFile($event)" accept="image/jpeg"/>
       </div>
       <input type="file" id="image-input" name="photos" accept="image/jpeg" multiple/>
     </div>
+
+    <div class="col-sm-12">
+      <label class="form-label mb-1">Select type</label>
+      <select *ngIf="allPossible" class="form-select form-select-lg" [(ngModel)]="type">
+        <option *ngFor="let t of allPossible.types">{{t.typeName}}</option>
+      </select>
+    </div>
+
+    <div class="col-sm-6">
+      <label for="firstName" class="form-label mb-1">Title name</label>
+      <input type="text" class="form-control" id="firstName">
+    </div>
+
+    <div class="col-sm-6">
+      <label for="lastName" class="form-label mb-1">Original author</label>
+      <input type="text" class="form-control" id="lastName">
+    </div>
+
+    <div class="col-12">
+      <label class="form-label mb-1">Description</label>
+      <textarea style="height: 200px" class="w-100"></textarea>
+    </div>
+
+
+    <div class="errMsg" *ngIf="titleNameEmpty"><strong> Title name cannot be empty</strong></div>
+    <div class="errMsg" *ngIf="descriptionEmpty"><strong> Description cannot be empty</strong></div>
+    <div class="errMsg" *ngIf="titleImageEmpty"><strong> Title image cannot be empty</strong></div>
+    <div class="errMsg" *ngIf="tagsEmpty"><strong> Tags list cannot be empt</strong>y</div>
+    <div class="errMsg" *ngIf="categoriesEmpty"><strong> Categories list cannot be empty</strong></div>
+    <div class="errMsg" *ngIf="contentImagesEmpty"><strong> Content images cannot be empty</strong></div>
+    <div class="col-12">
+      <button class="w-100 btn-lg" (click)="addPost()">Add Post</button>
+    </div>
   </div>
-
-  <div class="all-possible-content-panel">
-    <div *ngIf="allPossible" class="panel">
-      <h2> Select categories for title</h2>
-      <div *ngFor="let cat of allPossible.categories" style="margin-top: 1px; border: black 1px solid">
-        <input (change)="addToArr($event, cat, categories)" type="checkbox" name="categories"> {{cat.genre}}
-      </div>
-    </div>
-
-    <div *ngIf="allPossible" class="panel">
-      <h2> Select tags for title </h2>
-      <div *ngFor="let tag of allPossible.tags" style="margin-top: 1px; border: black 1px solid">
-        <input (change)="addToArr($event, tag, tags)" type="checkbox" name="tags"> {{tag.tag}}
-      </div>
-    </div>
-
-    <div *ngIf="allPossible" class="panel">
-      <h2> Select serials for title</h2>
-
-      <div *ngFor="let ser of allPossible.serials" style="margin-top: 1px; border: black 1px solid">
-        <input (change)="addToArr($event, ser, serials)" type="checkbox" name="serials"> {{ser.serialName}}
-      </div>
-    </div>
-
-  </div>
-  <div class="errMsg" *ngIf="titleNameEmpty"><strong> Title name cannot be empty</strong></div>
-  <div class="errMsg" *ngIf="descriptionEmpty"><strong> Description cannot be empty</strong></div>
-  <div class="errMsg" *ngIf="titleImageEmpty"><strong> Title image cannot be empty</strong></div>
-  <div class="errMsg" *ngIf="tagsEmpty"><strong> Tags list cannot be empt</strong>y</div>
-  <div class="errMsg" *ngIf="categoriesEmpty"><strong> Categories list cannot be empty</strong></div>
-  <div class="errMsg" *ngIf="contentImagesEmpty"><strong> Content images cannot be empty</strong></div>
-  <button class="addTitle" (click)="addPost()">Add Post</button>
-
-
 </div>

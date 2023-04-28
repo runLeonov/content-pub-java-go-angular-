@@ -33,4 +33,19 @@ export class ProfileViewComponent {
   }
 
 
+  getLimitComments() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.httpclient.get<Title[]>(`${environment.serverUrl}/account/commented/${id}`).subscribe(titles => {
+      this.commentedTitles = titles;
+    });
+  }
+
+  getReleaseYear(u: User): string {
+    return new Date(u.creationDate).toLocaleDateString();
+  }
+
+  ngOnInit(): void {
+    this.getLimitComments();
+  }
+
 }

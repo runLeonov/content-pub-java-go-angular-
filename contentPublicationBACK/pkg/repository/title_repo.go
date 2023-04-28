@@ -52,6 +52,7 @@ func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 			return db.Order("creation_date desc")
 		}).
 		Preload(commentUserTableE).
+		Where("released = true").
 		First(&title)
 	return title, nil
 }
@@ -65,6 +66,7 @@ func (r *TitleRepo) GetImagesByTitleId(id int) ([]app.Image, error) {
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
 		Preload(likeTableE).
+		Where("released = true").
 		First(&title)
 	return title.Content.Images, nil
 }
@@ -102,7 +104,7 @@ func (r *TitleRepo) UnLikeById(like app.Like) error {
 func (r *TitleRepo) GetRandom() (app.Title, error) {
 	var title app.Title
 	r.db.Debug().
-		Raw("SELECT * FROM titles ORDER BY RAND() LIMIT 1").
+		Raw("SELECT * FROM titles WHERE released = true ORDER BY RAND() LIMIT 1 ").
 		Preload(categoryTableE).
 		Preload(serialTableE).
 		Preload(tagTableE).
@@ -136,6 +138,7 @@ func (r *TitleRepo) GetAllTitlesByNameRegex(name string) ([]app.Title, error) {
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
 		Preload(likeTableE).
+		Where("released = true").
 		Where("title_name LIKE %?%", name).Find(&titles)
 	return titles, nil
 }
@@ -152,6 +155,7 @@ func (r *TitleRepo) GetTitlesByCategories(ids []uint) ([]app.Title, error) {
 		Preload(serialTableE).
 		Preload(tagTableE).
 		Preload(titleContentTableE).
+		Where("released = true").
 		Where("titles.id IN (SELECT title_id FROM titles_categories JOIN categories t on titles_categories.category_id = t.id WHERE t.id IN ?)", ids).
 		Find(&titles)
 	return titles, nil
@@ -164,6 +168,7 @@ func (r *TitleRepo) GetTitlesByTags(ids []uint) ([]app.Title, error) {
 		Preload(serialTableE).
 		Preload(tagTableE).
 		Preload(titleContentTableE).
+		Where("released = true").
 		Where("titles.id IN (SELECT title_id FROM titles_tags JOIN tags t on titles_tags.tag_id = t.id WHERE t.id IN ?)", ids).
 		Find(&titles)
 
@@ -177,6 +182,7 @@ func (r *TitleRepo) GetTitlesBySerials(ids []uint) ([]app.Title, error) {
 		Preload(serialTableE).
 		Preload(tagTableE).
 		Preload(titleContentTableE).
+		Where("released = true").
 		Where("titles.id IN (SELECT title_id FROM titles_serials JOIN serials t on titles_serials.serial_id = t.id WHERE t.id IN ?)", ids).
 		Find(&titles)
 	return titles, nil

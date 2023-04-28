@@ -12,9 +12,10 @@ export class User {
   public creationDate: Date = new Date();
   public lastName: string;
   public firstName: string;
+  public banned: boolean;
 
 
-  constructor(id: number, email: string, name: string, role: string, img64: string, likes: Like[], comments: Comment[], creationDate: Date, lastName: string, firstName: string) {
+  constructor(id: number, email: string, name: string, role: string, img64: string, likes: Like[], comments: Comment[], creationDate: Date, lastName: string, firstName: string, banned: boolean) {
     this.id = id;
     this.email = email;
     this.nickName = name;
@@ -25,5 +26,6 @@ export class User {
     this.creationDate = creationDate;
     this.lastName = lastName;
     this.firstName = firstName;
+    this.banned = banned;
   }
 }

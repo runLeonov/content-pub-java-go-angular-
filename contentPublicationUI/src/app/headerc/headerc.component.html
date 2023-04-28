@@ -1,13 +1,31 @@
-<header>
-  <div class="head-buttons left-buttons">
-    <a routerLink="/main">Main page</a>
-    <a routerLink="/titles">Manga</a>
-    <a routerLink="">Manhwa</a>
-    <a routerLink="/random">Random manga or manhwa</a>
-    <a routerLink="/title/create">Publication</a>
+<header class="navbar bg-gr navbar-expand-lg navbar-light bg-light">
+  <div style="width:60%" class="container">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/titles">Check all candidates</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/random">Random candidate</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/title/create">Publication</a>
+        </li>
+      </ul>
+    </div>
 
-    <a *ngIf="user" class="user-img" [style.background-image]="'url(' + user.img64 + ')'" routerLink="/profile"> </a>
-    <a *ngIf="!user" routerLink="/sing-up">Sing in</a>
-    <span *ngIf="user" (click)="logOut()">Sign out</span>
+    <div class="d-flex align-items-center">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="user" (click)="logOut()">Log out</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="user"  routerLink="/profile">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="!user" routerLink="/sing-up">Sing in</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </header>
