@@ -8,8 +8,8 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/random">Random candidate</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/title/create">Publication</a>
+        <li class="nav-item" *ngIf="user">
+          <a *ngIf="user.role === 'ADMIN'"  class="nav-link" routerLink="/title/create">Publication</a>
         </li>
       </ul>
     </div>

@@ -1,7 +1,20 @@
 <div *ngIf="user" class="row p-3 pt-4 pb-5 g-3">
   <div class="col-md-3 col-lg-3 order-md-first">
     <img [src]="user.img64" alt="Admin" class="w-100 bg-wgr">
-    <div class="row g-1 p-2 bg-wgr">
+
+    <div class="mt-1">
+      <div *ngIf="user.role == 'USER'" class="row g-0">
+        <button (click)="beAuthorRequest()" class="btn-lg w-100 bg-danger not-border-bottom">Your are not author<br> <small>Click to make request</small> </button>
+      </div>
+      <div *ngIf="user.role == 'PRE_AUTHOR'" class="row g-0">
+        <button (click)="beSimpleUserRequest()" class="btn-lg w-100 bg-warning not-border-bottom">Checking request by admin... <br> <small> Cancel?</small></button>
+      </div>
+      <div *ngIf="user.role == 'AUTHOR'" class="row g-0">
+        <button (click)="beSimpleUserRequest()" class="btn-lg w-100 bg-gr not-border-bottom">You have author permission<br> <small> Cancel?</small></button>
+      </div>
+    </div>
+
+    <div class="row g-0 p-2 bg-wgr">
       <div class="col-sm-6">
         <strong class="title">First name</strong>
         <input type="text" class="form-control p-1" id="firstName"
@@ -15,7 +28,7 @@
       </div>
 
       <div class="col-sm-6">
-        <strong  class="title">Username</strong>
+        <strong class="title">Username</strong>
         <div class="input-group has-validation">
           <span class="input-group-text p-1">@</span>
           <input type="text" class="form-control p-1" id="username"

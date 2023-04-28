@@ -9,9 +9,9 @@ import {Comment, Title} from "../title";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css', '../title-view/title-view.component.css', '../titles/titles.component.css']
+  styleUrls: ['./profile.component.css', '../title-view/title-view.component.css']
 })
-export class ProfileComponent  implements OnInit {
+export class ProfileComponent implements OnInit {
   user: User | undefined;
   likedTitles: Title[] | undefined
   commentedTitles: Title[] | undefined
@@ -28,9 +28,23 @@ export class ProfileComponent  implements OnInit {
       this.likedTitles = titles;
     });
   }
+
   getLimitComments() {
     this.httpclient.get<Title[]>(`${environment.serverUrl}/account/commented-limit`).subscribe(titles => {
       this.commentedTitles = titles;
+    });
+  }
+
+
+  beAuthorRequest() {
+    this.httpclient.post(`${environment.serverUrl}/account/request/author`, {}).subscribe(() => {
+      document.location.reload();
+    });
+  }
+
+  beSimpleUserRequest() {
+    this.httpclient.post(`${environment.serverUrl}/account/request/user`, {}).subscribe(() => {
+      document.location.reload();
     });
   }
 

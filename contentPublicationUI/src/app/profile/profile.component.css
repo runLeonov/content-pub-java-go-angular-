@@ -1,3 +1,10 @@
+button {
+  background-color: green;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
 
 
 .likes-inner {
