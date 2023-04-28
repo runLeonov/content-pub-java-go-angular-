@@ -61,6 +61,29 @@ public class Mappers {
         }
     }
 
+
+    public static final class UserAuthMapper implements RowMapper<User> {
+        private JdbcTemplate jdbcTemplate;
+
+        public UserAuthMapper(JdbcTemplate jdbcTemplate) {
+            this.jdbcTemplate = jdbcTemplate;
+        }
+
+        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+            User user = new User();
+            user.setID(rs.getLong("id"));
+            user.setName(rs.getString("name"));
+            user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
+            user.setImg(rs.getString("img"));
+            user.setRole(rs.getString("role"));
+            user.setLastName(rs.getString("last_name"));
+            user.setFirstName(rs.getString("first_name"));
+            user.setBanned(rs.getBoolean("banned"));
+            return user;
+        }
+    }
+
     public static final class UserMapper implements RowMapper<User> {
         private JdbcTemplate jdbcTemplate;
 

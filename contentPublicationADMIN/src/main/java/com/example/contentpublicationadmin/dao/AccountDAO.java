@@ -37,6 +37,11 @@ public class AccountDAO {
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new Mappers.TitleUserMapper(jdbcTemplate));
     }
 
+    public User getUserByName(String name) {
+        String sql = "SELECT * FROM users WHERE name=? LIMIT 1";
+        return jdbcTemplate.queryForObject(sql, new Object[]{name}, new Mappers.UserAuthMapper(jdbcTemplate));
+    }
+
     public List<User> getFilteredUsers(String filter) {
         String sql = "SELECT * FROM users WHERE name LIKE ?";
         return jdbcTemplate.query(sql, new Object[]{'%' + filter + '%'}, new Mappers.UserMapper(jdbcTemplate));
@@ -50,6 +55,11 @@ public class AccountDAO {
     public void deleteUsersComment(Long commentId) {
         String sql = "DELETE FROM comments WHERE id = ?";
         jdbcTemplate.update(sql, commentId);
+    }
+
+    public void addUserAdmin(User user) {
+        String sql = "INSERT INTO users ( email, password, name, role, last_name, first_name) VALUES (?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getName(), user.getRole(), user.getLastName(), user.getFirstName());
     }
 
     public void addUser(User user) {

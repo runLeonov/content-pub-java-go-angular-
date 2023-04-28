@@ -6,16 +6,24 @@ import com.example.contentpublicationadmin.entity.Title;
 import com.example.contentpublicationadmin.entity.User;
 import com.example.contentpublicationadmin.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
-public class AccountService implements IAccountService {
+public class AccountService implements IAccountService, UserDetailsService {
 
     @Autowired
     private AccountDAO accountDAO;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<User> getAllUsers() {
@@ -41,7 +49,10 @@ public class AccountService implements IAccountService {
 
     @Override
     public User createUser(User user) {
-        accountDAO.addUser(user);
+        user.setRole("ADMIN");
+        user.setCreationDate(LocalDateTime.now());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        accountDAO.addUserAdmin(user);
         return user;
     }
 
@@ -69,5 +80,10 @@ public class AccountService implements IAccountService {
     public User banOrUnbanUser(User user) {
         accountDAO.banOrUnbanUserById(user);
         return accountDAO.getUserById(user.getID());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return accountDAO.getUserByName(username);
     }
 }

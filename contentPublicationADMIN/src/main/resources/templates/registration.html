@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+
+        .main-head {
+            height: 150px;
+            background: #FFF;
+
+        }
+
+        .sidenav {
+            height: 100%;
+            background-color: #000;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+
+        .main {
+            padding: 0px 10px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            .login-form {
+                margin-top: 10%;
+            }
+
+            .register-form {
+                margin-top: 10%;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .main {
+                margin-left: 40%;
+            }
+
+            .sidenav {
+                width: 40%;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+            }
+
+            .login-form {
+                margin-top: 60%;
+            }
+
+            .register-form {
+                margin-top: 20%;
+            }
+        }
+
+
+        .login-main-text {
+            margin-top: 25%;
+            padding: 60px;
+            color: #fff;
+        }
+
+        .login-main-text h2 {
+            font-weight: 300;
+        }
+
+        .btn-black {
+            background-color: #000 !important;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>Leonov Oleksandr's PJ</h2>
+        <h2>Application<br> Login Page</h2>
+        <p>Login or register from here to access.</p>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form th:object="${usr}" th:action="@{/registration}" method="post">
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input type="text" th:field="*{name}" name="name" class="form-control" placeholder="User name">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+
+
+                <div class="g-1 p-0 d-flex">
+                    <div class="col-6 p-0 form-group">
+                        <label>Last name</label>
+                        <input type="text" th:field="*{lastName}" name="name" class="form-control"
+                               placeholder="Last name">
+                    </div>
+                    <div class=" col-6 p-0 form-group">
+                        <label>First name</label>
+                        <input type="text" th:field="*{firstName}" name="name" class="form-control"
+                               placeholder="First name">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" th:field="*{email}" name="name" class="form-control" placeholder="Email">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" id="password-check" th:field="*{password}"
+                           class="form-control" placeholder="Password">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" onclick="myFunction()">
+                    <label class="form-check-label" >
+                        Show password
+                    </label>
+                    <script>
+                        function myFunction() {
+                            let x = document.getElementById("password-check");
+                            x.type === "password" ? x.type = "text" : x.type = "password";
+                        }
+                    </script>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-black">Create admin user</button>
+                <a type="submit" th:href="@{/login}" class="btn btn-secondary">Login page</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

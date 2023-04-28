@@ -47,6 +47,11 @@ public class TitleController {
         return new ModelAndView("titles", model);
     }
 
+    @GetMapping("")
+    public ModelAndView redirectTitles(ModelMap model) {
+        return titles(model);
+    }
+
     @GetMapping("/f")
     public ModelAndView filterTitles(@RequestParam(name = "filter", required = false) String filter, ModelMap model) {
         filter = filter.trim().toLowerCase();
