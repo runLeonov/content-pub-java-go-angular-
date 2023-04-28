@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AccountService implements IAccountService, UserDetailsService {
@@ -85,10 +86,7 @@ public class AccountService implements IAccountService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        try {
-            return accountDAO.getUserByName(username);
-        } catch (EmptyResultDataAccessException e) {
-            throw new UsernameNotFoundException("Not found");
-        }
+        UserDetails user = accountDAO.getUserByName(username);
+        return Objects.isNull(user) ? new User() : user;
     }
 }

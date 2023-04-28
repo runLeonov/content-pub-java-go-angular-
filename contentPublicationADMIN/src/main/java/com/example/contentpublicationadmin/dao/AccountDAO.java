@@ -2,6 +2,7 @@ package com.example.contentpublicationadmin.dao;
 
 import com.example.contentpublicationadmin.entity.Title;
 import com.example.contentpublicationadmin.entity.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,33 +19,57 @@ public class AccountDAO {
     }
 
     public List<User> getAllUsers() {
-        String sql = "SELECT * FROM users";
-        return jdbcTemplate.query(sql, new Mappers.UserMapper(jdbcTemplate));
+        String sql = "SELECT * FROM users WHERE role != 'ADMIN'";
+        try {
+            return jdbcTemplate.query(sql, new Mappers.UserMapper(jdbcTemplate));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public List<User> findAllByID() {
-        String sql = "SELECT * FROM users ORDER BY id DESC ";
-        return jdbcTemplate.query(sql, new Mappers.UserMapper(jdbcTemplate));
+        String sql = "SELECT * FROM users WHERE role != 'ADMIN' ORDER BY id DESC ";
+        try {
+            return jdbcTemplate.query(sql, new Mappers.UserMapper(jdbcTemplate));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public List<User> findAllByDate() {
-        String sql = "SELECT * FROM users ORDER BY creation_date DESC ";
-        return jdbcTemplate.query(sql, new Mappers.UserMapper(jdbcTemplate));
+        String sql = "SELECT * FROM users WHERE role != 'ADMIN' ORDER BY creation_date DESC ";
+        try {
+            return jdbcTemplate.query(sql, new Mappers.UserMapper(jdbcTemplate));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public User getUserById(Long id) {
-        String sql = "SELECT * FROM users WHERE id=?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new Mappers.TitleUserMapper(jdbcTemplate));
+        String sql = "SELECT * FROM users WHERE id=? WHERE role != 'ADMIN'";
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{id}, new Mappers.TitleUserMapper(jdbcTemplate));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public User getUserByName(String name) {
-        String sql = "SELECT * FROM users WHERE name=? LIMIT 1";
-        return jdbcTemplate.queryForObject(sql, new Object[]{name}, new Mappers.UserAuthMapper(jdbcTemplate));
+        String sql = "SELECT * FROM users WHERE name=?  LIMIT 1";
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{name}, new Mappers.UserAuthMapper(jdbcTemplate));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public List<User> getFilteredUsers(String filter) {
         String sql = "SELECT * FROM users WHERE name LIKE ?";
-        return jdbcTemplate.query(sql, new Object[]{'%' + filter + '%'}, new Mappers.UserMapper(jdbcTemplate));
+        try {
+            return jdbcTemplate.query(sql, new Object[]{'%' + filter + '%'}, new Mappers.UserMapper(jdbcTemplate));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public void banOrUnbanUserById(User user) {
