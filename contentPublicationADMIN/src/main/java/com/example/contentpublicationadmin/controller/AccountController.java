@@ -83,6 +83,20 @@ public class AccountController {
         return new ModelAndView("redirect:/users/" + id);
     }
 
+    @PostMapping("/{id}/make-author")
+    public ModelAndView giveAuthorRole(@PathVariable Long id, ModelMap model) {
+        User user = userService.getUserById(id);
+        model.addAttribute("user", userService.updateUserRole("AUTHOR" ,user));
+        return new ModelAndView("redirect:/users/" + id);
+    }
+
+    @PostMapping("/{id}/cancel-author")
+    public ModelAndView cancelAuthorRole(@PathVariable Long id, ModelMap model) {
+        User user = userService.getUserById(id);
+        model.addAttribute("user", userService.updateUserRole("USER" ,user));
+        return new ModelAndView("redirect:/users/" + id);
+    }
+
     @PostMapping("/{id}/comment/{commentId}")
     public ModelAndView deleteCommentByUser(ModelMap model, @PathVariable Long commentId, @PathVariable Long id) {
         User user = userService.getUserById(id);

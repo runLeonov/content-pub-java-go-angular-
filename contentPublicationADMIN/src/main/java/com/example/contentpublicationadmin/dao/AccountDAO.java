@@ -46,7 +46,7 @@ public class AccountDAO {
     }
 
     public User getUserById(Long id) {
-        String sql = "SELECT * FROM users WHERE id=? WHERE role != 'ADMIN'";
+        String sql = "SELECT * FROM users WHERE id=? AND role != 'ADMIN'";
         try {
             return jdbcTemplate.queryForObject(sql, new Object[]{id}, new Mappers.TitleUserMapper(jdbcTemplate));
         } catch (EmptyResultDataAccessException e) {
@@ -90,6 +90,11 @@ public class AccountDAO {
     public void addUser(User user) {
         String sql = "INSERT INTO users (name) VALUES (?)";
         jdbcTemplate.update(sql, user.getName());
+    }
+
+    public void giveRoleForUser(String role, User user) {
+        String sql = "UPDATE users SET role=? WHERE id=?";
+        jdbcTemplate.update(sql, role, user.getID());
     }
 
     public void updateUser(User user) {

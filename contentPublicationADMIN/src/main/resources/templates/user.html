@@ -46,10 +46,10 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link " th:href="@{/titles/}">Titles</a>
+                        <a class="nav-link" th:href="@{/titles/released}">Titles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " th:href="@{/titles/}">Unreleased
+                        <a class="nav-link" th:href="@{/titles/not-released}">Unreleased
                             titles</a>
                     </li>
                     <li class="nav-item">
@@ -65,7 +65,7 @@
                         <a class="nav-link" th:href="@{/comments/}">Comments</a>
                     </li>
                     <li class="nav-item">
-                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Log out</a>
+                        <a href="javascript: document.logoutForm.submit()" class="nav-link">Log out</a>
                     </li>
                     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                         <input hidden type="submit" value="Sign Out"/>
@@ -90,7 +90,8 @@
                         <a th:href="${'/titles/' + comm.getTitleContent().getTitle().getID()}"
                            style="text-decoration: none">
                             <div>
-                                <h6 th:if="${comm.getCreationDate() != null}" th:text="${#temporals.format(comm.getCreationDate(), 'dd-MM-yyyy HH:mm')}"
+                                <h6 th:if="${comm.getCreationDate() != null}"
+                                    th:text="${#temporals.format(comm.getCreationDate(), 'dd-MM-yyyy HH:mm')}"
                                     class="my-0"></h6>
                                 <h6 th:unless="${comm.getCreationDate() != null}" class="my-0">[date parse error]</h6>
                                 <small th:text="${comm.getCommentVal()}" class="text-muted"></small>
@@ -158,8 +159,26 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
-                        <form method="post" th:action="${'/users/' + user.getID() +'/ban'}">
+                    <div th:if="${user.role == 'PRE_AUTHOR' || user.role == 'AUTHOR'}" class="col-12">
+                        <form class="mb-0" th:if="${user.role == 'AUTHOR'}" method="post"
+                              th:action="${'/users/' + user.getID() +'/cancel-author'}">
+                            <label class="mb-2">User has AUTHOR role. Click to cancel.</label>
+                            <button class="w-100 btn btn-success btn-lg form-control"
+                                    type="submit">Cancel author role.
+                            </button>
+                        </form>
+                        <form class="mb-0" th:if="${user.role == 'PRE_AUTHOR'}" method="post"
+                              th:action="${'/users/' + user.getID() +'/make-author'}">
+                            <label class="mb-2">User wants to be AUTHOR. Click to make.</label>
+                            <button class="w-100 btn btn-warning btn-lg form-control"
+                                    type="submit">Give author role
+                            </button>
+                        </form>
+                    </div>
+
+
+                    <div class="mt-1 col-12">
+                        <form  method="post" th:action="${'/users/' + user.getID() +'/ban'}">
                             <button th:if="${!user.isBanned()}" class="w-100 btn btn-danger btn-lg form-control"
                                     type="submit">Ban user
                             </button>

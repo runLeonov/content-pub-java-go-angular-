@@ -21,6 +21,16 @@ public class TitleDAO {
         return jdbcTemplate.query(sql, new Mappers.TitleMapper(jdbcTemplate));
     }
 
+    public List<Title> findAllReleased() {
+        String sql = "SELECT * FROM titles WHERE released = true";
+        return jdbcTemplate.query(sql, new Mappers.TitleMapper(jdbcTemplate));
+    }
+
+    public List<Title> findAllUnReleased() {
+        String sql = "SELECT * FROM titles WHERE released = false";
+        return jdbcTemplate.query(sql, new Mappers.TitleMapper(jdbcTemplate));
+    }
+
     public List<Title> findAllByID() {
         String sql = "SELECT * FROM titles ORDER BY id DESC ";
         return jdbcTemplate.query(sql, new Mappers.TitleMapper(jdbcTemplate));

@@ -40,9 +40,17 @@ public class TitleController {
         return new ModelAndView("title", model);
     }
 
-    @GetMapping("/")
+    @GetMapping("/released")
     public ModelAndView titles(ModelMap model) {
-        List<Title> titles = service.getAllTitles();
+        List<Title> titles = service.getAllTitlesReleased();
+        model.addAttribute("titles", titles);
+        return new ModelAndView("titles", model);
+    }
+
+
+    @GetMapping("/not-released")
+    public ModelAndView titlesUnReleased(ModelMap model) {
+        List<Title> titles = service.getAllTitlesUnReleased();
         model.addAttribute("titles", titles);
         return new ModelAndView("titles", model);
     }

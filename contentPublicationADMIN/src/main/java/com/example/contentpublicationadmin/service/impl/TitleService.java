@@ -22,6 +22,16 @@ public class TitleService implements ITitleService {
     }
 
     @Override
+    public List<Title> getAllTitlesReleased() {
+        return titleDAO.findAllReleased();
+    }
+
+    @Override
+    public List<Title> getAllTitlesUnReleased() {
+        return titleDAO.findAllUnReleased();
+    }
+
+    @Override
     public List<Title> getAllFilteredTitles(String filter) {
         return titleDAO.findFilteredAll(filter);
     }

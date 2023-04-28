@@ -9,6 +9,10 @@ public interface ITitleService {
 
     List<Title> getAllTitles();
 
+    List<Title> getAllTitlesReleased();
+
+    List<Title> getAllTitlesUnReleased();
+
     List<Title> getAllUserTitles(Long userId);
 
     List<Title> getAllFilteredTitles(String filter);

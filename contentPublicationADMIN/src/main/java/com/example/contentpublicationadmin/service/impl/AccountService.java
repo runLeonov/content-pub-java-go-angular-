@@ -59,6 +59,12 @@ public class AccountService implements IAccountService, UserDetailsService {
     }
 
     @Override
+    public User updateUserRole(String role, User user) {
+        accountDAO.giveRoleForUser(role, user);
+        return user;
+    }
+
+    @Override
     public User updateUser(User user) {
         accountDAO.updateUser(user);
         return user;

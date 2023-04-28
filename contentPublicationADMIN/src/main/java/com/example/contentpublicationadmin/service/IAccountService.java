@@ -25,4 +25,6 @@ public interface IAccountService {
     User deleteCommentByUser(User user, Long commentId);
 
     User banOrUnbanUser(User user);
+
+    User updateUserRole(String role, User user);
 }
