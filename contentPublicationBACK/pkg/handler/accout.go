@@ -30,6 +30,30 @@ func (h *Handler) getUserInfoById(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 }
 
+func (h *Handler) beAuthor(c *gin.Context) {
+	tok, err := c.Cookie("jwt")
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.Authorization.ParseToken(tok)
+	err = h.services.Account.ChangeRole("PRE_AUTHOR", id)
+	c.JSON(http.StatusOK, err)
+}
+
+func (h *Handler) beUser(c *gin.Context) {
+	tok, err := c.Cookie("jwt")
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.Authorization.ParseToken(tok)
+	err = h.services.Account.ChangeRole("USER", id)
+	c.JSON(http.StatusOK, err)
+}
+
 func (h *Handler) changeUserInfo(c *gin.Context) {
 	var inputUser app.User
 
@@ -85,6 +109,16 @@ func (h *Handler) getCommentedTitles(c *gin.Context) {
 	id, err := h.services.Authorization.ParseToken(tok)
 	titles, err := h.services.Account.GetCommentedTitlesByUserId(id)
 
+	c.JSON(http.StatusOK, titles)
+}
+
+func (h *Handler) getCommentedTitlesForUser(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid params")
+		return
+	}
+	titles, err := h.services.Account.GetCommentedTitlesByUserId(id)
 	c.JSON(http.StatusOK, titles)
 }
 

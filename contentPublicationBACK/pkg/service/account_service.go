@@ -43,6 +43,19 @@ func (s *AccountService) GetLikedTitlesByUserId(id int) ([]app.Title, error) {
 	return s.repoAcc.GetUserLikes(id)
 }
 
+func (s *AccountService) ChangeRole(role string, id int) error {
+	user, err := s.repoAcc.GetUserInfo(id)
+
+	user.Role = role
+	err = s.repoAcc.SaveUserInfo(user)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+}
+
 func (s *AccountService) GetLikedTitlesByUserIdLimit(id int) ([]app.Title, error) {
 	return s.repoAcc.GetUserLikesLimit(id)
 }

@@ -36,8 +36,15 @@ func (h *Handler) InitRouters() *gin.Engine {
 			account.GET("/profile-view/:id", h.getUserInfoById)
 			account.GET("/likes", h.getLikedTitles)
 			account.GET("/commented", h.getCommentedTitles)
+			account.GET("/commented/:id", h.getCommentedTitlesForUser)
 			account.GET("/likes-limit", h.getLikedTitlesLimit)
 			account.GET("/commented-limit", h.getCommentedTitlesLimit)
+
+			request := account.Group("/request")
+			{
+				request.POST("/author", h.beAuthor)
+				request.POST("/user", h.beUser)
+			}
 		}
 
 		titles := mainRout.Group("/titles")

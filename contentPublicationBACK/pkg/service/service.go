@@ -20,6 +20,7 @@ type Account interface {
 	GetLikedTitlesByUserIdLimit(id int) ([]app.Title, error)
 	GetCommentedTitlesByUserId(id int) ([]app.Title, error)
 	GetCommentedTitlesByUserIdLimit(id int) ([]app.Title, error)
+	ChangeRole(role string, id int) error
 }
 
 type Titles interface {

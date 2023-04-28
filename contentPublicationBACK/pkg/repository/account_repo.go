@@ -19,6 +19,7 @@ func (r *AccountRepo) GetUserInfo(id int) (app.User, error) {
 		Preload("Likes", func(db *gorm.DB) *gorm.DB {
 			return db.Limit(1)
 		}).
+		Preload("Comments", "user_id = ?", id).
 		Preload("Likes.TitleContent").
 		Preload("Likes.TitleContent.Title").
 		First(&user).Error
@@ -78,9 +79,7 @@ func (r *AccountRepo) GetUserComments(userId int) ([]app.Title, error) {
 		Preload(commentTableE, "user_id = ?", userId, func(db *gorm.DB) *gorm.DB {
 			return db.Limit(1).Order("creation_date desc")
 		}).
-		Preload(commentUserTableE, "id = ?", userId, func(db *gorm.DB) *gorm.DB {
-			return db.Limit(1)
-		}).
+		Preload(commentUserTableE, "id = ?", userId).
 		Joins("inner join title_contents t on t.title_id = titles.id").
 		Joins("inner join comments l on l.title_content_id = t.id").
 		Joins("inner join users u on u.id = l.user_id").
