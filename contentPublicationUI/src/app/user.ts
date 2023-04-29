@@ -31,3 +31,18 @@ export class User {
     this.publishedTitles = publishedTitles;
   }
 }
+
+export class Subscription {
+  public authorId: number;
+  public subscriberId: number;
+  public author: User;
+  public subscriber: User;
+
+
+  constructor(authorId: number, subscriberId: number, author: User, subscriber: User) {
+    this.authorId = authorId;
+    this.subscriberId = subscriberId;
+    this.author = author;
+    this.subscriber = subscriber;
+  }
+}

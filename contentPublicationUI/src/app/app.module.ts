@@ -29,6 +29,7 @@ import { ProfEditComponent } from './auth-page/prof-edit/prof-edit.component';
 import { CommentsPageComponent } from './profile/comments-page/comments-page.component';
 import { ProfileViewComponent } from './profile/profile-view/profile-view.component';
 import { PublishedComponent } from './profile/published/published.component';
+import { SubscriptionsComponent } from './profile/subscriptions/subscriptions.component';
 
 const appRoutes: Routes = [
   {path: 'titles', component: TitlesComponent},
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
   {path: 'user-comments', component: CommentsPageComponent},
   {path: 'profile-view/:id', component: ProfileViewComponent},
   {path: 'published-titles', component: PublishedComponent},
+  {path: 'user-subscriptions', component: SubscriptionsComponent},
 ]
 
 @Injectable()
@@ -76,7 +78,8 @@ export class CustomInterceptor implements HttpInterceptor {
     ProfEditComponent,
     CommentsPageComponent,
     ProfileViewComponent,
-    PublishedComponent
+    PublishedComponent,
+    SubscriptionsComponent
   ],
   imports: [
     BrowserModule,
