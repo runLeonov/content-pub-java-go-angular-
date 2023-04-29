@@ -19,6 +19,7 @@ func (r *AccountRepo) GetUserInfo(id int) (app.User, error) {
 		Preload("Likes", func(db *gorm.DB) *gorm.DB {
 			return db.Limit(1)
 		}).
+		Preload("Titles").
 		Preload("Comments", "user_id = ?", id).
 		Preload("Likes.TitleContent").
 		Preload("Likes.TitleContent.Title").
@@ -28,6 +29,28 @@ func (r *AccountRepo) GetUserInfo(id int) (app.User, error) {
 
 func (r *AccountRepo) SaveUserInfo(user app.User) error {
 	return r.db.Debug().Save(&user).Error
+}
+
+func (r *AccountRepo) CreateUserSub(subs app.Subscription) (uint, error) {
+	err := r.db.Debug().Create(&subs).Error
+	return subs.SubscriberID, err
+}
+
+func (r *AccountRepo) DeleteUserSub(subs app.Subscription, user app.User) (uint, error) {
+	err := r.db.Debug().Where("subscriber_id = ?", user.ID).Delete(subs).Error
+	return subs.SubscriberID, err
+}
+
+func (r *AccountRepo) GetAuthorSubscribers(authorId uint) ([]app.Subscription, error) {
+	var sub []app.Subscription
+	r.db.Preload("Subscriber").Where("author_id = ?", authorId).Find(&sub)
+	return sub, nil
+}
+
+func (r *AccountRepo) GetUserSubscriptions(userId uint) ([]app.Subscription, error) {
+	var sub []app.Subscription
+	r.db.Preload("Subscriber").Where("subscriber_id = ?", userId).Find(&sub)
+	return sub, nil
 }
 
 func (r *AccountRepo) GetUserLikes(userId int) ([]app.Title, error) {
@@ -84,6 +107,21 @@ func (r *AccountRepo) GetUserComments(userId int) ([]app.Title, error) {
 		Joins("inner join comments l on l.title_content_id = t.id").
 		Joins("inner join users u on u.id = l.user_id").
 		Where("l.user_id = ?", userId).
+		Find(&titles)
+	return titles, nil
+}
+
+func (r *AccountRepo) GetUserPublished(userId int) ([]app.Title, error) {
+	var titles []app.Title
+	r.db.Debug().
+		Distinct().
+		Preload(serialTableE).
+		Preload(categoryTableE).
+		Preload(tagTableE).
+		Preload(imagesTableE).
+		Preload(titleContentTableE).
+		Preload("User").
+		Where("user_id = ?", userId).
 		Find(&titles)
 	return titles, nil
 }

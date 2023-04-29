@@ -180,9 +180,9 @@ func (h *Handler) subscribe(c *gin.Context) {
 	user, err := h.services.Account.GetUserInfo(id)
 
 	subscription := app.Subscription{
-		Author: author,
+		Author:     author,
+		Subscriber: user,
 	}
-	subscription.Subscribers = append(subscription.Subscribers, user)
 
 	uid, err := h.services.Account.CreateSubscription(subscription)
 
@@ -217,7 +217,8 @@ func (h *Handler) unsubscribe(c *gin.Context) {
 	user, err := h.services.Account.GetUserInfo(id)
 
 	subscription := app.Subscription{
-		Author: author,
+		Author:     author,
+		Subscriber: user,
 	}
 
 	uid, err := h.services.Account.DeleteSubscription(subscription, user)

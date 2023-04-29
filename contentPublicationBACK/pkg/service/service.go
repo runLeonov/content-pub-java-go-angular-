@@ -19,6 +19,12 @@ type Account interface {
 	ChangeUserInfo(newUser app.User, id int) (app.User, error)
 	GetLikedTitlesByUserIdLimit(id int) ([]app.Title, error)
 	GetCommentedTitlesByUserId(id int) ([]app.Title, error)
+	CreateSubscription(subs app.Subscription) (uint, error)
+	DeleteSubscription(subs app.Subscription, user app.User) (uint, error)
+	GetAuthorSubscribers(authorId uint) ([]app.Subscription, error)
+	GetUserSubscriptions(userId uint) ([]app.Subscription, error)
+	CheckUserSubForAuthor(authorId uint, user app.User) (bool, error)
+	GetUserPublishedByUserId(userId int) ([]app.Title, error)
 	GetCommentedTitlesByUserIdLimit(id int) ([]app.Title, error)
 	ChangeRole(role string, id int) error
 }

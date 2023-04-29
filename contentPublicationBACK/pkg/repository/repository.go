@@ -18,6 +18,11 @@ type Account interface {
 	SaveUserInfo(user app.User) error
 	GetUserLikesLimit(id int) ([]app.Title, error)
 	GetUserComments(userId int) ([]app.Title, error)
+	CreateUserSub(subs app.Subscription) (uint, error)
+	DeleteUserSub(subs app.Subscription, user app.User) (uint, error)
+	GetAuthorSubscribers(authorId uint) ([]app.Subscription, error)
+	GetUserSubscriptions(userId uint) ([]app.Subscription, error)
+	GetUserPublished(userId int) ([]app.Title, error)
 	GetUserCommentsLimit(userId int) ([]app.Title, error)
 }
 

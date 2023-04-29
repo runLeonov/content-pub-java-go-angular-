@@ -1,6 +1,8 @@
 package contentPublicationBACK
 
-import "time"
+import (
+	"time"
+)
 
 type User struct {
 	ID           int       `json:"id" db:"id"`
@@ -14,7 +16,9 @@ type User struct {
 	CreationDate time.Time `json:"creationDate"`
 	LastName     string    `json:"lastName"`
 	FirstName    string    `json:"firstName"`
-	Banned       bool      `json:"banned" gorm:"default:false"`
+	Titles       []*Title  `json:"publishedTitles" gorm:"foreignKey:UserID"`
+	//Subscriptions []Subscription `gorm:"many2many:subscription_subscribers;"`
+	Banned bool `json:"banned" gorm:"default:false"`
 }
 
 type Like struct {
@@ -32,4 +36,12 @@ type Comment struct {
 	UserID         uint         `json:"userId"`
 	TitleContent   TitleContent `json:"titleContent"`
 	TitleContentID uint         `json:"titleContentId"`
+}
+
+type Subscription struct {
+	//ID          uint
+	AuthorID     uint
+	Author       User
+	Subscriber   User
+	SubscriberID uint
 }

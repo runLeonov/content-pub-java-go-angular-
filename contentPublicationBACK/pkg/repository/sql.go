@@ -47,6 +47,7 @@ func CreateORMModels(config Config) {
 	db.AutoMigrate(app.Like{})
 	db.AutoMigrate(app.StaticType{})
 	db.AutoMigrate(app.Comment{})
+	db.AutoMigrate(app.Subscription{})
 }
 
 func connectToDb(cfg Config) (*gorm.DB, error) {
