@@ -48,6 +48,7 @@ func (r *TitleRepo) GetTitleById(id int) (app.Title, error) {
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
 		Preload(likeTableE).
+		Preload("User").
 		Preload(commentTableE, func(db *gorm.DB) *gorm.DB {
 			return db.Order("creation_date desc")
 		}).
@@ -111,6 +112,7 @@ func (r *TitleRepo) GetRandom() (app.Title, error) {
 		Preload(titleContentTableE).
 		Preload(imagesTableE).
 		Preload(likeTableE).
+		Preload("User").
 		Preload(commentTableE, func(db *gorm.DB) *gorm.DB {
 			return db.Order("creation_date desc")
 		}).

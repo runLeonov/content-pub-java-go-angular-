@@ -112,6 +112,121 @@ func (h *Handler) getCommentedTitles(c *gin.Context) {
 	c.JSON(http.StatusOK, titles)
 }
 
+func (h *Handler) getPublishedTitles(c *gin.Context) {
+	tok, err := c.Cookie("jwt")
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.Authorization.ParseToken(tok)
+	titles, err := h.services.Account.GetUserPublishedByUserId(id)
+
+	c.JSON(http.StatusOK, titles)
+}
+
+func (h *Handler) checkSubscribe(c *gin.Context) {
+	authorId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid params")
+		return
+	}
+
+	tok, err := c.Cookie("jwt")
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.Authorization.ParseToken(tok)
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	author, err := h.services.Account.GetUserInfo(authorId)
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	user, err := h.services.Account.GetUserInfo(id)
+	sub, err := h.services.Account.CheckUserSubForAuthor(uint(author.ID), user)
+
+	c.JSON(http.StatusOK, sub)
+}
+
+func (h *Handler) subscribe(c *gin.Context) {
+	authorId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid params")
+		return
+	}
+
+	tok, err := c.Cookie("jwt")
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.Authorization.ParseToken(tok)
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	author, err := h.services.Account.GetUserInfo(authorId)
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	user, err := h.services.Account.GetUserInfo(id)
+
+	subscription := app.Subscription{
+		Author: author,
+	}
+	subscription.Subscribers = append(subscription.Subscribers, user)
+
+	uid, err := h.services.Account.CreateSubscription(subscription)
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": uid,
+	})
+}
+
+func (h *Handler) unsubscribe(c *gin.Context) {
+	authorId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid params")
+		return
+	}
+
+	tok, err := c.Cookie("jwt")
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.Authorization.ParseToken(tok)
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	author, err := h.services.Account.GetUserInfo(authorId)
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	user, err := h.services.Account.GetUserInfo(id)
+
+	subscription := app.Subscription{
+		Author: author,
+	}
+
+	uid, err := h.services.Account.DeleteSubscription(subscription, user)
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": uid,
+	})
+}
+
 func (h *Handler) getCommentedTitlesForUser(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
