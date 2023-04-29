@@ -12,7 +12,7 @@ import {AppComponent} from "../app.component";
   styleUrls: ['./title-view.component.css']
 })
 export class TitleViewComponent {
-  title: Title = Title.getEmptyTitle();
+  title: Title | undefined;
   user: User | undefined;
   isLiked: boolean = false;
   clickCount: number = 0;
@@ -71,6 +71,7 @@ export class TitleViewComponent {
   }
 
   private addView() {
+    if (!this.title) return;
     let url = `${environment.serverUrl}/titles/add-view/` + this.title.id
     setTimeout(() => {
       this.httpclient.get(url).subscribe(() => {
@@ -92,6 +93,7 @@ export class TitleViewComponent {
       return;
     }
     if (!this.comment.trim()) return;
+    if (!this.title) return;
     this.httpclient.post(`${environment.serverUrl}/titles/comment`, {
       commentVal: this.comment,
       titleContentId: this.title.id,
@@ -116,7 +118,7 @@ export class TitleViewComponent {
         this.clear(interval);
         return;
       }
-      if (this.countSec === 5 && this.clickCount % 2 !== 0) {
+      if (this.title && this.countSec === 5 && this.clickCount % 2 !== 0) {
         if (doLike) {
           this.httpclient.post<Title>(`${environment.serverUrl}/titles/like`, {
             titleContentId: this.title.id,

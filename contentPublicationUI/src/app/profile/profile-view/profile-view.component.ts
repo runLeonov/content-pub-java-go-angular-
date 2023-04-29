@@ -12,14 +12,15 @@ import {environment} from "../../environment";
 })
 export class ProfileViewComponent {
   user: User | undefined;
-  likedTitles: Title[] | undefined
   commentedTitles: Title[] | undefined
+  isSubscribed: boolean = false
 
 
   constructor(private httpclient: HttpClient, private router: Router, private route: ActivatedRoute) {
     let id = this.route.snapshot.paramMap.get('id');
     this.httpclient.get<User>(`${environment.serverUrl}/account/profile-view/${id}`).subscribe(user => {
       this.user = user
+      this.checkSubscribe();
     });
   }
 
@@ -38,6 +39,30 @@ export class ProfileViewComponent {
     this.httpclient.get<Title[]>(`${environment.serverUrl}/account/commented/${id}`).subscribe(titles => {
       this.commentedTitles = titles;
     });
+  }
+
+  subscribe() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.httpclient.post<number>(`${environment.serverUrl}/account/subscribe/${id}`, {}).subscribe(() => {
+      document.location.reload();
+    });
+  }
+
+  unSubscribe() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.httpclient.post<number>(`${environment.serverUrl}/account/unsubscribe/${id}`, {}).subscribe(() => {
+      document.location.reload();
+    });
+  }
+
+
+  checkSubscribe() {
+    if (this.user) {
+      let id = this.user.id
+      this.httpclient.get<boolean>(`${environment.serverUrl}/account/check-sub/${id}`).subscribe(isSubscribed => {
+        this.isSubscribed = isSubscribed;
+      });
+    }
   }
 
   getReleaseYear(u: User): string {

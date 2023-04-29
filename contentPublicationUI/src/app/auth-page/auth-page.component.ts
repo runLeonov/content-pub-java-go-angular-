@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-auth-page',
   templateUrl: './auth-page.component.html',
-  // styleUrls: ['./auth-page.component.css', '../title-view/title-view.component.css', '../publish/publish.component.css']
+  styleUrls: ['./auth-page.component.css', '../title-view/title-view.component.css', '../publish/publish.component.css']
 })
 export class AuthPageComponent implements OnInit {
   email: string | undefined
@@ -55,7 +55,7 @@ export class AuthPageComponent implements OnInit {
       reader.onload = () => {
         const newImg = document.createElement("img");
         newImg.style.width = "100%";
-        newImg.style.height = "320px";
+        newImg.style.height = "650px";
         newImg.style.border = "solid 1px black";
         newImg.style.borderRadius = "5px";
         newImg.style.objectFit = "cover";

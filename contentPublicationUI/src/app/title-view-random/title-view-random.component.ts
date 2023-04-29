@@ -9,7 +9,7 @@ import {environment} from "../environment";
   styleUrls: ['./title-view-random.component.css']
 })
 export class TitleViewRandomComponent {
-  title: Title = Title.getEmptyTitle()
+  title: Title | undefined
 
   constructor(private httpclient: HttpClient) {
     this.loadTitlesList();

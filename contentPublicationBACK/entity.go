@@ -5,11 +5,12 @@ import (
 )
 
 type Title struct {
-	ID             uint         `json:"id"`
+	ID             uint         `json:"id" gorm:"primary_key, AUTO_INCREMENT"`
 	TitleName      string       `json:"titleName"`
 	Type           string       `json:"typeName"`
 	OriginalAuthor string       `json:"originalAuthor"`
-	AuthorId       uint         `json:"authorId"`
+	UserID         uint         `json:"authorId"`
+	User           User         `json:"author"`
 	CreationDate   time.Time    `json:"creationDate"`
 	Description    string       `json:"description"`
 	TitleImgBase64 string       `json:"titleImg"`

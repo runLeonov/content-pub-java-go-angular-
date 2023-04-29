@@ -12,6 +12,13 @@
           <strong>LIKED</strong>
         </button>
       </div>
+
+      <div class="col-sm-12" *ngIf="title.author.nickName">
+        <a class="w-100 btn-lg btn-success"  href="/profile-view/{{title.author.id}}"> Author:
+          <strong>@{{title.author.nickName}}</strong>
+        </a>
+      </div>
+
       <div class="col-sm-12">
         <input type="text" class="form-control text-center" id="type"
                placeholder="{{'type: '+ title.typeName}}" disabled>
@@ -80,7 +87,9 @@
         <div
           class="row flex-column g-0 px-3 border rounded not-border-top overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col-auto d-none d-lg-block">
-            <img [src]="comm.user.img64" alt="" class="bd-placeholder-img" width="50">
+            <a href="/profile-view/{{comm.user.id}}">
+              <img [src]="comm.user.img64" alt="" class="bd-placeholder-img" width="50">
+            </a>
           </div>
 
           <div class="col p-2 likes-inner d-flex flex-column position-static">
@@ -99,6 +108,9 @@
 
         </div>
       </div>
+
+
+
     </div>
   </div>
 </div>

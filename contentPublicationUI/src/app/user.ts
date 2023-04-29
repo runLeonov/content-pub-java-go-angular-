@@ -1,4 +1,4 @@
-import {Like} from "./title";
+import {Like, Title} from "./title";
 import {Comment} from "./title";
 
 export class User {
@@ -9,13 +9,14 @@ export class User {
   public img64: string;
   public likes: Like[];
   public comments: Comment[];
+  public publishedTitles: Title[];
   public creationDate: Date = new Date();
   public lastName: string;
   public firstName: string;
   public banned: boolean;
 
 
-  constructor(id: number, email: string, name: string, role: string, img64: string, likes: Like[], comments: Comment[], creationDate: Date, lastName: string, firstName: string, banned: boolean) {
+  constructor(id: number, email: string, name: string, role: string, img64: string, likes: Like[], comments: Comment[], publishedTitles: Title[], creationDate: Date, lastName: string, firstName: string, banned: boolean) {
     this.id = id;
     this.email = email;
     this.nickName = name;
@@ -27,5 +28,6 @@ export class User {
     this.lastName = lastName;
     this.firstName = firstName;
     this.banned = banned;
+    this.publishedTitles = publishedTitles;
   }
 }

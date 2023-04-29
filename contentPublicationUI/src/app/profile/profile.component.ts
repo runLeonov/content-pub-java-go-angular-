@@ -12,13 +12,15 @@ import {Comment, Title} from "../title";
   styleUrls: ['./profile.component.css', '../title-view/title-view.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user: User | undefined;
+  author: User | undefined;
   likedTitles: Title[] | undefined
+  publishedTitles: Title[] | undefined
   commentedTitles: Title[] | undefined
+  user: User | undefined = AppComponent.getUser();
 
   constructor(private httpclient: HttpClient, private router: Router) {
     this.httpclient.get<User>(`${environment.serverUrl}/account/`).subscribe(user => {
-      this.user = user
+      this.author = user
     });
 
   }
@@ -28,6 +30,14 @@ export class ProfileComponent implements OnInit {
       this.likedTitles = titles;
     });
   }
+
+  getPublishedTitles() {
+    this.httpclient.get<Title[]>(`${environment.serverUrl}/account/published`).subscribe(titles => {
+      this.publishedTitles = titles;
+    });
+  }
+
+
 
   getLimitComments() {
     this.httpclient.get<Title[]>(`${environment.serverUrl}/account/commented-limit`).subscribe(titles => {
@@ -59,5 +69,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getLimitLikes();
     this.getLimitComments();
+    this.getPublishedTitles();
   }
 }

@@ -233,6 +233,7 @@ export class PublishComponent implements OnInit {
       titleName: this.titleName,
       originalAuthor: this.originalAuthor,
       authorId: this.user.id,
+      author: this.user,
       typeName: this.type,
       description: this.description,
       creationDate: new Date(),

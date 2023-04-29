@@ -10,13 +10,14 @@ export class Title {
   public description: string = '';
   public titleImg: string = '';
   public released: boolean;
+  public author: User;
   public content: TitleContent;
   public categories: Category[];
   public tags: Tag[];
   public serials: Serial[];
 
 
-  constructor(id: number, titleName: string, typeName: string, originalAuthor: string, authorId: number, creationDate: Date, description: string, titleImg: string, released: boolean, content: TitleContent, categories: Category[], tags: Tag[], serials: Serial[]) {
+  constructor(id: number, titleName: string, typeName: string, originalAuthor: string, authorId: number, creationDate: Date, description: string, titleImg: string, released: boolean, author: User, content: TitleContent, categories: Category[], tags: Tag[], serials: Serial[]) {
     this.id = id;
     this.titleName = titleName;
     this.typeName = typeName;
@@ -30,10 +31,7 @@ export class Title {
     this.tags = tags;
     this.serials = serials;
     this.released = released;
-  }
-
-  static getEmptyTitle(): Title {
-    return new Title(0, "", "", "", 0, new Date(), "", "", false, TitleContent.getEmptyContent(), [], [], []);
+    this.author = author;
   }
 }
 

@@ -1,15 +1,15 @@
-<div *ngIf="user" class="row p-3 pt-4 pb-5 g-3">
+<div *ngIf="author" class="row p-3 pt-4 pb-5 g-3">
   <div class="col-md-3 col-lg-3 order-md-first">
-    <img [src]="user.img64" alt="Admin" class="w-100 bg-wgr">
+    <img [src]="author.img64" alt="Admin" class="w-100 bg-wgr">
 
     <div class="mt-1">
-      <div *ngIf="user.role == 'USER'" class="row g-0">
+      <div *ngIf="author.role == 'USER'" class="row g-0">
         <button (click)="beAuthorRequest()" class="btn-lg w-100 bg-danger not-border-bottom">Your are not author<br> <small>Click to make request</small> </button>
       </div>
-      <div *ngIf="user.role == 'PRE_AUTHOR'" class="row g-0">
+      <div *ngIf="author.role == 'PRE_AUTHOR'" class="row g-0">
         <button (click)="beSimpleUserRequest()" class="btn-lg w-100 bg-warning not-border-bottom">Checking request by admin... <br> <small> Cancel?</small></button>
       </div>
-      <div *ngIf="user.role == 'AUTHOR'" class="row g-0">
+      <div *ngIf="author.role == 'AUTHOR'" class="row g-0">
         <button (click)="beSimpleUserRequest()" class="btn-lg w-100 bg-gr not-border-bottom">You have author permission<br> <small> Cancel?</small></button>
       </div>
     </div>
@@ -18,12 +18,12 @@
       <div class="col-sm-6">
         <strong class="title">First name</strong>
         <input type="text" class="form-control p-1" id="firstName"
-               placeholder="{{user.firstName}}" disabled value="" required="">
+               placeholder="{{author.firstName}}" disabled value="" required="">
       </div>
 
       <div class="col-sm-6">
         <strong class="title">Last name</strong>
-        <input type="text" class="form-control p-1" id="lastName" placeholder="{{user.lastName}}"
+        <input type="text" class="form-control p-1" id="lastName" placeholder="{{author.lastName}}"
                disabled value="" required="">
       </div>
 
@@ -32,13 +32,13 @@
         <div class="input-group has-validation">
           <span class="input-group-text p-1">@</span>
           <input type="text" class="form-control p-1" id="username"
-                 placeholder="{{user.nickName}}" disabled>
+                 placeholder="{{author.nickName}}" disabled>
         </div>
       </div>
 
       <div class="col-sm-6">
         <strong class="title">Role</strong>
-        <input type="text" class="form-control p-1" id="role" placeholder="{{user.role}}"
+        <input type="text" class="form-control p-1" id="role" placeholder="{{author.role}}"
                disabled value="">
       </div>
 
@@ -46,14 +46,14 @@
       <div class="col-sm-12">
         <strong class="title">Email
         </strong>
-        <input type="email" class="form-control p-1" id="email" placeholder="{{user.email}}"
+        <input type="email" class="form-control p-1" id="email" placeholder="{{author.email}}"
                disabled>
       </div>
 
       <div class="col-sm-12">
         <strong class="title">Creation date
         </strong>
-        <input type="text" class="form-control p-1" id="date" placeholder="{{parseDate(user.creationDate)}}" disabled>
+        <input type="text" class="form-control p-1" id="date" placeholder="{{parseDate(author.creationDate)}}" disabled>
       </div>
 
     </div>
@@ -64,7 +64,7 @@
     <a class="btn-lg w-100 not-border-bottom" routerLink="/user-comments">Check commented posts</a>
     <div class="col-12" *ngFor="let title of commentedTitles">
       <div
-        class="row g-0  border rounded not-border-top overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        class="row g-0  border rounded not-border-top overflow-hidden flex-md-row mb-1 shadow-sm h-md-250 position-relative">
         <div class="col p-2 likes-inner d-flex flex-column position-static">
           <h4 class="mb-0">{{title.titleName}}</h4>
           <div class="d-flex">
@@ -91,7 +91,33 @@
     <a class="btn-lg w-100 not-border-bottom" routerLink="/liked-titles">See all what you like</a>
     <div class="col-12" *ngFor="let title of likedTitles">
       <div
-        class="row g-0  border rounded  not-border-top overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        class="row g-0  border rounded  not-border-top overflow-hidden flex-md-row mb-1 shadow-sm h-md-250 position-relative">
+        <div class="col p-2 likes-inner d-flex flex-column position-static">
+          <h4 class="mb-0">{{title.titleName}}</h4>
+          <div class="d-flex">
+            <span>Author: </span>
+            <strong class="text-muted">{{title.originalAuthor}}</strong>
+          </div>
+          <div class="d-flex">
+            <span>Creation date: </span>
+            <div class="mb-1 text-muted" *ngIf="title.creationDate">{{parseDate(title.creationDate)}}</div>
+            <div class="mb-1 text-muted" *ngIf="!title.creationDate">[date parse error]</div>
+          </div>
+          <textarea style="border: 0" class="w-100" disabled>{{title.description}}</textarea>
+          <p class="card-text mb-auto">
+
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img [src]="title.titleImg" alt="" class="bd-placeholder-img" width="100">
+        </div>
+      </div>
+    </div>
+
+    <a class="btn-lg w-100 not-border-bottom" routerLink="/published-titles">Check published titles</a>
+    <div class="col-12" *ngFor="let title of publishedTitles">
+      <div
+        class="row g-0  border rounded  not-border-top overflow-hidden flex-md-row mb-1 shadow-sm h-md-250 position-relative">
         <div class="col p-2 likes-inner d-flex flex-column position-static">
           <h4 class="mb-0">{{title.titleName}}</h4>
           <div class="d-flex">

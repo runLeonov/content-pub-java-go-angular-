@@ -1,7 +1,24 @@
 <div *ngIf="user" class="row p-3 pt-4 pb-5 g-3">
   <div class="col-md-3 col-lg-3 order-md-first">
     <img [src]="user.img64" alt="Admin" class="w-100 bg-wgr">
-    <div class="row g-1 p-2 bg-wgr">
+
+    <div *ngIf="user.role == 'AUTHOR' && !isSubscribed" class="col-sm-12">
+      <button (click)="subscribe()" class="w-100 bg-warning">This user is creator
+        <br>
+        <small>Subscribe?</small>
+      </button>
+    </div>
+
+    <div *ngIf="user.role == 'AUTHOR' && isSubscribed" class="col-sm-12">
+      <button (click)="unSubscribe()" class="w-100 bg-gr">
+        <strong>You are subscribed</strong>
+        <br>
+        <small>Unsubscribe?</small>
+      </button>
+    </div>
+
+    <div class="row g-0 p-2 bg-wgr">
+
       <div class="col-sm-6">
         <strong class="title">First name</strong>
         <input type="text" class="form-control p-1" id="firstName"
@@ -15,7 +32,7 @@
       </div>
 
       <div class="col-sm-6">
-        <strong  class="title">Username</strong>
+        <strong class="title">Username</strong>
         <div class="input-group has-validation">
           <span class="input-group-text p-1">@</span>
           <input type="text" class="form-control p-1" id="username"
@@ -47,9 +64,37 @@
   </div>
 
 
-  <div *ngIf="commentedTitles && commentedTitles.length > 0" class="col-md-9 col-lg-9">
-    <a class="btn-lg w-100 not-border-bottom">User commented posts</a>
+  <div *ngIf="commentedTitles && commentedTitles.length > 0 && user.publishedTitles && user.publishedTitles.length > 0"
+       class="col-md-9 col-lg-9">
+    <a class="btn-lg w-100 not-border-bottom">User commented titles</a>
     <div class="col-12" *ngFor="let title of commentedTitles">
+      <div
+        class="row g-0  border rounded not-border-top overflow-hidden flex-md-row pb-1 mb-1 shadow-sm h-md-250 position-relative">
+        <div class="col p-2 likes-inner d-flex flex-column position-static">
+          <h4 class="mb-0">{{title.titleName}}</h4>
+          <div class="d-flex">
+            <span>Author: </span>
+            <strong class="text-muted">{{title.originalAuthor}}</strong>
+          </div>
+          <div class="d-flex">
+            <span>Creation date: </span>
+            <div class="mb-1 text-muted" *ngIf="title.creationDate">{{parseDate(title.creationDate)}}</div>
+            <div class="mb-1 text-muted" *ngIf="!title.creationDate">[date parse error]</div>
+          </div>
+          <textarea style="border: 0" class="w-100" disabled>{{title.description}}</textarea>
+          <p class="card-text mb-auto">
+
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img [src]="title.titleImg" alt="" class="bd-placeholder-img" width="100">
+        </div>
+      </div>
+    </div>
+
+
+    <a class="btn-lg w-100 not-border-bottom">User published titles</a>
+    <div class="col-12" *ngFor="let title of user.publishedTitles">
       <div
         class="row g-0  border rounded not-border-top overflow-hidden flex-md-row pb-1 mb-1 shadow-sm h-md-250 position-relative">
         <div class="col p-2 likes-inner d-flex flex-column position-static">
