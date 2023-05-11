@@ -88,9 +88,9 @@
 <body>
 <div class="sidenav">
     <div class="login-main-text">
-        <h2>Leonov Oleksandr's PJ</h2>
-        <h2>Application<br> Login Page</h2>
-        <p>Login or register from here to access.</p>
+        <h2>Веб-додаток для публікації контенту з використанням мікросервісної архітектури мовою Java, Golang</h2>
+        <!--        <h2>Application<br> Ле</h2>-->
+        <p>Сторінка реєстрації адміністраторів.</p>
     </div>
 </div>
 <div class="main">
@@ -98,8 +98,8 @@
         <div class="login-form">
             <form th:object="${usr}" th:action="@{/registration}" method="post">
                 <div class="form-group">
-                    <label>User Name</label>
-                    <input type="text" th:field="*{name}" name="name" class="form-control" placeholder="User name">
+                    <label>Створіть нікнейм</label>
+                    <input type="text" th:field="*{name}" name="name" class="form-control" placeholder="Нікнейм">
                     <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                     <div class="alert alert-danger" th:if="${err != null}" th:text="${err}"></div>
                 </div>
@@ -107,35 +107,35 @@
 
                 <div class="g-1 p-0 d-flex">
                     <div class="col-6 p-0 form-group">
-                        <label>Last name</label>
+                        <label>Прізвище (необов'язково)</label>
                         <input type="text" th:field="*{lastName}" name="name" class="form-control"
-                               placeholder="Last name">
+                               placeholder="Прізвище">
                     </div>
                     <div class=" col-6 p-0 form-group">
-                        <label>First name</label>
+                        <label>Ім'я (необов'язково)</label>
                         <input type="text" th:field="*{firstName}" name="name" class="form-control"
-                               placeholder="First name">
+                               placeholder="Ім'я">
                     </div>
                 </div>
 
 
                 <div class="form-group">
-                    <label>Email</label>
+                    <label>Електронна пошта для зв'язку</label>
                     <input type="text" th:field="*{email}" name="name" class="form-control" placeholder="Email">
                     <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
 
                 <div class="form-group">
-                    <label>Password</label>
+                    <label>Створіть пароль</label>
                     <input type="password" name="password" id="password-check" th:field="*{password}"
-                           class="form-control" placeholder="Password">
+                           class="form-control" placeholder="">
                     <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                 </div>
 
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" onclick="myFunction()">
                     <label class="form-check-label" >
-                        Show password
+                        Показати/сховати пароль
                     </label>
                     <script>
                         function myFunction() {
@@ -147,8 +147,8 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-black">Create admin user</button>
-                <a type="submit" th:href="@{/login}" class="btn btn-secondary">Login page</a>
+                <button type="submit" class="btn btn-black">Створити</button>
+                <a type="submit" th:href="@{/login}" class="btn btn-secondary">Авторизація</a>
             </form>
         </div>
     </div>

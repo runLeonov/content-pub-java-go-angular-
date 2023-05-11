@@ -46,26 +46,25 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/released}">Titles</a>
+                        <a class="nav-link" th:href="@{/titles/released}">Опублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/not-released}">Unreleased
-                            titles</a>
+                        <a class="nav-link" th:href="@{/titles/not-released}">Неопублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/users/}">Users</a>
+                        <a class="nav-link" th:href="@{/users/}">Користувачі</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
+                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Навігайційний контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/comments/}">Comments</a>
+                        <a class="nav-link" th:href="@{/comments/}">Коментарі</a>
                     </li>
                     <li class="nav-item">
-                        <a href="javascript: document.logoutForm.submit()" class="nav-link">Log out</a>
+                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Вийти</a>
                     </li>
                     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                         <input hidden type="submit" value="Sign Out"/>
@@ -81,7 +80,7 @@
         <div class="row g-5">
             <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="">User photo:</span>
+                    <span class="">Фото профілю:</span>
                 </h4>
                 <img th:src="${user.getImg()}" alt="Admin" class="w-100">
                 <ul class="list-group mb-3">
@@ -109,43 +108,34 @@
                     <li th:unless="${!user.getComments().isEmpty()}"
                         class="list-group-item d-flex justify-content-between bg-light">
                         <div class="text-danger">
-                            <h6 class="my-0">User has no</h6>
-                            <small>any comments</small>
+                            <h6 class="my-0">Користувач нічого</h6>
+                            <small>не прокоментував</small>
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">User info:</h4>
+                <h4 class="mb-3">Інформація про користувача:</h4>
                 <div class="row g-3">
                     <div class="col-sm-6">
-                        <label for="firstName" class="form-label">First name</label>
+                        <label for="firstName" class="form-label">Ім'я</label>
                         <input type="text" class="form-control" id="firstName"
                                th:placeholder="${user.getFirstName()}" disabled value="" required="">
-                        <div class="invalid-feedback">
-                            Valid first name is required.
-                        </div>
                     </div>
 
                     <div class="col-sm-6">
-                        <label for="lastName" class="form-label">Last name</label>
+                        <label for="lastName" class="form-label">Прізвище</label>
                         <input type="text" class="form-control" id="lastName" th:placeholder="${user.getLastName()}"
                                disabled value="" required="">
-                        <div class="invalid-feedback">
-                            Valid last name is required.
-                        </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label">@нікнейм</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text">@</span>
                             <input type="text" class="form-control" id="username"
                                    th:placeholder="${user.getName()} " disabled
                                    required="">
-                            <div class="invalid-feedback">
-                                Your username is required.
-                            </div>
                         </div>
                     </div>
 
@@ -154,24 +144,21 @@
                         </label>
                         <input type="email" class="form-control" id="email" th:placeholder="${user.getEmail()}"
                                disabled>
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
                     </div>
 
                     <div th:if="${user.role == 'PRE_AUTHOR' || user.role == 'AUTHOR'}" class="col-12">
                         <form class="mb-0" th:if="${user.role == 'AUTHOR'}" method="post"
                               th:action="${'/users/' + user.getID() +'/cancel-author'}">
-                            <label class="mb-2">User has AUTHOR role. Click to cancel.</label>
+                            <label class="mb-2">Користувач має роль автора. Натисність, щоб</label>
                             <button class="w-100 btn btn-success btn-lg form-control"
-                                    type="submit">Cancel author role.
+                                    type="submit">Прибрати роль автора
                             </button>
                         </form>
                         <form class="mb-0" th:if="${user.role == 'PRE_AUTHOR'}" method="post"
                               th:action="${'/users/' + user.getID() +'/make-author'}">
-                            <label class="mb-2">User wants to be AUTHOR. Click to make.</label>
+                            <label class="mb-2">Користувач хоче стати автором. Натисність, щоб</label>
                             <button class="w-100 btn btn-warning btn-lg form-control"
-                                    type="submit">Give author role
+                                    type="submit">Дозволити роль автора.
                             </button>
                         </form>
                     </div>
@@ -180,19 +167,19 @@
                     <div class="mt-1 col-12">
                         <form  method="post" th:action="${'/users/' + user.getID() +'/ban'}">
                             <button th:if="${!user.isBanned()}" class="w-100 btn btn-danger btn-lg form-control"
-                                    type="submit">Ban user
+                                    type="submit">Забанити користувача
                             </button>
                             <button th:unless="${!user.isBanned()}" class="w-100 btn btn-secondary btn-lg form-control"
-                                    type="submit">Unban user
+                                    type="submit">Розбанити користувача
                             </button>
                         </form>
                     </div>
 
-                    <h3 th:if="${!titles.isEmpty()}" class="mb-3">Users uploaded titles:</h3>
+                    <h3 th:if="${!titles.isEmpty()}" class="mb-3">Публікації, створенні користувачем:</h3>
                     <div class="col-12" th:each="title: ${titles}">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-1 shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-primary" th:text="${title.getOriginalAuthor()}">World</strong>
+                                <strong class="d-inline-block mb-2 text-primary" th:text="${title.getOriginalAuthor()}"></strong>
                                 <h3 class="mb-0" th:text="${title.getTitleName()}"></h3>
                                 <div class="mb-1 text-muted" th:if="${title.getCreationDate() != null}"
                                      th:text="${#temporals.format(title.getCreationDate(), 'dd-MM-yyyy HH:mm')}"></div>
@@ -200,7 +187,8 @@
                                     error]
                                 </div>
                                 <p class="card-text mb-auto" th:text="${title.getDescription()}"></p>
-                                <a th:href="${'/titles/' + title.getID()}" class="stretched-link">Check title info</a>
+                                <br>
+                                <a th:href="${'/titles/' + title.getID()}" class="stretched-link">Відкрити інформацію про публікацію</a>
                             </div>
                             <div class="col-auto d-none d-lg-block">
                                 <img th:src="${title.getTitleImgBase64()}" alt="" class="bd-placeholder-img" width="200"
@@ -216,7 +204,7 @@
 </main>
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">Для зворотнього зв'язку: leonovcasha@gmail.com</span>
     </div>
 </footer>
 </body>

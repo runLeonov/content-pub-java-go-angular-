@@ -49,26 +49,25 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/released}">Titles</a>
+                        <a class="nav-link" th:href="@{/titles/released}">Опублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/not-released}">Unreleased
-                            titles</a>
+                        <a class="nav-link" th:href="@{/titles/not-released}">Неопублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/users/}">Users</a>
+                        <a class="nav-link" th:href="@{/users/}">Користувачі</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
+                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Навігайційний контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/comments/}">Comments</a>
+                        <a class="nav-link" th:href="@{/comments/}">Коментарі</a>
                     </li>
                     <li class="nav-item">
-                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Log out</a>
+                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Вийти</a>
                     </li>
                     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                         <input hidden type="submit" value="Sign Out"/>
@@ -83,7 +82,7 @@
         <div class="row g-5">
             <div class="col-md-5 col-lg-4 order-first">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="">Title image and content images:</span>
+                    <span class="">Головне фото:</span>
                 </h4>
 
                 <div class="row g-1">
@@ -92,12 +91,12 @@
                         <button th:if="${title.getTags().isEmpty()}" type="button" class="w-100 btn btn-danger"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                            No tags.
+                            Немає тегів
                         </button>
                         <button th:unless="${title.getTags().isEmpty()}" type="button"
                                 class="w-100 btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                            Categories list
+                            Список тегів
                         </button>
                         <ul class="w-100 dropdown-menu">
                             <li th:each="tag: ${title.getTags()}" class="list-group-item d-flex justify-content-between"
@@ -114,12 +113,12 @@
                         <button th:if="${title.getCategories().isEmpty()}" type="button" class="w-100 btn btn-danger"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                            No categories.
+                            Немає категорій
                         </button>
                         <button th:unless="${title.getCategories().isEmpty()}" type="button"
                                 class="w-100 btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                            Categories list
+                            Список категорії
                         </button>
                         <ul class="w-100 dropdown-menu">
                             <li th:each="cat: ${title.getCategories()}"
@@ -136,12 +135,12 @@
                         <button th:if="${title.getSerials().isEmpty()}" type="button" class="w-100 btn btn-danger"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                            No serials.
+                            Немає серій (поколінь, тощо)
                         </button>
                         <button th:unless="${title.getSerials().isEmpty()}" type="button"
                                 class="w-100 btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                            Serials list
+                            Списко серій (поколінь, тощо)
                         </button>
                         <ul class="w-100 dropdown-menu">
                             <li th:each="ser: ${title.getSerials()}"
@@ -156,44 +155,38 @@
 
                     <div class="col-sm-12">
                         <input type="text" style="text-align:center;" class="form-control" id="views"
-                               th:placeholder=" ${'Views total: ' + title.getContent().getViews()}" disabled value=""
+                               th:placeholder=" ${'Переглядів: ' + title.getContent().getViews()}" disabled value=""
                                required="">
                     </div>
 
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="comments"
-                               th:placeholder="${'Comments total: ' + title.getContent().getComments().size()}" disabled
+                               th:placeholder="${'Коментарів: ' + title.getContent().getComments().size()}" disabled
                                value="" required="">
                     </div>
 
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="likes"
-                               th:placeholder=" ${'Likes total: ' + title.getContent().getLikesCount()}" disabled
+                               th:placeholder=" ${'Лайків: ' + title.getContent().getLikesCount()}" disabled
                                value="" required="">
                     </div>
 
                 </div>
             </div>
             <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Title info:</h4>
+                <h4 class="mb-3">Інформація:</h4>
                 <div class="row g-3">
                     <div class="col-sm-6">
-                        <label for="firstName" class="form-label">Title name</label>
+                        <label for="firstName" class="form-label">Назва</label>
                         <input type="text" class="form-control" id="firstName"
                                th:placeholder="${title.getTitleName()}" disabled value="" required="">
-                        <div class="invalid-feedback">
-                            Valid first name is required.
-                        </div>
                     </div>
 
                     <div class="col-sm-6">
-                        <label for="lastName" class="form-label">Original author</label>
+                        <label for="lastName" class="form-label">Оригінальний автор</label>
                         <input type="text" class="form-control" id="lastName"
                                th:placeholder="${title.getOriginalAuthor()}"
                                disabled value="" required="">
-                        <div class="invalid-feedback">
-                            Valid last name is required.
-                        </div>
                     </div>
                     <div class="col-12">
                         <textarea style="height: 200px" th:text="${'Description: ' + title.getDescription()}" disabled
@@ -204,18 +197,18 @@
                     <div class="col-12">
                         <form th:action="${'/titles/' + title.getID() +'/release'}" method="post">
                             <button th:if="${!title.isReleased()}" class="w-100 btn btn-secondary btn-lg form-control"
-                                    type="submit">Release title
+                                    type="submit">Розблокувати публікацію для перегляду
                             </button>
                             <button th:unless="${!title.isReleased()}" class="w-100 btn  btn-danger btn-lg form-control"
-                                    type="submit">Ban title
+                                    type="submit">Заблокувати публікацію
                             </button>
                         </form>
                     </div>
 
                     <div th:if="${!title.getContent().getImages().isEmpty()}">
-                        <h3 class="mb-3">Title images in content:</h3>
+                        <h3 class="mb-3">Внутрішній контент (фотографії):</h3>
                         <button id="scrollerImg" class="w-100 btn btn-secondary btn-lg">
-                            Show content images
+                            Переглянути вміст
                         </button>
                         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" hidden>
                             <div class="carousel-inner">
@@ -249,7 +242,7 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="mb-3">Comments by users for title:</h3>
+                        <h3 class="mb-3">Коментарі від користувачів:</h3>
                         <ul class="list-group mb-3">
                             <li th:if="${!title.getContent().getComments().isEmpty()}"
                                 th:each="comm: ${title.getContent().getComments()}"
@@ -269,7 +262,7 @@
                                     <form method="post"
                                           th:action="${'/titles/' + title.getID() +'/comment/' + comm.getID()}">
                                         <button style="text-decoration: none; border: none; background-color: white"
-                                                class="text-danger">delete
+                                                class="text-danger">видалити
                                         </button>
                                     </form>
                                 </i>
@@ -277,8 +270,8 @@
                             <li th:unless="${!title.getContent().getComments().isEmpty()}"
                                 class="list-group-item d-flex justify-content-between bg-light">
                                 <div class="text-danger">
-                                    <h6 class="my-0">Title has no</h6>
-                                    <small>any comments</small>
+                                    <h6 class="my-0">В публікації</h6>
+                                    <small>немає коментарів</small>
                                 </div>
                             </li>
                         </ul>
@@ -292,7 +285,7 @@
 </main>
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">Для зворотнього зв'язку: leonovcasha@gmail.com</span>
     </div>
 </footer>
 </body>
@@ -303,7 +296,7 @@
     document.getElementById("scrollerImg").addEventListener("click", () => {
         IS_HIDDEN = !IS_HIDDEN;
         document.getElementById("carouselExampleCaptions").hidden = !IS_HIDDEN;
-        document.getElementById("scrollerImg").innerHTML = IS_HIDDEN ? "Hide images" : "Show content images";
+        document.getElementById("scrollerImg").innerHTML = IS_HIDDEN ? "Сховати вміст" : "Переглянути вміст";
     });
 </script>
 </html>

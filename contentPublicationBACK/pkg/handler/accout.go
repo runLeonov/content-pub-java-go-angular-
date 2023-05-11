@@ -191,6 +191,17 @@ func (h *Handler) subscribe(c *gin.Context) {
 	})
 }
 
+func (h *Handler) getSubscriptions(c *gin.Context) {
+	tok, err := c.Cookie("jwt")
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	id, err := h.services.Authorization.ParseToken(tok)
+	authors, err := h.services.Account.GetUserSubscriptions(uint(id))
+	c.JSON(http.StatusOK, authors)
+}
+
 func (h *Handler) unsubscribe(c *gin.Context) {
 	authorId, err := strconv.Atoi(c.Param("id"))
 	if err != nil {

@@ -49,7 +49,7 @@ func (r *AccountRepo) GetAuthorSubscribers(authorId uint) ([]app.Subscription, e
 
 func (r *AccountRepo) GetUserSubscriptions(userId uint) ([]app.Subscription, error) {
 	var sub []app.Subscription
-	r.db.Preload("Subscriber").Where("subscriber_id = ?", userId).Find(&sub)
+	r.db.Preload("Author").Where("subscriber_id = ?", userId).Find(&sub)
 	return sub, nil
 }
 
@@ -121,7 +121,7 @@ func (r *AccountRepo) GetUserPublished(userId int) ([]app.Title, error) {
 		Preload(imagesTableE).
 		Preload(titleContentTableE).
 		Preload("User").
-		Where("user_id = ?", userId).
+		Where("user_id = ? AND released = true", userId).
 		Find(&titles)
 	return titles, nil
 }

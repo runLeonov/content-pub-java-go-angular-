@@ -2,9 +2,9 @@
   <div class="row">
     <div class="card col-9">
       <div *ngFor="let title of titles" class="row g-1 manga-block d-flex">
-        <div class="col-md-4" >
-          <a href="/titles/{{title.id}}" >
-            <img class="img-fluid rounded-start" [src]="title.titleImg" >
+        <div class="col-md-4">
+          <a href="/titles/{{title.id}}">
+            <img class="img-fluid rounded-start" [src]="title.titleImg">
           </a>
         </div>
         <div class="col-md-8">
@@ -19,35 +19,35 @@
 
               <div class="row">
                 <div class="col-md-3 d-grid">
-                  <strong>Categories:</strong>
-                  <span *ngIf="title.categories.length === 0">No categories((</span>
+                  <strong>Категорії:</strong>
+                  <span *ngIf="title.categories.length === 0">Немає категорій.</span>
                   <small class="text-muted" *ngFor="let cat of title.categories">{{cat.genre}}</small>
                 </div>
 
                 <div class="col-md-3  d-grid">
-                  <strong>Tags:</strong>
-                  <span *ngIf="title.tags.length === 0">No categories((</span>
+                  <strong>Теги:</strong>
+                  <span *ngIf="title.tags.length === 0">Немає тегів.</span>
                   <small class="text-muted" *ngFor="let cat of title.tags">{{cat.tag}}</small>
                 </div>
 
                 <div class="col-md-3  d-grid">
-                  <strong>Serials:</strong>
-                  <span class="text-danger" *ngIf="title.serials.length === 0">No serials</span>
+                  <strong>Серії (покоління):</strong>
+                  <span class="text-danger" *ngIf="title.serials.length === 0">Немає серій.</span>
                   <small class="text-muted" *ngFor="let cat of title.serials">{{cat.serialName}}</small>
                 </div>
               </div>
 
               <div class="row">
-                <strong>Date of release:</strong>
+                <strong>Дата створення:</strong>
                 <small class="text-muted">{{getCreatingDate(title.creationDate)}}</small>
               </div>
               <div class="row">
                 <div class="card-text">
-                  <strong>Likes:</strong>
+                  <strong>Лайків:</strong>
                   <small style="margin-left: 4px" class="text-muted">{{title.content.likesCount}}</small>
                 </div>
                 <div class="card-text">
-                  <strong>Views:</strong>
+                  <strong>Переглядів:</strong>
                   <small style="margin-left: 4px" class="text-muted">{{title.content.views}}</small>
                 </div>
               </div>
@@ -61,11 +61,11 @@
     <div class="card col-3">
       <div class="row mb-1">
         <form>
-          <button class="btn btn-lg w-100 form-control" *ngIf="hideCats" (click)="hideCats = !hideCats">Show
-            categories
+          <button class="btn btn-lg w-100 form-control" *ngIf="hideCats" (click)="hideCats = !hideCats">Показати
+            категорії
           </button>
-          <button class="btn btn-lg w-100 form-control" *ngIf="!hideCats" (click)="hideCats = !hideCats">Hide
-            categories
+          <button class="btn btn-lg w-100 form-control" *ngIf="!hideCats" (click)="hideCats = !hideCats">Сховати
+            категорії
           </button>
         </form>
       </div>
@@ -82,14 +82,16 @@
 
       <div class="row mb-1">
         <form>
-          <button class="btn btn-lg w-100 form-control" *ngIf="hideTags" (click)="hideTags = !hideTags">Show tags
+          <button class="btn btn-lg w-100 form-control" *ngIf="hideTags" (click)="hideTags = !hideTags">Показати
+            теги
           </button>
-          <button class="btn btn-lg w-100 form-control" *ngIf="!hideTags" (click)="hideTags = !hideTags">Hide tags
+          <button class="btn btn-lg w-100 form-control" *ngIf="!hideTags" (click)="hideTags = !hideTags">Сховати
+            теги
           </button>
         </form>
       </div>
       <div [ngStyle]="{'display': hideTags ? 'none' : 'block'}" *ngIf="allPossible" class="panel">
-        <div  class="form-check border border-success" *ngFor="let tag of allPossible.tags">
+        <div class="form-check border border-success" *ngFor="let tag of allPossible.tags">
           <div (change)="addToArr($event, tag, tags)">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate1" name="categories">
             <label class="form-check-label" for="flexCheckIndeterminate">
@@ -101,11 +103,11 @@
 
       <div class="row mb-1">
         <form action="">
-          <button class="btn btn-lg w-100 form-control" *ngIf="hideSerials" (click)="hideSerials = !hideSerials">Show
-            serials
+          <button class="btn btn-lg w-100 form-control" *ngIf="hideSerials" (click)="hideSerials = !hideSerials">Показати
+            серії (покоління, тощо)
           </button>
-          <button class="btn btn-lg w-100 form-control" *ngIf="!hideSerials" (click)="hideSerials = !hideSerials">Hide
-            serials
+          <button class="btn btn-lg w-100 form-control" *ngIf="!hideSerials" (click)="hideSerials = !hideSerials">Сховати
+            серії (покоління, тощо)
           </button>
         </form>
       </div>
@@ -123,105 +125,13 @@
 
       <div class="d-flex row g-1">
         <div class="w-50">
-          <button class="btn btn-lg form-control" (click)="reset()">Reset filter</button>
+          <button class="btn btn-lg form-control" (click)="reset()">Скинути фільтр</button>
         </div>
         <div class="w-50">
-          <button class="btn btn-lg form-control" (click)="filterList()">Search</button>
+          <button class="btn btn-lg form-control" (click)="filterList()">Пошук</button>
         </div>
       </div>
     </div>
 
   </div>
 </div>
-
-
-
-<!--<div class="main-content">-->
-<!--  <div class="block title-from-list">-->
-<!--    <div class="" *ngIf="titles.length === 0">-->
-<!--      <h2>No any titles by your filter((</h2>-->
-<!--    </div>-->
-<!--    <div class="manga-block" *ngFor="let title of titles">-->
-<!--      <a href="/titles/{{title.id}}" class="title-img" [style.background-image]="'url(' + title.titleImg + ')'"></a>-->
-<!--      <div class="rows">-->
-<!--        <div class="row">-->
-<!--          <a style="font-size: 22px" href="/titles/{{title.id}}"><strong> {{title.titleName}}</strong></a>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <strong>Serials:</strong>-->
-<!--          <span *ngIf="title.serials.length === 0">-->
-<!--          No serials((-->
-<!--        </span>-->
-<!--          <span *ngFor="let ser of title.serials">-->
-<!--          {{ser.serialName}}-->
-<!--        </span>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <strong>Categories:</strong>-->
-<!--          <span *ngIf="title.categories.length === 0">-->
-<!--          No categories((-->
-<!--        </span>-->
-<!--          <span *ngFor="let cat of title.categories">-->
-<!--          {{cat.genre}}-->
-<!--        </span>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <strong>Tags:</strong>-->
-<!--          <span *ngIf="title.tags.length === 0">-->
-<!--          No tags((-->
-<!--        </span>-->
-<!--          <span *ngFor="let tag of title.tags">-->
-<!--          {{tag.tag}}-->
-<!--        </span>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <strong>Date of release:</strong> {{getCreatingDate(title.creationDate)}}-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <span>{{title.content.likesCount}} likes, {{title.content.views}} views</span>-->
-<!--          <hr>-->
-<!--        </div>-->
-<!--        <div style="border-top: 1px solid black" class="row">-->
-<!--          <span><strong>Description:</strong> {{title.description}}</span>-->
-<!--        </div>-->
-
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="right-panel">-->
-<!--    <div>-->
-<!--      <button class="filter-but" *ngIf="hideCats" (click)="hideCats = !hideCats">Show categories</button>-->
-<!--      <button class="filter-but" *ngIf="!hideCats" (click)="hideCats = !hideCats">Hide categories</button>-->
-<!--    </div>-->
-<!--    <div [ngStyle]="{'display': hideCats ? 'none' : 'block'}" *ngIf="allPossible" class="panel">-->
-<!--      <div *ngFor="let cat of allPossible.categories" style="border: black 3px solid">-->
-<!--        <input (change)="addToArr($event, cat, categories)" type="checkbox" name="categories"> {{cat.genre}}-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div>-->
-<!--      <button class="filter-but" *ngIf="hideTags" (click)="hideTags = !hideTags">Show tags</button>-->
-<!--      <button class="filter-but" *ngIf="!hideTags" (click)="hideTags = !hideTags">Hide tags</button>-->
-<!--    </div>-->
-<!--    <div [ngStyle]="{'display': hideTags ? 'none' : 'block'}" *ngIf="allPossible" class="panel">-->
-<!--      <div *ngFor="let tag of allPossible.tags" style="border: black 3px solid">-->
-<!--        <input (change)="addToArr($event, tag, tags)" type="checkbox" name="tags"> {{tag.tag}}-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div>-->
-<!--      <button class="filter-but" *ngIf="hideSerials" (click)="hideSerials = !hideSerials">Show serials</button>-->
-<!--      <button class="filter-but" *ngIf="!hideSerials" (click)="hideSerials = !hideSerials">Hide serials</button>-->
-<!--    </div>-->
-<!--    <div [ngStyle]="{'display': hideSerials ? 'none' : 'block'}" *ngIf="allPossible" class="panel">-->
-<!--      <div *ngFor="let ser of allPossible.serials" style="border: black 3px solid">-->
-<!--        <input (change)="addToArr($event, ser, serials)" type="checkbox" name="serials"> {{ser.serialName}}-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div style="display: flex">-->
-<!--      <button class="filter-but50" style="margin-right: 3px;" (click)="reset()">Reset filter</button>-->
-<!--      <button class="filter-but50" (click)="filterList()">Search</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->

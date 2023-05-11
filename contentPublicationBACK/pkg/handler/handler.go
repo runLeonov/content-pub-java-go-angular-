@@ -39,6 +39,7 @@ func (h *Handler) InitRouters() *gin.Engine {
 			account.GET("/published", h.getPublishedTitles)
 			account.POST("/subscribe/:id", h.subscribe)
 			account.POST("/unsubscribe/:id", h.unsubscribe)
+			account.GET("/subscriptions", h.getSubscriptions)
 			account.GET("/check-sub/:id", h.checkSubscribe)
 			account.GET("/commented/:id", h.getCommentedTitlesForUser)
 			account.GET("/likes-limit", h.getLikedTitlesLimit)

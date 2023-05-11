@@ -9,7 +9,6 @@ import java.util.List;
 @Repository
 public class TitleDAO {
 
-
     private final JdbcTemplate jdbcTemplate;
 
     public TitleDAO(JdbcTemplate jdbcTemplate) {
@@ -62,7 +61,7 @@ public class TitleDAO {
     }
 
     public List<Title> findTitlesByUserId(Long id) {
-        String sql = "SELECT * FROM titles WHERE author_id = ?";
+        String sql = "SELECT * FROM titles WHERE user_id = ?";
         return jdbcTemplate.query(sql, new Object[]{id}, new Mappers.TitleMapper(jdbcTemplate));
     }
 

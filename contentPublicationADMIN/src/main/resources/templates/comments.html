@@ -46,26 +46,25 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/released}">Titles</a>
+                        <a class="nav-link" th:href="@{/titles/released}">Опублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/not-released}">Unreleased
-                            titles</a>
+                        <a class="nav-link" th:href="@{/titles/not-released}">Неопублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/users/}">Users</a>
+                        <a class="nav-link" th:href="@{/users/}">Користувачі</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" th:href="@{/contents/}">Content</a>
+                        <a class="nav-link " aria-current="page" th:href="@{/contents/}">Навігайційний контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/comments/}">Comments</a>
+                        <a class="nav-link active" th:href="@{/comments/}">Коментарі</a>
                     </li>
                     <li class="nav-item">
-                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Log out</a>
+                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Вийти</a>
                     </li>
                     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                         <input hidden type="submit" value="Sign Out"/>
@@ -81,16 +80,16 @@
         <div class="bg-light d-flex">
             <div class="me-auto ms-2 mb-2 mb-md-0 d-flex">
                 <form th:action="@{/comments/f}" method="get" class="d-flex me-2">
-                    <input name="filter" class="form-control" type="search" placeholder="Search by text"
+                    <input name="filter" class="form-control" type="search" placeholder="Пошук за текстом"
                            aria-label="Search">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    <button class="btn btn-outline-secondary" type="submit">Пошук</button>
                 </form>
             </div>
             <div class="d-flex">
                 <div class="dropdown me-1">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Sort by
+                        Сортувати за
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <form method="get" th:if="${byID}" th:action="@{/comments/sort/id/}">
@@ -108,7 +107,7 @@
                     </ul>
                 </div>
                 <div class="me-2">
-                    <a class="btn btn-secondary" th:href="@{/comments/}">Reset</a>
+                    <a class="btn btn-secondary" th:href="@{/comments/}">Скинути</a>
                 </div>
             </div>
         </div>
@@ -118,11 +117,11 @@
             <table class=" table custom-table">
                 <thead>
                 <tr>
-                    <th scope="col">Comment value</th>
-                    <th scope="col">Creation date</th>
-                    <th scope="col">User name</th>
-                    <th scope="col">Image</th>
-                    <th width="150" class="text-center" scope="col">Delete comment</th>
+                    <th scope="col">Текст</th>
+                    <th scope="col">Дата створення</th>
+                    <th scope="col">Нік користувача</th>
+                    <th scope="col">ФОто</th>
+                    <th width="150" class="text-center" scope="col">видалити коментар</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -153,7 +152,7 @@
 
                     <td width="150" class="text-center">
                         <form method="post" th:action="${'/comments/'+comm.ID+'/del/'}">
-                            <button class="btn btn-danger btn-xs form-control" type="submit">delete
+                            <button class="btn btn-danger btn-xs form-control" type="submit">видалити
                             </button>
                         </form>
                     </td>
@@ -166,7 +165,7 @@
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">Для зворотнього зв'язку: leonovcasha@gmail.com</span>
     </div>
 </footer>
 </body>

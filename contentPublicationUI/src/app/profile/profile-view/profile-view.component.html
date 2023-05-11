@@ -3,36 +3,36 @@
     <img [src]="user.img64" alt="Admin" class="w-100 bg-wgr">
 
     <div *ngIf="user.role == 'AUTHOR' && !isSubscribed" class="col-sm-12">
-      <button (click)="subscribe()" class="w-100 bg-warning">This user is creator
+      <button (click)="subscribe()" class="w-100 bg-warning">Цей користувач є автором
         <br>
-        <small>Subscribe?</small>
+        <small>Підписатись?</small>
       </button>
     </div>
 
     <div *ngIf="user.role == 'AUTHOR' && isSubscribed" class="col-sm-12">
       <button (click)="unSubscribe()" class="w-100 bg-gr">
-        <strong>You are subscribed</strong>
+        <strong>Ви вже підписані</strong>
         <br>
-        <small>Unsubscribe?</small>
+        <small>Відписатись?</small>
       </button>
     </div>
 
     <div class="row g-0 p-2 bg-wgr">
 
       <div class="col-sm-6">
-        <strong class="title">First name</strong>
+        <strong class="title">Ім'я</strong>
         <input type="text" class="form-control p-1" id="firstName"
                placeholder="{{user.firstName}}" disabled value="" required="">
       </div>
 
       <div class="col-sm-6">
-        <strong class="title">Last name</strong>
+        <strong class="title">Прізвище</strong>
         <input type="text" class="form-control p-1" id="lastName" placeholder="{{user.lastName}}"
                disabled value="" required="">
       </div>
 
       <div class="col-sm-6">
-        <strong class="title">Username</strong>
+        <strong class="title">@нікнейм</strong>
         <div class="input-group has-validation">
           <span class="input-group-text p-1">@</span>
           <input type="text" class="form-control p-1" id="username"
@@ -41,21 +41,21 @@
       </div>
 
       <div class="col-sm-6">
-        <strong class="title">Role</strong>
+        <strong class="title">роль</strong>
         <input type="text" class="form-control p-1" id="role" placeholder="{{user.role}}"
                disabled value="">
       </div>
 
 
       <div class="col-sm-12">
-        <strong class="title">Email
+        <strong class="title">еmail
         </strong>
         <input type="email" class="form-control p-1" id="email" placeholder="{{user.email}}"
                disabled>
       </div>
 
       <div class="col-sm-12">
-        <strong class="title">Creation date
+        <strong class="title">дата реєстрації
         </strong>
         <input type="text" class="form-control p-1" id="date" placeholder="{{parseDate(user.creationDate)}}" disabled>
       </div>
@@ -66,21 +66,21 @@
 
   <div class="col-md-9 col-lg-9">
     <div *ngIf="!(commentedTitles && commentedTitles.length > 0)">
-      <a class="btn-lg w-100 bg-danger not-border-bottom">User didn't comment anything</a>
+      <a class="btn-lg w-100 bg-danger not-border-bottom">Користувач нічого не прокоментував</a>
     </div>
     <div *ngIf="commentedTitles && commentedTitles.length > 0">
-      <a class="btn-lg w-100 not-border-bottom">User commented titles</a>
+      <a class="btn-lg w-100 not-border-bottom">Прокоментовані публікації</a>
       <div class="col-12" *ngFor="let title of commentedTitles">
         <div
           class="row g-0  border rounded not-border-top overflow-hidden flex-md-row pb-1 mb-1 shadow-sm h-md-250 position-relative">
           <div class="col p-2 likes-inner d-flex flex-column position-static">
             <h4 class="mb-0">{{title.titleName}}</h4>
             <div class="d-flex">
-              <span>Author: </span>
+              <span>оригінальний автор: </span>
               <strong class="text-muted">{{title.originalAuthor}}</strong>
             </div>
             <div class="d-flex">
-              <span>Creation date: </span>
+              <span>дата створення: </span>
               <div class="mb-1 text-muted" *ngIf="title.creationDate">{{parseDate(title.creationDate)}}</div>
               <div class="mb-1 text-muted" *ngIf="!title.creationDate">[date parse error]</div>
             </div>
@@ -98,21 +98,21 @@
 
 
     <div *ngIf="!(user.publishedTitles && user.publishedTitles.length > 0)">
-      <a class="btn-lg w-100 bg-danger not-border-bottom">User didn't comment anything</a>
+      <a class="btn-lg w-100 bg-danger not-border-bottom">Користувач нічого не опублікував</a>
     </div>
     <div *ngIf=" user.publishedTitles && user.publishedTitles.length > 0">
-      <a class="btn-lg w-100 not-border-bottom">User published titles</a>
+      <a class="btn-lg w-100 not-border-bottom">Публікаці створені користувачем</a>
       <div class="col-12" *ngFor="let title of user.publishedTitles">
         <div
           class="row g-0  border rounded not-border-top overflow-hidden flex-md-row pb-1 mb-1 shadow-sm h-md-250 position-relative">
           <div class="col p-2 likes-inner d-flex flex-column position-static">
             <h4 class="mb-0">{{title.titleName}}</h4>
             <div class="d-flex">
-              <span>Author: </span>
+              <span>оригінальний автор: </span>
               <strong class="text-muted">{{title.originalAuthor}}</strong>
             </div>
             <div class="d-flex">
-              <span>Creation date: </span>
+              <span>дата створення: </span>
               <div class="mb-1 text-muted" *ngIf="title.creationDate">{{parseDate(title.creationDate)}}</div>
               <div class="mb-1 text-muted" *ngIf="!title.creationDate">[date parse error]</div>
             </div>

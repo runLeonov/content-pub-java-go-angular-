@@ -85,9 +85,8 @@
 <body>
 <div class="sidenav">
     <div class="login-main-text">
-        <h2>Leonov Oleksandr's PJ</h2>
-        <h2>Application<br> Login Page</h2>
-        <p>Login or register from here to access.</p>
+        <h2>Веб-додаток для публікації контенту з використанням мікросервісної архітектури мовою Java, Golang</h2>
+        <p>Сторінка авторизації для адміністраторів.</p>
     </div>
 </div>
 <div class="main">
@@ -95,15 +94,15 @@
         <div class="login-form">
             <form method="post" action="/login">
                 <div class="form-group">
-                    <label>User Name</label>
-                    <input type="text"  name="username" class="form-control" value="leonov3" placeholder="User Name">
+                    <label>Логін адміністратора</label>
+                    <input type="text"  name="username" class="form-control" value="leonov3" placeholder="Логін">
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control" value="password" placeholder="Password">
+                    <label>Введіть пароль</label>
+                    <input type="password" name="password" class="form-control" value="password" placeholder="Пароль">
                 </div>
-                <button type="submit" class="btn btn-black">Login</button>
-                <a type="submit" th:href="@{/registration}" class="btn btn-secondary">Register</a>
+                <button type="submit" class="btn btn-black">Авторизуватись</button>
+                <a type="submit" th:href="@{/registration}" class="btn btn-secondary">Зареєструватися</a>
             </form>
         </div>
     </div>

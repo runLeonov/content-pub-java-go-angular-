@@ -46,26 +46,25 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/released}">Titles</a>
+                        <a class="nav-link" th:href="@{/titles/released}">Опублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/not-released}">Unreleased
-                            titles</a>
+                        <a class="nav-link" th:href="@{/titles/not-released}">Неопублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/users/}">Users</a>
+                        <a class="nav-link active" th:href="@{/users/}">Користувачі</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
+                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Навігайційний контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/comments/}">Comments</a>
+                        <a class="nav-link" th:href="@{/comments/}">Коментарі</a>
                     </li>
                     <li class="nav-item">
-                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Log out</a>
+                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Вийти</a>
                     </li>
                     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                         <input hidden type="submit" value="Sign Out"/>
@@ -81,16 +80,16 @@
         <div class="bg-light d-flex">
             <div class="me-auto ms-2 mb-2 mb-md-0 d-flex">
                 <form th:action="@{/users/f}" method="get" class="d-flex me-2">
-                    <input name="filter" class="form-control" type="search" placeholder="Search by username"
+                    <input name="filter" class="form-control" type="search" placeholder="Пошук за нікнеймом"
                            aria-label="Search">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    <button class="btn btn-outline-secondary" type="submit">Пошук</button>
                 </form>
             </div>
             <div class="d-flex">
                 <div class="dropdown me-1">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Sort by
+                        Сортувати за
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <form method="get" th:if="${byID}" th:action="@{/users/sort/id/}">
@@ -108,7 +107,7 @@
                     </ul>
                 </div>
                 <div class="me-2">
-                    <a class="btn btn-secondary" th:href="@{/users/}">Reset</a>
+                    <a class="btn btn-secondary" th:href="@{/users/}">Скинути</a>
                 </div>
             </div>
         </div>
@@ -118,14 +117,14 @@
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Is blocked</th>
-                    <th scope="col">Role</th>
+                    <th scope="col">@Нікнейм</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Роль</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Last name</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Creation date</th>
-                    <th scope="col">Image</th>
+                    <th scope="col">Прізвище</th>
+                    <th scope="col">Ім'я</th>
+                    <th scope="col">Дата реєстрації</th>
+                    <th scope="col">Фото</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -177,7 +176,7 @@
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">Для зворотнього зв'язку: leonovcasha@gmail.com</span>
     </div>
 </footer>
 </body>

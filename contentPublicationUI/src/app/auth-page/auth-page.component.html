@@ -7,14 +7,14 @@
     <div class="card-body py-5 px-md-5" style="border: 0">
       <div class="row d-flex justify-content-center">
         <div class="col-lg-8">
-          <h2 class="fw-bold mb-3">Sign up now</h2>
+          <h2 class="fw-bold mb-3">Створіть новий профіль</h2>
           <form>
 
             <div class="form-outline mb-3">
               <input id="form3Example6" class="form-control" name="name" [(ngModel)]="name"
                      type="text"
                      placeholder="">
-              <label class="form-label" for="form3Example3">Nick name</label>
+              <label class="form-label" for="form3Example3">Ваш @нікнейм</label>
             </div>
 
             <div class="row">
@@ -23,7 +23,7 @@
                   <input id="form3Example1" class="form-control" name="firstName" [(ngModel)]="firstName"
                          type="text"
                          placeholder="">
-                  <label class="form-label" for="form3Example1">First name</label>
+                  <label class="form-label" for="form3Example1">Ім'я (необов'язково)</label>
                 </div>
               </div>
               <div class="col-md-6 mb-3">
@@ -31,7 +31,7 @@
                   <input id="form3Example2" class="form-control" name="lastName" [(ngModel)]="lastName"
                          type="text"
                          placeholder="">
-                  <label class="form-label" for="form3Example2">Last name</label>
+                  <label class="form-label" for="form3Example2">Прізвище (необов'язково)</label>
                 </div>
               </div>
             </div>
@@ -76,7 +76,7 @@
               <input id="form3Example3" class="form-control" name="email"  [(ngModel)]="email"
                      type="email"
                      placeholder="">
-              <label class="form-label" for="form3Example3">Email address</label>
+              <label class="form-label" for="form3Example3">Ваш email</label>
             </div>
 
             <div class="form-outline mb-3">
@@ -85,7 +85,7 @@
                      name="password"
                      type="password"
                      placeholder="">
-              <label class="form-label" for="form3Example4">Password</label>
+              <label class="form-label" for="form3Example4">Придумайте пароль</label>
             </div>
 
             <div class="form-outline mb-3">
@@ -93,7 +93,7 @@
                      type="password" #passRep
                      name="password-rep"
                      placeholder="">
-              <label class="form-label" for="form3Example4">Password</label>
+              <label class="form-label" for="form3Example4">Повторіть пароль</label>
             </div>
             <div class="alert alert-danger" *ngIf="emptyPass">Password must contains at least 6 symbols</div>
             <div class="alert alert-danger" *ngIf="emptyEmail">Email field cannot be empty</div>
@@ -101,10 +101,10 @@
             <div class="alert alert-danger" *ngIf="userExist">User already exist</div>
             <div class="alert alert-danger"  [innerHtml]='msg' *ngIf="msg"></div>
             <button (click)="validation()" class="btn bg-gr form-outline w-100 btn-block mb-4">
-              Create user
+              Створити!
             </button>
-            <button routerLink="/do-login" class="btn bg-gr form-outline w-100 btn-block mb-4">Have profile?
-              Login
+            <button routerLink="/do-login" class="btn bg-gr form-outline w-100 btn-block mb-4">Вже маєте профіль?
+              Авторизуйтесь
             </button>
           </form>
         </div>

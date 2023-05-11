@@ -48,26 +48,25 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/released}">Titles</a>
+                        <a class="nav-link" th:href="@{/titles/released}">Опублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/not-released}">Unreleased
-                            titles</a>
+                        <a class="nav-link" th:href="@{/titles/not-released}">Неопублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/users/}">Users</a>
+                        <a class="nav-link" th:href="@{/users/}">Користувачі</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/contents/}">Content</a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/contents/}">Навігайційний контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/comments/}">Comments</a>
+                        <a class="nav-link" th:href="@{/comments/}">Коментарі</a>
                     </li>
                     <li class="nav-item">
-                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Log out</a>
+                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Вийти</a>
                     </li>
                     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                         <input hidden type="submit" value="Sign Out"/>
@@ -81,15 +80,15 @@
     <div class="container">
         <div class="row col-md-12 col-md-offset-2 ">
             <h3 class="d-flex justify-content-between align-items-center">
-                <span class="">The list of all available tags:</span>
+                <span class="">Список всіх можливих тегів:</span>
             </h3>
             <div style="overflow-y: auto; height: 350px;">
                 <table class="table  custab">
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Tag name</th>
-                        <th class="text-center">Action</th>
+                        <th>Назва</th>
+                        <th class="text-center">Дія</th>
                     </tr>
                     </thead>
                     <tr th:each="tag: ${contents.getTags()}">
@@ -98,7 +97,7 @@
                         <td width="300" class="text-center">
                             <form method="post" th:action="${'/contents/t/'+tag.ID}">
                                 <button class="btn btn-danger btn-xs form-control"
-                                        type="submit">delete
+                                        type="submit">видалити
                                 </button>
                             </form>
                         </td>
@@ -112,14 +111,14 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <button class="btn btn-primary btn-xs form-control"
-                            type="submit">Add tag
+                            type="submit">Додати
                     </button>
                 </div>
             </form>
         </div>
         <div class="row mt-10  col-md-12 col-md-offset-2 custyle">
             <h3 class="d-flex justify-content-between align-items-center">
-                <span class="">The list of all available serials:</span>
+                <span class="">Список всіх можливих серій (поколінь, тощо.):</span>
             </h3>
             <div style="overflow-y: auto; height: 350px;">
                 <table class=" table custab">
@@ -127,8 +126,8 @@
 
                     <tr>
                         <th>ID</th>
-                        <th>Tag name</th>
-                        <th class="text-center">Action</th>
+                        <th>Назва</th>
+                        <th class="text-center">Дія</th>
                     </tr>
                     </thead>
                     <tr th:each="ser: ${contents.getSerials()}">
@@ -137,7 +136,7 @@
                         <td width="300" class="text-center">
                             <form method="post" th:action="${'/contents/s/'+ser.ID}">
                                 <button class="btn btn-danger btn-xs form-control"
-                                        type="submit">delete
+                                        type="submit">видалити
                                 </button>
                             </form>
                         </td>
@@ -152,7 +151,7 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <button class="btn btn-primary btn-xs form-control"
-                            type="submit">Add serial
+                            type="submit">Додати
                     </button>
                 </div>
             </form>
@@ -160,7 +159,7 @@
 
         <div class="row  mt-10  col-md-12 col-md-offset-2 custyle">
             <h3 class="d-flex justify-content-between align-items-center">
-                <span class="">The list of all available categories:</span>
+                <span class="">Список всіх можливих категорій:</span>
             </h3>
             <div style="overflow-y: auto; height: 350px;">
                 <table class="table custab">
@@ -168,8 +167,8 @@
 
                     <tr>
                         <th>ID</th>
-                        <th>Tag name</th>
-                        <th class="text-center">Action</th>
+                        <th>Назва</th>
+                        <th class="text-center">Дія</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -179,7 +178,7 @@
                         <td width="300" class="text-center">
                             <form method="post" th:action="${'/contents/c/'+cat.ID}">
                                 <button class="btn btn-danger btn-xs form-control"
-                                        type="submit">delete
+                                        type="submit">видалити
                                 </button>
                             </form>
                         </td>
@@ -194,7 +193,7 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <button class="btn btn-primary btn-xs form-control"
-                            type="submit">Add category
+                            type="submit">Додати
                     </button>
                 </div>
             </form>
@@ -203,7 +202,7 @@
 </main>
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">Для зворотнього зв'язку: leonovcasha@gmail.com</span>
     </div>
 </footer>
 </body>

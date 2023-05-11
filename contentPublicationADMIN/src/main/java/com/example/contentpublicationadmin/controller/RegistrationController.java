@@ -42,7 +42,7 @@ public class RegistrationController {
             return new ModelAndView("registration", modelMap);
         }
 
-        if (Objects.nonNull(accountService.loadUserByUsername(user.getUsername()))) {
+        if (Objects.nonNull(((User) accountService.loadUserByUsername(user.getUsername())).getID()  )) {
             modelMap.addAttribute("err", "User already exist!");
             return new ModelAndView("registration", modelMap);
         }

@@ -17,11 +17,7 @@ export class LoginComponent implements OnInit {
   emptyEmail: boolean = false
   emptyPass: boolean = false
 
-
-
-
   constructor(private httpclient: HttpClient, private router: Router) {
-
   }
 
   ngOnInit(): void {

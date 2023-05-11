@@ -39,9 +39,8 @@ type Comment struct {
 }
 
 type Subscription struct {
-	//ID          uint
-	AuthorID     uint
-	Author       User
-	Subscriber   User
-	SubscriberID uint
+	AuthorID     uint `json:"authorId"`
+	Author       User `json:"author"`
+	Subscriber   User `json:"subscriber"`
+	SubscriberID uint `json:"subscriberId"`
 }

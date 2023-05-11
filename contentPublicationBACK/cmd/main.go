@@ -13,7 +13,7 @@ func main() {
 		Host:       "localhost",
 		DriverName: "mysql",
 		Port:       "3306",
-		DBName:     "Testing",
+		DBName:     "avia",
 		Username:   "root",
 		Password:   "1111",
 		ParseTime:  "true",

@@ -3,13 +3,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/titles">Check all candidates</a>
+          <a class="nav-link" routerLink="/titles">Перегляд усіх публікацій</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/random">Random candidate</a>
+          <a class="nav-link" routerLink="/random">Рандомна публікація</a>
         </li>
         <li class="nav-item" *ngIf="user">
-          <a *ngIf="user.role === 'AUTHOR'"  class="nav-link" routerLink="/title/create">Publication</a>
+          <a *ngIf="user.role === 'AUTHOR'"  class="nav-link" routerLink="/title/create">Створити публікацію</a>
         </li>
       </ul>
     </div>
@@ -17,13 +17,13 @@
     <div class="d-flex align-items-center">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" *ngIf="user" (click)="logOut()">Log out</a>
+          <a class="nav-link" *ngIf="user" (click)="logOut()">Вийти</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" *ngIf="user"  routerLink="/profile">Profile</a>
+          <a class="nav-link" *ngIf="user"  routerLink="/profile">Профіль</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" *ngIf="!user" routerLink="/sing-up">Sing in</a>
+          <a class="nav-link" *ngIf="!user" routerLink="/sing-up">Авторизація</a>
         </li>
       </ul>
     </div>

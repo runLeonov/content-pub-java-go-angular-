@@ -45,26 +45,25 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/released}">Titles</a>
+                        <a class="nav-link active" th:href="@{/titles/released}">Опублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/titles/not-released}">Unreleased
-                            titles</a>
+                        <a class="nav-link active" th:href="@{/titles/not-released}">Неопублікований контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/users/}">Users</a>
+                        <a class="nav-link" th:href="@{/users/}">Користувачі</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Content</a>
+                        <a class="nav-link" aria-current="page" th:href="@{/contents/}">Навігайційний контент</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/comments/}">Comments</a>
+                        <a class="nav-link" th:href="@{/comments/}">Коментарі</a>
                     </li>
                     <li class="nav-item">
-                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Log out</a>
+                        <a  href="javascript: document.logoutForm.submit()" class="nav-link">Вийти</a>
                     </li>
                     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                         <input hidden type="submit" value="Sign Out"/>
@@ -80,16 +79,16 @@
         <div class="bg-light d-flex">
             <div class="me-auto ms-2 mb-2 mb-md-0 d-flex">
                 <form th:action="@{/titles/f}" method="get" class="d-flex me-2">
-                    <input name="filter" class="form-control" type="search" placeholder="Search by title name"
+                    <input name="filter" class="form-control" type="search" placeholder="Пошук по головній назві"
                            aria-label="Search">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    <button class="btn btn-outline-secondary" type="submit">Пошук</button>
                 </form>
             </div>
             <div class="d-flex">
                 <div class="dropdown me-1">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Sort by
+                        Сортувати за
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <form method="get" th:if="${byID}" th:action="@{/titles/sort/id/}">
@@ -107,7 +106,7 @@
                     </ul>
                 </div>
                 <div class="me-2">
-                    <a class="btn btn-secondary" th:href="@{/titles/}">Reset</a>
+                    <a class="btn btn-secondary" th:href="@{/titles/}">Скинути</a>
                 </div>
             </div>
         </div>
@@ -117,16 +116,16 @@
             <table class="table custom-table">
                 <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Title name</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Tags</th>
-                    <th scope="col">Categories</th>
-                    <th scope="col">Serials</th>
-                    <th scope="col">Description</th>
-                    <th scope="col" width="150">Date</th>
-                    <th scope="col" class="text-center">Image</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Назва</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Тип</th>
+                    <th scope="col">Теги</th>
+                    <th scope="col">Категорії</th>
+                    <th scope="col">Серії</th>
+                    <th scope="col">Опис</th>
+                    <th scope="col" width="150">Дата</th>
+                    <th scope="col" class="text-center">Фото</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -184,7 +183,7 @@
 </main>
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">Для зворотнього зв'язку: leonovcasha@gmail.com</span>
     </div>
 </footer>
 </body>

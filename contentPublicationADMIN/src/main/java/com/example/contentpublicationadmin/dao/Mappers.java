@@ -293,7 +293,7 @@ public class Mappers {
         public Title mapRow(ResultSet rs, int rowNum) throws SQLException {
             Title o = new Title();
             o.setID(rs.getLong("id"));
-            o.setAuthorId(rs.getLong("author_id"));
+            o.setAuthorId(rs.getLong("user_id"));
             o.setTitleName(rs.getString("title_name"));
             o.setOriginalAuthor(rs.getString("original_author"));
             o.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());
@@ -371,7 +371,7 @@ public class Mappers {
         public Title mapRow(ResultSet rs, int rowNum) throws SQLException {
             Title o = new Title();
             o.setID(rs.getLong("id"));
-            o.setAuthorId(rs.getLong("author_id"));
+            o.setAuthorId(rs.getLong("user_id"));
             o.setTitleName(rs.getString("title_name"));
             o.setOriginalAuthor(rs.getString("original_author"));
             o.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());

@@ -18,21 +18,21 @@
             <div class="row d-flex">
               <div class="col-md-6">
                 <div class="col-md-12 d-flex">
-                  <strong>Categories:</strong>
-                  <span *ngIf="title.categories.length === 0">No categories((</span>
+                  <strong>Категорії:</strong>
+                  <span *ngIf="title.categories.length === 0">Немає категорій.</span>
                   <small style="margin-left: 3px" class="text-muted"
                          *ngFor="let cat of title.categories">{{cat.genre}}</small>
                 </div>
 
                 <div class="col-md-12  d-flex">
-                  <strong>Tags:</strong>
-                  <span *ngIf="title.tags.length === 0">No categories((</span>
+                  <strong>Теги:</strong>
+                  <span *ngIf="title.tags.length === 0">Немає тегів.</span>
                   <small style="margin-left: 3px" class="text-muted" *ngFor="let cat of title.tags">{{cat.tag}}</small>
                 </div>
 
                 <div class="col-md-12  d-flex">
-                  <strong>Serials:</strong>
-                  <span class="text-danger" *ngIf="title.serials.length === 0">No serials</span>
+                  <strong>Серії:</strong>
+                  <span class="text-danger" *ngIf="title.serials.length === 0">Немає серій.</span>
                   <small style="margin-left: 3px" class="text-muted"
                          *ngFor="let cat of title.serials">{{cat.serialName}}</small>
                 </div>
@@ -40,17 +40,17 @@
 
               <div class="col-md-6">
                 <div class="card-text">
-                  <strong>Likes:</strong>
+                  <strong>Лайків:</strong>
                   <small style="margin-left: 4px" class="text-muted">{{title.content.likesCount}}</small>
                 </div>
                 <div class="card-text">
-                  <strong>Views:</strong>
+                  <strong>Переглядів:</strong>
                   <small style="margin-left: 4px" class="text-muted">{{title.content.views}}</small>
                 </div>
               </div>
 
               <div class="col-md-12">
-                <strong>Date of creation:</strong>
+                <strong>Дата створення:</strong>
                 <small style="margin-left: 4px" class="text-muted">{{parseDate(title.creationDate)}}</small>
               </div>
             </div>

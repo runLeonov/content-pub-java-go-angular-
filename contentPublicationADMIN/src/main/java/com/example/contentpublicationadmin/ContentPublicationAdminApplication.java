@@ -18,7 +18,7 @@ public class ContentPublicationAdminApplication {
     @Bean
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql://localhost:3306/Testing");
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/avia");
         config.setUsername("root");
         config.setPassword("1111");
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
